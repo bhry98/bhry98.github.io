@@ -1,28 +1,48 @@
 media:
-  input: src/media
-  output: /media
+  input: public/images
+  output: /images
+
 content:
-  - name: posts
-    label: Posts
+  - name: blog
+    label: Blog Posts
     type: collection
-    path: src/posts
+    path: src/content/blog
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date]
     fields:
-      - name: title
-        type: string
-      - name: body
-        type: rich-text
-  - name: site
-    label: Site settings
-    type: file
-    path: src/_data/site.json
+      - { name: title, type: string, required: true }
+      - { name: date, type: date }
+      - { name: tags, type: string, list: true }
+      - { name: body, type: rich-text }
+
+  - name: packages
+    label: Packages
+    type: collection
+    path: src/content/packages
+    filename: "{primary}.md"
     fields:
-      - name: title
-        type: string
-      - name: description
-        type: text
-      - name: url
-        type: string
-actions:
-  - name: deploy-site
-    label: Deploy site
-    workflow: pages-cms-action.yml
+      - { name: title, type: string }
+      - { name: version, type: string }
+      - { name: body, type: rich-text }
+
+  - name: docs
+    label: Documentation
+    type: collection
+    path: src/content/docs
+    filename: "{primary}.md"
+    fields:
+      - { name: title, type: string }
+      - { name: category, type: string }
+      - { name: body, type: rich-text }
+
+  - name: portfolio
+    label: Portfolio
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    fields:
+      - { name: title, type: string }
+      - { name: github, type: string }
+      - { name: demo, type: string }
+      - { name: description, type: rich-text }
