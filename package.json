@@ -1,0 +1,23 @@
+{
+  "name": "bhry98.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal developer portfolio, blog and documentation",
+
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+
+  "dependencies": {
+    "astro": "^5.0.0"
+  },
+
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "eslint": "^9.0.0"
+  }
+}
