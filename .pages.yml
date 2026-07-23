@@ -1,11 +1,28 @@
-media: media
+media:
+  input: src/media
+  output: /media
 content:
-  - name: pages
-    label: Pages
+  - name: posts
+    label: Posts
     type: collection
-    path: docs
+    path: src/posts
     fields:
       - name: title
         type: string
       - name: body
         type: rich-text
+  - name: site
+    label: Site settings
+    type: file
+    path: src/_data/site.json
+    fields:
+      - name: title
+        type: string
+      - name: description
+        type: text
+      - name: url
+        type: string
+actions:
+  - name: deploy-site
+    label: Deploy site
+    workflow: pages-cms-action.yml
