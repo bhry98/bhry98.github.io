@@ -1,0 +1,60 @@
+site_name: BHRY98
+site_url: https://bhry98.github.io
+site_description: Open Source Laravel Packages
+#repo_url: https://github.com/bhry98/bhry98.github.io
+#repo_name: bhry98.github.io
+
+theme:
+  name: material
+  palette:
+    primary: black
+    accent: blue
+  logo: https://avatars.githubusercontent.com/u/85765830?s=96&v=4
+  homepage: https://bhry98.github.io
+  favicon: assets/favicon.png
+  features:
+    - navigation.tabs
+plugins:
+  - search
+#  - blog:
+#      archive: false
+#      blog_dir: blog
+#      pagination: true
+
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - Portfolio:
+      - Overview: portfolio/index.md
+      - About Me: portfolio/about-me.md
+      - Skills: portfolio/skills.md
+      - Packages: portfolio/packages.md
+      - Projects: portfolio/projects.md
+  - Packages:
+      - Overview: packages/index.md
+
+      - Laravel API Response:
+          - Introduction: packages/laravel-api-response/index.md
+          - Installation: packages/laravel-api-response/installation.md
+          - Responses: packages/laravel-api-response/responses.md
+          - Customization: packages/laravel-api-response/customization.md
+          - Upgrade Guide: packages/laravel-api-response/upgrade.md
+
+      - Laravel Users Core:
+          - Introduction: packages/laravel-users-core/index.md
+          - Installation: packages/laravel-users-core/installation.md
+          - Configuration: packages/laravel-users-core/configuration.md
+          - Usage: packages/laravel-users-core/usage.md
+
+      - Laravel Ready:
+          - Introduction: packages/laravel-ready/index.md
+          - Installation: packages/laravel-ready/installation.md
+          - Quick Start: packages/laravel-ready/quick-start.md
+
+#  - Blog:
+#      - blog/index.md
