@@ -1,0 +1,1492 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Open Source Laravel Packages">
+      
+      
+      
+        <link rel="canonical" href="https://bhry98.github.io/packages/laravel-api-response/customization/">
+      
+      
+        <link rel="prev" href="../responses/">
+      
+      
+        <link rel="next" href="../upgrade/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Customization - BHRY98</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#customization" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="BHRY98" class="md-header__button md-logo" aria-label="BHRY98" data-md-component="logo">
+      
+  <img src="https://avatars.githubusercontent.com/u/85765830?s=96&v=4" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BHRY98
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Customization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  
+  Portfolio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Packages
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BHRY98" class="md-nav__button md-logo" aria-label="BHRY98" data-md-component="logo">
+      
+  <img src="https://avatars.githubusercontent.com/u/85765830?s=96&v=4" alt="logo">
+
+    </a>
+    BHRY98
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Portfolio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Portfolio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/about-me/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Packages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laravel API Response
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Laravel API Response
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#presets-configurable-json-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Presets &amp; configurable JSON structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global metadata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API versioning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Localization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#translating-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Translating messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolving-the-requests-locale-accept-language-user-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolving the request's locale (Accept-Language + user column)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate limiting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audit logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exception-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exception handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overriding-the-default-response-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overriding the default response()-&gt;json()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extending-the-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extending the package
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#presets-configurable-json-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Presets &amp; configurable JSON structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Global metadata
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API versioning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Localization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#translating-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Translating messages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolving-the-requests-locale-accept-language-user-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolving the request's locale (Accept-Language + user column)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate limiting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Audit logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exception-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exception handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overriding-the-default-response-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overriding the default response()-&gt;json()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing helpers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extending-the-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extending the package
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="customization">Customization</h1>
+<h2 id="presets-configurable-json-structure">Presets &amp; configurable JSON structure</h2>
+<p>Every top-level key is renameable:</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;keys&#39; =&gt; [</span>
+<span class="x">    &#39;status&#39; =&gt; &#39;success&#39;,</span>
+<span class="x">    &#39;message&#39; =&gt; &#39;msg&#39;,</span>
+<span class="x">    &#39;data&#39; =&gt; &#39;result&#39;,</span>
+<span class="x">],</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Set <code>'wrap' =&gt; true</code> to nest the whole envelope under a top-level <code>data</code> key.</p>
+<p>Four built-in <strong>presets</strong> control the overall response <em>shape</em> (not just key names):</p>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td>The standard <code>{status, message, data, errors?, meta?, links?}</code> envelope.</td>
+</tr>
+<tr>
+<td><code>minimal</code></td>
+<td>Only <code>{status, message, data, errors?}</code> - no meta/links/extras/debug.</td>
+</tr>
+<tr>
+<td><code>mobile</code></td>
+<td>Same as <code>default</code> but recursively strips <code>null</code> values to save bandwidth.</td>
+</tr>
+<tr>
+<td><code>jsonapi</code></td>
+<td>A JSON:API-inspired <code>{data, meta, links, errors}</code> shape (not a strict spec implementation).</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="x">config([&#39;bhry98-api-response.preset&#39; =&gt; &#39;minimal&#39;]); // global default</span>
+
+<span class="x">return api()-&gt;preset(&#39;jsonapi&#39;)-&gt;success()-&gt;data($user); // per response</span>
+</code></pre></div>
+<p>Register your own preset:</p>
+<div class="highlight"><pre><span></span><code><span class="x">use Bhry98\LaravelApiResponse\Contracts\{PresetContract, ResponseFormatterContract};</span>
+<span class="x">use Bhry98\LaravelApiResponse\Presets\PresetManager;</span>
+
+<span class="x">class ShoutyFormatter implements ResponseFormatterContract</span>
+<span class="x">{</span>
+<span class="x">    public function format(\Bhry98\LaravelApiResponse\Data\ResponsePayload $payload): array</span>
+<span class="x">    {</span>
+<span class="x">        return [&#39;STATUS&#39; =&gt; $payload-&gt;success, &#39;MESSAGE&#39; =&gt; strtoupper($payload-&gt;message)];</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+
+<span class="x">class ShoutyPreset implements PresetContract</span>
+<span class="x">{</span>
+<span class="x">    public function __construct(private ShoutyFormatter $formatter) {}</span>
+<span class="x">    public function formatter(): ResponseFormatterContract { return $this-&gt;formatter; }</span>
+<span class="x">}</span>
+
+<span class="x">// in a service provider</span>
+<span class="x">app(PresetManager::class)-&gt;register(&#39;shouty&#39;, ShoutyPreset::class);</span>
+
+<span class="x">return api()-&gt;preset(&#39;shouty&#39;)-&gt;success()-&gt;message(&#39;done&#39;);</span>
+</code></pre></div>
+<h2 id="global-metadata">Global metadata</h2>
+<p>Opt in per key:</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;meta&#39; =&gt; [</span>
+<span class="x">    &#39;enabled&#39; =&gt; [&#39;request_id&#39;, &#39;execution_time&#39;, &#39;api_version&#39;, &#39;locale&#39;],</span>
+<span class="x">],</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;execution_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12.4ms&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;api_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Explicit <code>-&gt;meta([...])</code> values always win over the automatic ones on key collisions. Add your own provider by implementing <code>MetaProviderContract</code> and registering it under <code>meta.providers</code>.</p>
+<p>There is also an optional <code>AttachRequestId</code> middleware that reuses an incoming <code>X-Request-Id</code> header (or generates one) and echoes it back as a response header, so the <code>request_id</code> meta stays consistent with your logs:</p>
+<div class="highlight"><pre><span></span><code><span class="x">// bootstrap/app.php</span>
+<span class="x">-&gt;withMiddleware(function (Middleware $middleware) {</span>
+<span class="x">    $middleware-&gt;append(\Bhry98\LaravelApiResponse\Middleware\AttachRequestId::class);</span>
+<span class="x">})</span>
+</code></pre></div>
+<h2 id="debug-mode">Debug mode</h2>
+<p>Development only - requires <strong>both</strong> flags to be true, so it can never leak into production by accident:</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;debug&#39; =&gt; [</span>
+<span class="x">    &#39;enabled&#39; =&gt; env(&#39;API_RESPONSE_DEBUG&#39;, false),</span>
+<span class="x">    &#39;include&#39; =&gt; [&#39;queries&#39;, &#39;time&#39;, &#39;memory&#39;, &#39;exception&#39;, &#39;trace&#39;],</span>
+<span class="x">],</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;debug&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.4</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;memory_usage_mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8.1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;queries&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="api-versioning">API versioning</h2>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;version&#39; =&gt; env(&#39;API_RESPONSE_VERSION&#39;, &#39;v1&#39;),</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="x">return api()-&gt;version(&#39;v2&#39;)-&gt;success(); // overrides for this response</span>
+</code></pre></div>
+<p>Exposed automatically via the <code>api_version</code> meta provider when enabled.</p>
+<h2 id="localization">Localization</h2>
+<h3 id="translating-messages">Translating messages</h3>
+<div class="highlight"><pre><span></span><code><span class="x">return api()-&gt;updated()-&gt;localize(&#39;bhry98-api-response::api.updated&#39;);</span>
+</code></pre></div>
+<p>The package ships <code>lang/en/api.php</code> (publishable to <code>lang/vendor/bhry98-api-response</code>) with an entry per ready-made shortcut. <code>config('bhry98-api-response.messages')</code> remains the primary/default source so a config override is never silently shadowed by a translation - use <code>localize()</code> explicitly when you want locale-driven messages instead.</p>
+<h3 id="resolving-the-requests-locale-accept-language-user-column">Resolving the request's locale (Accept-Language + user column)</h3>
+<p>Opt-in per-request locale resolution via the <code>api.locale</code> middleware alias. It resolves a locale in this priority order and calls <code>App::setLocale()</code>:</p>
+<ol>
+<li>The <strong><code>Accept-Language</code></strong> request header (first tag, e.g. <code>fr</code> out of <code>fr-CA;q=0.9,en;q=0.5</code>), matched against <code>locale.supported</code> when that list is non-empty.</li>
+<li>The <strong>authenticated user's locale column</strong> - the column name is configurable, so this works whatever your <code>users</code> table calls it (<code>locale</code>, <code>lang</code>, <code>preferred_language</code>, ...).</li>
+<li><code>locale.fallback</code> (defaults to <code>config('app.locale')</code>).</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;locale&#39; =&gt; [</span>
+<span class="x">    &#39;enabled&#39; =&gt; env(&#39;API_RESPONSE_LOCALE_ENABLED&#39;, false),</span>
+<span class="x">    &#39;supported&#39; =&gt; [&#39;en&#39;, &#39;ar&#39;, &#39;fr&#39;], // empty array = accept any tag from the header</span>
+<span class="x">    &#39;user_column&#39; =&gt; env(&#39;API_RESPONSE_LOCALE_USER_COLUMN&#39;, &#39;locale&#39;),</span>
+<span class="x">    &#39;fallback&#39; =&gt; env(&#39;API_RESPONSE_LOCALE_FALLBACK&#39;, config(&#39;app.locale&#39;, &#39;en&#39;)),</span>
+<span class="x">],</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="x">// bootstrap/app.php</span>
+<span class="x">-&gt;withMiddleware(function (Middleware $middleware) {</span>
+<span class="x">    $middleware-&gt;appendToGroup(&#39;api&#39;, &#39;api.locale&#39;);</span>
+<span class="x">})</span>
+</code></pre></div>
+<p>Combine with the <code>locale</code> global metadata provider (above) to echo the resolved locale back on every response.</p>
+<h2 id="rate-limiting">Rate limiting</h2>
+<p>Opt-in throttling for any route/group via the <code>api.rate_limit</code> middleware alias. It wraps Laravel's own <code>RateLimiter</code>, but returns a standard <code>api()-&gt;tooManyRequests()</code> envelope - with <code>Retry-After</code>/<code>X-RateLimit-*</code> headers - instead of the framework's default <code>ThrottleRequestsException</code> response.</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;rate_limit&#39; =&gt; [</span>
+<span class="x">    &#39;enabled&#39; =&gt; env(&#39;API_RESPONSE_RATE_LIMIT_ENABLED&#39;, false),</span>
+<span class="x">    &#39;max_attempts&#39; =&gt; env(&#39;API_RESPONSE_RATE_LIMIT_MAX_ATTEMPTS&#39;, 60),</span>
+<span class="x">    &#39;decay_seconds&#39; =&gt; env(&#39;API_RESPONSE_RATE_LIMIT_DECAY_SECONDS&#39;, 60),</span>
+<span class="x">    &#39;by&#39; =&gt; env(&#39;API_RESPONSE_RATE_LIMIT_BY&#39;, &#39;ip&#39;), // &quot;ip&quot;, &quot;user&quot; or &quot;route&quot;</span>
+<span class="x">    &#39;key_prefix&#39; =&gt; env(&#39;API_RESPONSE_RATE_LIMIT_PREFIX&#39;, &#39;api-response-rate-limit&#39;),</span>
+<span class="x">    &#39;message&#39; =&gt; null, // null falls back to messages.too_many_requests</span>
+<span class="x">],</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="x">// bootstrap/app.php</span>
+<span class="x">-&gt;withMiddleware(function (Middleware $middleware) {</span>
+<span class="x">    $middleware-&gt;appendToGroup(&#39;api&#39;, &#39;api.rate_limit&#39;);</span>
+<span class="x">})</span>
+</code></pre></div>
+<p>Override the configured <code>max_attempts</code>/<code>decay_seconds</code> for a specific route via middleware parameters:</p>
+<div class="highlight"><pre><span></span><code><span class="x">Route::post(&#39;/login&#39;, ...)-&gt;middleware(&#39;api.rate_limit:5,1&#39;); // 5 attempts per minute</span>
+</code></pre></div>
+<p><code>by: 'user'</code> buckets authenticated requests by the user's auth identifier and falls back to IP for guests; <code>by: 'route'</code> buckets by route name (or URI path when unnamed).</p>
+<h2 id="audit-logging">Audit logging</h2>
+<p>Opt-in request/response auditing via the <code>api.audit</code> middleware alias. Every matching request is written to the <code>api_response_audit_logs</code> table (name configurable) through the queued <code>StoreAuditLogEntry</code> job <strong>by default</strong>, so logging never adds latency to the actual response - set <code>queue.enabled</code> to <code>false</code> to write synchronously instead (handy for local dev/testing).</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;audit_log&#39; =&gt; [</span>
+<span class="x">    &#39;enabled&#39; =&gt; env(&#39;API_RESPONSE_AUDIT_LOG_ENABLED&#39;, false),</span>
+
+<span class="x">    &#39;connection&#39; =&gt; env(&#39;API_RESPONSE_AUDIT_LOG_DB_CONNECTION&#39;), // null = default DB connection</span>
+<span class="x">    &#39;table&#39; =&gt; env(&#39;API_RESPONSE_AUDIT_LOG_TABLE&#39;, &#39;api_response_audit_logs&#39;),</span>
+
+<span class="x">    &#39;queue&#39; =&gt; [</span>
+<span class="x">        &#39;enabled&#39; =&gt; env(&#39;API_RESPONSE_AUDIT_LOG_QUEUE_ENABLED&#39;, true),</span>
+<span class="x">        &#39;connection&#39; =&gt; env(&#39;API_RESPONSE_AUDIT_LOG_QUEUE_CONNECTION&#39;), // null = config(&#39;queue.default&#39;)</span>
+<span class="x">        &#39;queue&#39; =&gt; env(&#39;API_RESPONSE_AUDIT_LOG_QUEUE_NAME&#39;), // null = the connection&#39;s default queue</span>
+<span class="x">    ],</span>
+
+<span class="x">    &#39;capture&#39; =&gt; [</span>
+<span class="x">        &#39;request_body&#39; =&gt; true,</span>
+<span class="x">        &#39;response_body&#39; =&gt; true,</span>
+<span class="x">        &#39;headers&#39; =&gt; false,</span>
+<span class="x">    ],</span>
+
+<span class="x">    &#39;methods&#39; =&gt; [], // e.g. [&#39;POST&#39;, &#39;PUT&#39;, &#39;PATCH&#39;, &#39;DELETE&#39;] - empty means every method</span>
+<span class="x">    &#39;exclude_routes&#39; =&gt; [], // route names or URI patterns (fnmatch), e.g. &#39;telescope*&#39;</span>
+
+<span class="x">    &#39;hidden&#39; =&gt; [</span>
+<span class="x">        &#39;password&#39;, &#39;password_confirmation&#39;, &#39;token&#39;, &#39;secret&#39;,</span>
+<span class="x">        &#39;authorization&#39;, &#39;api_key&#39;, &#39;access_token&#39;, &#39;refresh_token&#39;, &#39;card_number&#39;, &#39;cvv&#39;,</span>
+<span class="x">    ],</span>
+<span class="x">],</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>vendor:publish<span class="w"> </span>--tag<span class="o">=</span>bhry98-api-response-migrations
+php<span class="w"> </span>artisan<span class="w"> </span>migrate
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="x">// bootstrap/app.php</span>
+<span class="x">-&gt;withMiddleware(function (Middleware $middleware) {</span>
+<span class="x">    $middleware-&gt;appendToGroup(&#39;api&#39;, &#39;api.audit&#39;);</span>
+<span class="x">})</span>
+</code></pre></div>
+<ul>
+<li><code>queue.connection</code>/<code>queue.queue</code> map directly onto <code>StoreAuditLogEntry::onConnection()</code>/<code>onQueue()</code>. Leave them <code>null</code> to use your app's default queue connection (<code>config('queue.default')</code>, e.g. <code>sync</code>, <code>database</code>, <code>redis</code>, ...) - set <code>queue.connection</code> to <code>'database'</code> (or <code>'redis'</code>, etc.) explicitly if you want audit logs on a <em>different</em> connection than the rest of your app's jobs.</li>
+<li>Anything listed under <code>hidden</code> is redacted (replaced with <code>"***"</code>) wherever it appears as a request/response body (or header, if <code>capture.headers</code> is on) key, at any nesting depth, before the entry is persisted.</li>
+<li>Query the log like any other Eloquent model:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="x">use Bhry98\LaravelApiResponse\Models\AuditLog;</span>
+
+<span class="x">AuditLog::where(&#39;user_id&#39;, $user-&gt;id)-&gt;latest(&#39;created_at&#39;)-&gt;get();</span>
+</code></pre></div>
+<h2 id="hooks">Hooks</h2>
+<p>Run arbitrary logic against every response before it is formatted:</p>
+<div class="highlight"><pre><span></span><code><span class="x">use Bhry98\LaravelApiResponse\Facades\ApiResponse;</span>
+<span class="x">use Bhry98\LaravelApiResponse\Data\ResponsePayload;</span>
+
+<span class="x">ApiResponse::before(function (ResponsePayload $payload) {</span>
+<span class="x">    $payload-&gt;extra[&#39;server&#39;] = gethostname();</span>
+<span class="x">});</span>
+
+<span class="x">ApiResponse::after(function (ResponsePayload $payload) {</span>
+<span class="x">    Log::info(&#39;api.response&#39;, [&#39;status&#39; =&gt; $payload-&gt;success]);</span>
+<span class="x">});</span>
+</code></pre></div>
+<h2 id="events">Events</h2>
+<div class="highlight"><pre><span></span><code><span class="x">Bhry98\LaravelApiResponse\Events\ResponseCreated::class; // fired for every response</span>
+<span class="x">Bhry98\LaravelApiResponse\Events\ResponseFailed::class;  // fired when success === false</span>
+<span class="x">Bhry98\LaravelApiResponse\Events\ResponseSent::class;    // fired once the JsonResponse is built</span>
+</code></pre></div>
+<h2 id="exception-handling">Exception handling</h2>
+<p>Fully opt-in - off by default:</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;exceptions&#39; =&gt; [</span>
+<span class="x">    &#39;override_exception_handler&#39; =&gt; env(&#39;API_RESPONSE_OVERRIDE_EXCEPTIONS&#39;, false),</span>
+<span class="x">],</span>
+</code></pre></div>
+<p>When enabled, <code>ValidationException</code>, <code>AuthenticationException</code>, <code>AuthorizationException</code>, <code>ModelNotFoundException</code> and any <code>HttpExceptionInterface</code> are automatically formatted as <code>api()</code> responses for JSON/<code>api/*</code> requests; anything else becomes <code>api()-&gt;internal()</code> (with the real message only when <code>app.debug</code> is true).</p>
+<h2 id="overriding-the-default-response-json">Overriding the default <code>response()-&gt;json()</code></h2>
+<p>Also fully opt-in:</p>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;override_default_response&#39; =&gt; env(&#39;API_RESPONSE_OVERRIDE_DEFAULT&#39;, false),</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="x">// with the flag enabled</span>
+<span class="x">return response()-&gt;json([&#39;id&#39; =&gt; 1]);</span>
+<span class="x">// =&gt; {&quot;status&quot;: true, &quot;data&quot;: {&quot;id&quot;: 1}}</span>
+</code></pre></div>
+<p>Never forced - leave it <code>false</code> (the default) and <code>response()-&gt;json()</code> behaves exactly like stock Laravel.</p>
+<h2 id="testing-helpers">Testing helpers</h2>
+<p>Registered automatically on <code>Illuminate\Testing\TestResponse</code> - no trait/import needed:</p>
+<div class="highlight"><pre><span></span><code><span class="x">$response-&gt;assertApiSuccess(&#39;User created.&#39;);</span>
+<span class="x">$response-&gt;assertApiError(&#39;Something went wrong.&#39;);</span>
+<span class="x">$response-&gt;assertApiValidation([&#39;email&#39;]);</span>
+<span class="x">$response-&gt;assertApiMessage(&#39;User created.&#39;);</span>
+<span class="x">$response-&gt;assertApiStatus(true);</span>
+<span class="x">$response-&gt;assertApiData([&#39;id&#39; =&gt; 1]);</span>
+</code></pre></div>
+<h2 id="extending-the-package">Extending the package</h2>
+<ul>
+<li><strong>Formatters</strong> - implement <code>ResponseFormatterContract</code> for a fully custom envelope shape.</li>
+<li><strong>Presets</strong> - implement <code>PresetContract</code> and register via <code>PresetManager::register()</code>.</li>
+<li><strong>Data resolvers</strong> - the default <code>DataResolverContract</code> binding (<code>DataResolver</code>) can be swapped in your own service provider if you need custom auto-detection.</li>
+<li><strong>Meta providers</strong> - implement <code>MetaProviderContract</code>, register under <code>meta.providers</code>, then list the key under <code>meta.enabled</code>.</li>
+<li><strong>Macros</strong> - <code>ResponseBuilder::macro()</code> / <code>ApiResponse::macro()</code> for one-off custom shortcuts.</li>
+<li><strong>Hooks</strong> - <code>ApiResponse::before()</code> / <code>ApiResponse::after()</code> for cross-cutting concerns (logging, request ids, ...).</li>
+<li><strong>Events</strong> - listen to <code>ResponseCreated</code> / <code>ResponseFailed</code> / <code>ResponseSent</code>.</li>
+</ul>
+<h2 id="next">Next</h2>
+<p>See the <a href="../upgrade/">Upgrade Guide</a> for backward compatibility with the pre-2.0 API and a look at the package's internal architecture.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
