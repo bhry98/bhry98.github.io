@@ -30,7 +30,7 @@ markdown_extensions:
 
 nav:
   - Portfolio:
-      - Overview: portfolio/index.md
+      - Overview: index.md
       - About Me: portfolio/about-me.md
       - Skills: portfolio/skills.md
       - Packages: portfolio/packages.md
@@ -44,17 +44,5 @@ nav:
           - Responses: packages/laravel-api-response/responses.md
           - Customization: packages/laravel-api-response/customization.md
           - Upgrade Guide: packages/laravel-api-response/upgrade.md
-
-      - Laravel Users Core:
-          - Introduction: packages/laravel-users-core/index.md
-          - Installation: packages/laravel-users-core/installation.md
-          - Configuration: packages/laravel-users-core/configuration.md
-          - Usage: packages/laravel-users-core/usage.md
-
-      - Laravel Ready:
-          - Introduction: packages/laravel-ready/index.md
-          - Installation: packages/laravel-ready/installation.md
-          - Quick Start: packages/laravel-ready/quick-start.md
-
 #  - Blog:
 #      - blog/index.md
