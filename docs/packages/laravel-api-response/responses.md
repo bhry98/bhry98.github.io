@@ -96,7 +96,7 @@ return api()
 - `extra()` - merge extra keys into the **top level** of the envelope.
 - `headers()` / `cookie()` / `cookies()` - attach to the final `JsonResponse`.
 - `statusCode()` - set any arbitrary HTTP status.
-- `preset()` - pick a response shape for this call only (see [Presets](customization.md#presets--configurable-json-structure)).
+- `preset()` - pick a response shape for this call only (see [Presets](customization.md#presets-configurable-json-structure)).
 - `version()` - override `config('bhry98-api-response.version')` for this response.
 - `localize($key)` - translate the current (or given) message through Laravel's translator.
 

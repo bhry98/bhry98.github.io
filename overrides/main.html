@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block announce %}
+  <a class="bh-announce" href="{{ 'portfolio/contact/' | url }}">
+    <span class="bh-dot"></span>
+    <span class="bh-announce__long">Available for freelance &amp; contract work —</span> <strong>Let's talk about your project</strong>
+    <span class="twemoji">{% include ".icons/material/arrow-right.svg" %}</span>
+  </a>
+{% endblock %}

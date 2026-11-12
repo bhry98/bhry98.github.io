@@ -1,0 +1,75 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+  {{ super() }}
+  <section class="bh-hero" data-md-color-scheme="slate">
+    <div class="bh-hero__grid"></div>
+    <div class="bh-hero__glow"></div>
+    <div class="md-grid bh-hero__inner">
+      <div class="bh-hero__copy">
+        <span class="bh-pill"><span class="bh-dot"></span> Open to new projects</span>
+        <h1>
+          I build <span class="bh-gradient-text">secure, scalable</span>
+          software &amp; the infrastructure it runs on.
+        </h1>
+        <p class="bh-hero__lead">
+          Hi, I'm <strong>Abdelrahman</strong> (<code>bhry98</code>) — a Software &amp; Infrastructure
+          Engineer. I design Laravel platforms, wire up single sign-on with Keycloak, and ship
+          them on Docker, Kubernetes and OpenShift with automated CI/CD.
+        </p>
+        <div class="bh-hero__actions">
+          <a href="{{ 'portfolio/projects/' | url }}" class="md-button md-button--primary">
+            View my work
+            <span class="twemoji">{% include ".icons/material/arrow-right.svg" %}</span>
+          </a>
+          <a href="{{ 'portfolio/contact/' | url }}" class="md-button">Hire me</a>
+        </div>
+        <ul class="bh-hero__stack" aria-label="Core technologies">
+          <li title="Laravel">{% include ".icons/simple/laravel.svg" %}</li>
+          <li title="PHP">{% include ".icons/simple/php.svg" %}</li>
+          <li title="Keycloak">{% include ".icons/simple/keycloak.svg" %}</li>
+          <li title="Docker">{% include ".icons/simple/docker.svg" %}</li>
+          <li title="Kubernetes">{% include ".icons/simple/kubernetes.svg" %}</li>
+          <li title="OpenShift">{% include ".icons/simple/redhatopenshift.svg" %}</li>
+          <li title="Red Hat">{% include ".icons/simple/redhat.svg" %}</li>
+          <li title="GitHub Actions">{% include ".icons/simple/githubactions.svg" %}</li>
+        </ul>
+      </div>
+
+      <div class="bh-hero__visual" aria-hidden="true">
+        <div class="bh-window">
+          <div class="bh-window__bar">
+            <span></span><span></span><span></span>
+            <em>UserController.php</em>
+          </div>
+<pre class="bh-window__code"><code><span class="k">public function</span> <span class="f">store</span>(StoreUserRequest <span class="v">$request</span>)
+{
+    <span class="v">$user</span> = User::<span class="f">create</span>(<span class="v">$request</span>-><span class="f">validated</span>());
+
+    <span class="k">return</span> <span class="f">api</span>()
+        -><span class="f">created</span>(<span class="v">$user</span>)
+        -><span class="f">message</span>(<span class="s">'Welcome aboard!'</span>);
+}</code></pre>
+          <div class="bh-window__out">
+<pre><code>{
+  <span class="s">"status"</span>: <span class="k">true</span>,
+  <span class="s">"message"</span>: <span class="s">"Welcome aboard!"</span>,
+  <span class="s">"data"</span>: { <span class="s">"id"</span>: <span class="n">42</span> }
+}</code></pre>
+            <span class="bh-badge-201">201 Created</span>
+          </div>
+        </div>
+        <div class="bh-float bh-float--a">
+          <span class="twemoji">{% include ".icons/material/shield-lock-outline.svg" %}</span> SSO · OIDC
+        </div>
+        <div class="bh-float bh-float--b">
+          <span class="twemoji">{% include ".icons/material/rocket-launch-outline.svg" %}</span> CI/CD shipped
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+  {{ page.content }}
+{% endblock %}
