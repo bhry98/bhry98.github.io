@@ -1,17 +1,17 @@
 site_name: BHRY98
 site_url: https://bhry98.github.io/
-site_author: Abdelrahman (bhry98)
+site_author: Abdelrahman Mahmoud (bhry98)
 site_description: >-
-  Abdelrahman (bhry98) — Software & Infrastructure Engineer. Laravel applications,
-  identity & access management, DevOps, and open-source Laravel packages.
+  Abdelrahman (bhry98), Enterprise Software & Integration Engineer.
+  Java Spring Boot, IBM App Connect Enterprise integrations, Red Hat OpenShift and identity & access management.
 copyright: >-
-  &copy; 2026 Abdelrahman · bhry98 — Built with care.
+  &copy; 2026 Abdelrahman Mahmoud · bhry98
 
 theme:
   name: material
   custom_dir: overrides
   language: en
-  logo: https://avatars.githubusercontent.com/u/85765830?s=96&v=4
+  logo: assets/images/avatar.jpg
   favicon: assets/favicon.svg
   font:
     text: Inter
@@ -57,6 +57,10 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/cv.css
+
+extra_javascript:
+  - javascripts/share.js
 
 plugins:
   - search
@@ -69,12 +73,18 @@ plugins:
       pagination_per_page: 6
       archive_date_format: yyyy
       categories_allowed:
-        - Laravel
+        - Spring Boot
+        - Integration
+        - OpenShift
         - Security
-        - DevOps
-        - Infrastructure
-        - Open Source
+        - Architecture
   - tags
+  # Generates a preview image (Open Graph / Twitter card) for every page,
+  # so links shared on WhatsApp, LinkedIn, X, Facebook, Telegram show an image.
+  - social:
+      cards_layout_options:
+        background_color: "#0a2a5e"
+        color: "#ffffff"
 
 extra:
   generator: false
@@ -135,6 +145,9 @@ nav:
       - Projects: portfolio/projects.md
       - Open Source: portfolio/packages.md
       - Contact: portfolio/contact.md
+  - My CV: cv/index.md
+  - Blog:
+      - blog/index.md
   - Packages:
       - packages/index.md
       - Laravel API Response:
@@ -143,5 +156,3 @@ nav:
           - Responses: packages/laravel-api-response/responses.md
           - Customization: packages/laravel-api-response/customization.md
           - Upgrade Guide: packages/laravel-api-response/upgrade.md
-  - Blog:
-      - blog/index.md

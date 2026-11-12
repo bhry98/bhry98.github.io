@@ -7,32 +7,35 @@
     <div class="bh-hero__glow"></div>
     <div class="md-grid bh-hero__inner">
       <div class="bh-hero__copy">
-        <span class="bh-pill"><span class="bh-dot"></span> Open to new projects</span>
+        <span class="bh-pill"><span class="bh-dot"></span> Red Hat Certified OpenShift Administrator</span>
         <h1>
-          I build <span class="bh-gradient-text">secure, scalable</span>
-          software &amp; the infrastructure it runs on.
+          Enterprise systems that <span class="bh-gradient-text">connect, scale</span>
+          and stay secure.
         </h1>
         <p class="bh-hero__lead">
-          Hi, I'm <strong>Abdelrahman</strong> (<code>bhry98</code>) — a Software &amp; Infrastructure
-          Engineer. I design Laravel platforms, wire up single sign-on with Keycloak, and ship
-          them on Docker, Kubernetes and OpenShift with automated CI/CD.
+          Hi, I'm <strong>Abdelrahman Mahmoud</strong> (<code>bhry98</code>), an Enterprise Software &amp;
+          Integration Engineer. I build Java Spring Boot services, connect business systems with
+          IBM App Connect Enterprise and API Connect, and run them on Red Hat OpenShift.
         </p>
         <div class="bh-hero__actions">
           <a href="{{ 'portfolio/projects/' | url }}" class="md-button md-button--primary">
             View my work
             <span class="twemoji">{% include ".icons/material/arrow-right.svg" %}</span>
           </a>
-          <a href="{{ 'portfolio/contact/' | url }}" class="md-button">Hire me</a>
+          <a href="{{ 'cv/' | url }}" class="md-button">
+            <span class="twemoji">{% include ".icons/material/file-document-outline.svg" %}</span>
+            My CV
+          </a>
         </div>
         <ul class="bh-hero__stack" aria-label="Core technologies">
-          <li title="Laravel">{% include ".icons/simple/laravel.svg" %}</li>
-          <li title="PHP">{% include ".icons/simple/php.svg" %}</li>
+          <li title="Java">{% include ".icons/simple/openjdk.svg" %}</li>
+          <li title="Spring Boot">{% include ".icons/simple/springboot.svg" %}</li>
+          <li title="Spring Security">{% include ".icons/simple/springsecurity.svg" %}</li>
+          <li title="Red Hat OpenShift">{% include ".icons/simple/redhatopenshift.svg" %}</li>
+          <li title="Kubernetes">{% include ".icons/simple/kubernetes.svg" %}</li>
+          <li title="Red Hat Enterprise Linux">{% include ".icons/simple/redhat.svg" %}</li>
           <li title="Keycloak">{% include ".icons/simple/keycloak.svg" %}</li>
           <li title="Docker">{% include ".icons/simple/docker.svg" %}</li>
-          <li title="Kubernetes">{% include ".icons/simple/kubernetes.svg" %}</li>
-          <li title="OpenShift">{% include ".icons/simple/redhatopenshift.svg" %}</li>
-          <li title="Red Hat">{% include ".icons/simple/redhat.svg" %}</li>
-          <li title="GitHub Actions">{% include ".icons/simple/githubactions.svg" %}</li>
         </ul>
       </div>
 
@@ -40,33 +43,37 @@
         <div class="bh-window">
           <div class="bh-window__bar">
             <span></span><span></span><span></span>
-            <em>UserController.php</em>
+            <em>OrderController.java</em>
           </div>
-<pre class="bh-window__code"><code><span class="k">public function</span> <span class="f">store</span>(StoreUserRequest <span class="v">$request</span>)
-{
-    <span class="v">$user</span> = User::<span class="f">create</span>(<span class="v">$request</span>-><span class="f">validated</span>());
+<pre class="bh-window__code"><code><span class="a">@RestController</span>
+<span class="a">@RequestMapping</span>(<span class="s">"/api/orders"</span>)
+<span class="k">class</span> <span class="f">OrderController</span> {
 
-    <span class="k">return</span> <span class="f">api</span>()
-        -><span class="f">created</span>(<span class="v">$user</span>)
-        -><span class="f">message</span>(<span class="s">'Welcome aboard!'</span>);
+    <span class="a">@PostMapping</span>
+    ResponseEntity&lt;Order&gt; <span class="f">create</span>(<span class="a">@RequestBody</span> OrderRequest <span class="v">req</span>) {
+        <span class="k">var</span> <span class="v">order</span> = orders.<span class="f">place</span>(<span class="v">req</span>);
+        <span class="k">return</span> ResponseEntity.<span class="f">status</span>(<span class="n">201</span>).<span class="f">body</span>(<span class="v">order</span>);
+    }
 }</code></pre>
           <div class="bh-window__out">
-<pre><code>{
-  <span class="s">"status"</span>: <span class="k">true</span>,
-  <span class="s">"message"</span>: <span class="s">"Welcome aboard!"</span>,
-  <span class="s">"data"</span>: { <span class="s">"id"</span>: <span class="n">42</span> }
-}</code></pre>
-            <span class="bh-badge-201">201 Created</span>
+<pre><code><span class="c">$</span> oc rollout status deployment/orders-api
+<span class="s">deployment "orders-api" successfully rolled out</span>
+<span class="c">$</span> oc get route orders-api
+orders-api   api.example.com   <span class="n">edge/TLS</span></code></pre>
+            <span class="bh-badge-201">Deployed</span>
           </div>
         </div>
         <div class="bh-float bh-float--a">
-          <span class="twemoji">{% include ".icons/material/shield-lock-outline.svg" %}</span> SSO · OIDC
+          <span class="twemoji">{% include ".icons/material/transit-connection-variant.svg" %}</span> IBM ACE integrations
         </div>
         <div class="bh-float bh-float--b">
-          <span class="twemoji">{% include ".icons/material/rocket-launch-outline.svg" %}</span> CI/CD shipped
+          <span class="twemoji">{% include ".icons/material/shield-lock-outline.svg" %}</span> SSO with Keycloak
         </div>
       </div>
     </div>
+    <svg class="bh-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,80 L0,80 Z"></path>
+    </svg>
   </section>
 {% endblock %}
 

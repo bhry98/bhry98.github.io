@@ -1,9 +1,9 @@
 ---
 title: Blog
-description: Notes on Laravel, identity & access management, DevOps and infrastructure by Abdelrahman (bhry98).
+description: Notes on Spring Boot, IBM integration, OpenShift and identity & access management by Abdelrahman (bhry98).
 ---
 
 # Blog
 
-<p class="bh-lead">Practical notes from building and running production systems — Laravel, single sign-on,
-containers, Linux and everything in between.</p>
+<p class="bh-lead">Practical notes from building and running enterprise systems: Java and Spring Boot,
+IBM integration, Red Hat OpenShift and identity &amp; access management.</p>

@@ -1,82 +1,81 @@
 ---
 title: Services
-description: Laravel development, identity & access management, DevOps and infrastructure services by Abdelrahman (bhry98).
+description: Java Spring Boot development, IBM integration, Red Hat OpenShift and identity & access management services by Abdelrahman Mahmoud (bhry98).
 ---
 
 <span class="bh-eyebrow">Services</span>
 
 # How I can help
 
-<p class="bh-lead">Hire me for a complete product, a focused piece of work, or ongoing support for a team
-that needs a hand with backend, security or infrastructure.</p>
+<p class="bh-lead">Hire me for a complete service, a focused integration, or ongoing support for a team that
+needs a hand with backend, integration, security or the platform.</p>
 
 <div class="grid cards" markdown>
 
--   :simple-laravel:{ .lg } **Custom web applications**
+-   :simple-springboot:{ .lg } **Spring Boot services &amp; APIs**
 
     ---
 
-    Business systems built on Laravel: ERP modules, CRMs, portals and internal tools.
+    Enterprise backend services built with Java and Spring Boot.
 
-    - Domain modelling & database design
-    - Admin panels with Filament / Livewire
-    - Roles, permissions & audit trails
+    - Domain modelling &amp; PostgreSQL design
+    - RESTful APIs with clear contracts
+    - Spring Security &amp; role-based access
     - Automated tests
 
--   :material-api:{ .lg } **APIs & integrations**
+-   :material-transit-connection-variant:{ .lg } **Enterprise integration**
 
     ---
 
-    Well-documented REST APIs for web and mobile apps, plus integrations with
-    third-party systems.
+    Connecting the systems your business already runs.
 
-    - Consistent, versioned JSON APIs
-    - Authentication with tokens / OAuth2
-    - Rate limiting & request logging
-    - Webhooks & external services
+    - IBM App Connect Enterprise message flows
+    - IBM API Connect: products, plans &amp; policies
+    - JSON/XML transformations &amp; mapping
+    - SMS, IoT and third-party API integrations
 
--   :material-shield-lock-outline:{ .lg } **Single sign-on & IAM**
+-   :simple-redhatopenshift:{ .lg } **OpenShift &amp; containers**
+
+    ---
+
+    Reliable workloads on Red Hat OpenShift and Kubernetes.
+
+    - Deployments, routes &amp; TLS
+    - Health probes, scaling &amp; resources
+    - Integration runtimes on CP4I
+    - Day-two operations &amp; troubleshooting
+
+-   :material-shield-lock-outline:{ .lg } **Single sign-on &amp; IAM**
 
     ---
 
     One secure login for all your applications.
 
-    - Keycloak setup, realms & clients
-    - OpenID Connect / OAuth2 integration
-    - LDAP & Active Directory federation
-    - Role mapping & access policies
+    - Keycloak realms, clients &amp; roles
+    - OAuth 2.0 / OpenID Connect integration
+    - LDAP &amp; Active Directory federation
+    - API and service-to-service security
 
--   :material-kubernetes:{ .lg } **DevOps & deployment**
-
-    ---
-
-    Reliable, automated releases on modern platforms.
-
-    - Docker images for PHP / Laravel
-    - Kubernetes & OpenShift deployments
-    - GitHub Actions / GitLab CI pipelines
-    - Nginx, TLS & environment setup
-
--   :material-server-network:{ .lg } **Infrastructure & Linux**
+-   :simple-gitlab:{ .lg } **CI/CD &amp; delivery**
 
     ---
 
-    Server and network foundations that just work.
+    Repeatable releases with no manual steps.
 
-    - RHEL & Ubuntu server administration
-    - Windows Server & Active Directory
-    - DNS, DHCP & virtualization
-    - MinIO / S3 object storage & NAS
+    - GitLab CI/CD pipelines
+    - Container image builds
+    - Environment promotion
+    - Release &amp; rollback workflows
 
--   :material-lifebuoy:{ .lg } **Consulting & support**
+-   :material-lifebuoy:{ .lg } **Consulting &amp; support**
 
     ---
 
-    A second pair of senior eyes when you need it.
+    A second pair of experienced eyes when you need it.
 
-    - Code & architecture reviews
-    - Performance & security audits
-    - Laravel upgrades & refactoring
+    - Architecture &amp; integration reviews
+    - Production incident troubleshooting
+    - Linux, Nginx &amp; certificate issues
     - Ongoing maintenance
 
 </div>
@@ -86,7 +85,7 @@ that needs a hand with backend, security or infrastructure.</p>
 <div class="bh-steps" markdown>
 <div class="bh-step" markdown>
 #### Discovery call
-<p>We talk through your goals, users, timeline and budget — free, no obligation.</p>
+<p>We talk through your goals, systems, timeline and budget. Free, no obligation.</p>
 </div>
 <div class="bh-step" markdown>
 #### Proposal
@@ -104,22 +103,21 @@ that needs a hand with backend, security or infrastructure.</p>
 
 ## Frequently asked questions
 
-??? question "Do you work with existing codebases?"
-    Yes. I regularly join existing Laravel projects to add features, fix issues, upgrade
-    framework versions or improve performance and security. I start with a short review so we
-    both know what we're working with.
+??? question "Do you work with existing systems?"
+    Yes. Most enterprise work is about connecting and improving what already exists. I start with a
+    short review of your current services, integrations and platform so we both know the starting point.
 
-??? question "Can you handle both the application and the servers?"
-    That's my strength. I can build the app, set up single sign-on, containerize it and deploy it
-    to your servers, Kubernetes or OpenShift, with a CI/CD pipeline so future releases are one click.
+??? question "Can you handle both the software and the platform?"
+    That's my strength. I can build the Spring Boot service, expose it through API Connect, integrate
+    it with App Connect Enterprise, secure it with Keycloak, and deploy it to OpenShift.
 
 ??? question "Do you work remotely?"
-    Yes — I work remotely with clients and teams, with regular check-ins and async updates
-    that fit your time zone.
+    Yes. I work remotely with clients and teams, with regular check-ins and written updates that
+    fit your time zone.
 
 ??? question "What happens after launch?"
-    You get documentation and a clean handover. I also offer ongoing maintenance and support
-    if you'd like someone to keep things updated, secure and running smoothly.
+    You get documentation and a clean handover. I also offer ongoing support if you'd like someone
+    to keep the system updated, secure and running smoothly.
 
 <div class="bh-cta" markdown>
 

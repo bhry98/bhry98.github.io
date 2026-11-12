@@ -9,7 +9,7 @@ hide:
 
 # Let's work together
 
-<p class="bh-lead">Have a project, a problem to solve, or a team that needs extra hands? Send me a message —
+<p class="bh-lead">Have a project, a problem to solve, or a team that needs extra hands? Send me a message and
 I'll get back to you as soon as I can.</p>
 
 <div class="grid cards bh-contact" markdown>

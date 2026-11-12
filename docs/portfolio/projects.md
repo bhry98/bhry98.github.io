@@ -1,128 +1,106 @@
 ---
 title: Projects
-description: Selected projects by Abdelrahman (bhry98) — ERP, service desk, HR, CRM, self-service portals, AI dashboards and knowledge bases.
+description: Selected projects by Abdelrahman Mahmoud (bhry98). ERP platform, enterprise integration, OpenShift operations and business systems.
 ---
 
 <span class="bh-eyebrow">Projects</span>
 
 # Selected work
 
-<p class="bh-lead">Business platforms I've designed and built. Most are private systems for organizations, so
-details are kept general — I'm happy to walk you through the architecture and a demo on a call.</p>
+<p class="bh-lead">Platforms I've built, integrated and operated. Most are private systems for organizations,
+so details stay general. I'm happy to walk you through the architecture on a call.</p>
 
-<div class="grid cards bh-cols-4" markdown>
+<div class="grid cards" markdown>
 
--   :material-office-building-cog-outline:{ .lg } **Enterprise ERP System**
-
-    ---
-
-    <span class="bh-tag">Enterprise</span><span class="bh-tag bh-tag--live">Production</span>
-
-    A modular ERP that brings core business operations into one place — with department-level
-    permissions, approval workflows and full audit trails.
-
-    <p class="bh-chips"><code>Laravel</code><code>Filament</code><code>RBAC</code><code>REST API</code></p>
-
--   :material-face-agent:{ .lg } **Service Desk Platform**
+-   :material-office-building-cog-outline:{ .lg } **ERP Platform**
 
     ---
 
-    <span class="bh-tag">IT Operations</span>
+    <span class="bh-tag">Valleysoft</span><span class="bh-tag bh-tag--live">2024 - Present</span>
 
-    Ticketing with categories, priorities, SLAs, assignment and escalation rules, so support
-    teams always know what to work on next.
+    Backend services, deployment and integration for a modular ERP. Centralized SSO with
+    Keycloak, integrations with SMS providers and IoT access-control systems, and secure
+    service-to-service communication.
 
-    <p class="bh-chips"><code>Laravel</code><code>Livewire</code><code>Keycloak SSO</code></p>
+    <p class="bh-chips"><code>Java</code><code>Spring Boot</code><code>Angular</code><code>PostgreSQL</code><code>Keycloak</code></p>
 
--   :material-account-group-outline:{ .lg } **HR Management System**
-
-    ---
-
-    <span class="bh-tag">People</span>
-
-    Employee records, leave and attendance, onboarding workflows and employee self-service
-    requests.
-
-    <p class="bh-chips"><code>Laravel</code><code>Filament</code><code>LDAP / AD</code></p>
-
--   :material-handshake-outline:{ .lg } **CRM**
+-   :material-transit-connection-variant:{ .lg } **Enterprise API &amp; Integration**
 
     ---
 
-    <span class="bh-tag">Sales</span>
+    <span class="bh-tag">Integration</span>
 
-    Customers, contacts, opportunities and activities in a single pipeline view, with
-    reporting for managers.
+    API contracts, request/response transformations and secure application-to-application
+    integration, connecting internal applications, ERP modules and external services.
 
-    <p class="bh-chips"><code>Laravel</code><code>Livewire</code><code>MySQL</code></p>
+    <p class="bh-chips"><code>IBM CP4I</code><code>App Connect</code><code>API Connect</code><code>OAuth 2.0</code></p>
 
--   :material-account-cog-outline:{ .lg } **Self-Service Portal**
-
-    ---
-
-    <span class="bh-tag">Employees</span>
-
-    A single portal where users submit and track requests, reset access and find answers —
-    signed in with company SSO.
-
-    <p class="bh-chips"><code>Laravel</code><code>OpenID Connect</code><code>Keycloak</code></p>
-
--   :material-robot-outline:{ .lg } **AI Dashboard**
+-   :simple-redhatopenshift:{ .lg } **Integration Platform Operations**
 
     ---
 
-    <span class="bh-tag">Analytics</span>
+    <span class="bh-tag">Platform</span>
 
-    A dashboard that surfaces insights and automates routine analysis on top of business data.
+    Administering IBM Cloud Pak for Integration environments: runtime components,
+    deployments, configuration, certificates and production troubleshooting.
 
-    <p class="bh-chips"><code>Laravel</code><code>AI APIs</code><code>Charts</code></p>
+    <p class="bh-chips"><code>OpenShift</code><code>CP4I</code><code>Linux</code><code>GitLab CI/CD</code></p>
 
--   :material-book-open-page-variant-outline:{ .lg } **Knowledge Base Platform**
-
-    ---
-
-    <span class="bh-tag">Documentation</span>
-
-    Searchable articles, categories and permissions so teams can document processes and help
-    users help themselves.
-
-    <p class="bh-chips"><code>Laravel</code><code>Full-text search</code><code>RBAC</code></p>
-
--   :material-package-variant-closed:{ .lg } **Open-source Laravel packages**
+-   :material-shield-account-outline:{ .lg } **Centralized Identity &amp; SSO**
 
     ---
 
-    <span class="bh-tag">Open Source</span><span class="bh-tag bh-tag--live">Public</span>
+    <span class="bh-tag">Security</span>
 
-    API responses, users & RBAC, Keycloak auth, dynamic enums and starter kits —
-    [see all packages](packages.md).
+    Keycloak-based single sign-on across enterprise applications, with secure authentication
+    and authorization flows and LDAP integration.
 
-    <p class="bh-chips"><code>PHP</code><code>Laravel 11–13</code><code>Composer</code></p>
+    <p class="bh-chips"><code>Keycloak</code><code>OpenID Connect</code><code>LDAP</code><code>JWT</code></p>
+
+-   :material-account-group-outline:{ .lg } **Business Modules**
+
+    ---
+
+    <span class="bh-tag">Valleysoft</span>
+
+    HR, CRM, Self-Service and Service Desk modules built as part of a larger enterprise suite.
+
+    <p class="bh-chips"><code>REST APIs</code><code>PostgreSQL</code><code>RBAC</code></p>
+
+-   :material-gift-outline:{ .lg } **Mora Electric: Redeem Points App**
+
+    ---
+
+    <span class="bh-tag">Client project</span><span class="bh-tag">2025</span>
+
+    A loyalty application that lets customers collect and redeem points.
+
+    <p class="bh-chips"><code>Backend APIs</code><code>Integration</code></p>
 
 </div>
 
 ## Typical architecture
 
-Most of these systems share a proven foundation I can reuse for your project:
+Most of the systems I work on share a foundation like this:
 
 ```mermaid
 flowchart LR
-    U[Users / Mobile app] -->|HTTPS| N[Nginx / Ingress]
-    N --> A[Laravel app]
+    U[Web / mobile clients] -->|HTTPS| G[IBM API Connect]
+    G --> S[Spring Boot services]
     U -.->|SSO login| K[Keycloak]
-    K -.->|OIDC tokens| A
-    K --- L[(LDAP / AD)]
-    A --> DB[(Database)]
-    A --> Q[Queue workers]
-    A --> S[(MinIO / S3)]
-    CI[CI/CD pipeline] -->|deploy| N
+    K -.->|OIDC tokens| S
+    K --- L[(LDAP)]
+    S --> DB[(PostgreSQL)]
+    S <--> ACE[IBM App Connect Enterprise]
+    ACE <--> X[ERP · SMS · IoT · partners]
+    CI[GitLab CI/CD] -->|deploy| OCP[[Red Hat OpenShift]]
 ```
 
 <div class="bh-cta" markdown>
 
 ## Want something similar?
 
-I can build a tailored version of any of these for your organization.
+I can design and build a version of any of these for your organization.
 
 [Discuss your project :material-arrow-right:](contact.md){ .md-button .md-button--primary }
 

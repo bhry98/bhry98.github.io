@@ -19,6 +19,19 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install "mkdocs-material>=9.5,<10"
+      # [imaging] is needed by the social plugin (link preview images)
+      - run: pip install "mkdocs-material[imaging]>=9.5,<10"
 
-      - run: mkdocs gh-deploy --force
+      - name: Build site
+        run: mkdocs build
+
+      # Converts the Markdown CV page (docs/cv/index.md) into a downloadable PDF.
+      # google-chrome is preinstalled on ubuntu-latest runners.
+      - name: Build CV PDF
+        run: ./scripts/build-cv-pdf.sh site
+
+      - name: Publish to GitHub Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          ghp-import --no-jekyll --push --force --message "Deploy ${GITHUB_SHA}" site

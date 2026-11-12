@@ -1,16 +1,16 @@
 ---
 title: Portfolio
-description: Portfolio of Abdelrahman (bhry98) — services, skills, projects and open-source work.
+description: Portfolio of Abdelrahman Mahmoud (bhry98). Enterprise services, integration and OpenShift.
 hide:
   - toc
 ---
 
 <span class="bh-eyebrow">Portfolio</span>
 
-# Engineering that scales with your business
+# Enterprise engineering you can rely on
 
-<p class="bh-lead">I'm a Software &amp; Infrastructure Engineer who works across the whole stack — application
-code, identity, servers and delivery pipelines. One person who understands how all the pieces fit.</p>
+<p class="bh-lead">I work across Java services, enterprise integration and the OpenShift platform underneath.
+One engineer who understands how all the pieces fit together.</p>
 
 <div class="grid cards" markdown>
 
@@ -30,24 +30,24 @@ code, identity, servers and delivery pipelines. One person who understands how a
 
     ---
 
-    Backend, frontend, DevOps, infrastructure, storage and security.
+    Java, integration, OpenShift, identity, DevOps and infrastructure.
 
 -   :material-view-dashboard-outline:{ .lg } **[Projects](projects.md)**
 
     ---
 
-    ERP, service desk, HR, CRM, portals and more.
+    ERP, enterprise integration, platform operations and more.
 
--   :material-package-variant-closed:{ .lg } **[Open source](packages.md)**
+-   :material-file-document-outline:{ .lg } **[My CV](../cv/index.md)**
 
     ---
 
-    Laravel packages I build and maintain.
+    Experience, certificates and education. Download as PDF.
 
 -   :material-email-fast-outline:{ .lg } **[Contact](contact.md)**
 
     ---
 
-    Tell me about your project — let's work together.
+    Tell me about your project. Let's work together.
 
 </div>

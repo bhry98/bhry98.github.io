@@ -1,68 +1,69 @@
 ---
 title: About Me
-description: About Abdelrahman (bhry98) — Software & Infrastructure Engineer.
+description: About Abdelrahman Mahmoud (bhry98), Enterprise Software & Integration Engineer and Red Hat Certified OpenShift Administrator.
 ---
 
 <div class="bh-profile" markdown>
-<img src="https://avatars.githubusercontent.com/u/85765830?s=240&v=4" alt="Abdelrahman (bhry98)">
+<img src="../../assets/images/avatar.jpg" alt="Abdelrahman Mahmoud (bhry98)">
 <div markdown>
 <span class="bh-eyebrow">About me</span>
-# Abdelrahman <small>(bhry98)</small>
-<p>Software &amp; Infrastructure Engineer · Laravel · IAM · DevOps</p>
+# Abdelrahman Mahmoud
+<p>Enterprise Software &amp; Integration Engineer · Red Hat Certified OpenShift Administrator</p>
 </div>
 </div>
 
-I'm a **Software & Infrastructure Engineer** who enjoys the whole journey of a product: modelling the
-domain, writing the application, securing who can access it, and running it reliably in production.
+I'm an **Enterprise Software & Integration Engineer** at Valleysoft. I design and build backend
+services with **Java and Spring Boot**, connect enterprise systems with **IBM Cloud Pak for
+Integration, App Connect Enterprise and API Connect**, and run workloads on **Red Hat OpenShift**,
+where I'm a Red Hat Certified Administrator.
 
-Most engineers specialise in either code *or* infrastructure. I work across both — so the
-applications I build are designed from day one to be deployed, monitored and scaled, and the
-infrastructure I set up is shaped around how the software actually behaves.
+I started on the infrastructure side as a System Engineer: Linux servers, networking, reverse
+proxies, certificates and production support. That background shapes how I write software today.
+The services I build are designed from day one to be deployed, secured, monitored and operated,
+and when something breaks I can follow the problem across the application, middleware and
+infrastructure layers.
 
 ## What I bring
 
 <div class="grid cards" markdown>
 
--   :material-code-braces:{ .lg } **Software engineering**
+-   :simple-springboot:{ .lg } **Backend engineering**
 
     ---
 
-    Laravel & PHP applications, REST APIs, admin panels with Filament and Livewire, plus
-    Java / Spring Boot services when the job calls for it.
+    Java and Spring Boot services, RESTful APIs, PostgreSQL, and Angular front ends for
+    enterprise applications.
 
--   :material-shield-lock-outline:{ .lg } **Identity & access**
-
-    ---
-
-    Keycloak, OAuth2, OpenID Connect, LDAP / Active Directory and PAM — one secure login
-    across your apps.
-
--   :material-ferry:{ .lg } **DevOps & containers**
+-   :material-transit-connection-variant:{ .lg } **Integration**
 
     ---
 
-    Docker, Kubernetes and OpenShift with CI/CD on GitHub Actions and GitLab — automated,
-    repeatable releases.
+    IBM CP4I, App Connect Enterprise and API Connect: integration flows, API contracts,
+    transformations and API security policies.
 
--   :simple-redhat:{ .lg } **Linux & infrastructure**
-
-    ---
-
-    Red Hat Enterprise Linux, Ubuntu, Windows Server, networking services, virtualization and
-    S3-compatible storage.
-
--   :material-robot-outline:{ .lg } **AI & automation**
+-   :simple-redhatopenshift:{ .lg } **OpenShift &amp; containers**
 
     ---
 
-    Exploring how AI and automation can remove repetitive work from business processes.
+    Red Hat certified OpenShift administration, Kubernetes and Docker for production workloads.
 
--   :material-source-branch:{ .lg } **Open source**
+-   :material-shield-lock-outline:{ .lg } **Identity &amp; access**
 
     ---
 
-    I publish reusable [Laravel packages](packages.md) so every project starts from proven
-    building blocks.
+    Keycloak, LDAP, SSO, OAuth 2.0, OpenID Connect and JWT across many applications.
+
+-   :simple-redhat:{ .lg } **Linux &amp; infrastructure**
+
+    ---
+
+    Linux administration, networking, Nginx, reverse proxies, SSL/TLS and incident troubleshooting.
+
+-   :simple-gitlab:{ .lg } **Delivery**
+
+    ---
+
+    GitLab CI/CD pipelines and deployment workflows for applications and integration services.
 
 </div>
 
@@ -71,30 +72,30 @@ infrastructure I set up is shaped around how the software actually behaves.
 <div class="bh-steps" markdown>
 <div class="bh-step" markdown>
 #### Understand
-<p>Clarify the business goal, users and constraints before writing code.</p>
+<p>Clarify the business goal, the systems involved and the constraints first.</p>
 </div>
 <div class="bh-step" markdown>
 #### Design
-<p>Choose a simple architecture, data model and security approach that fits.</p>
+<p>Define API contracts, data flows and the security model before writing code.</p>
 </div>
 <div class="bh-step" markdown>
 #### Build &amp; ship
-<p>Deliver in small, demoable increments with automated tests and CI/CD.</p>
+<p>Deliver in small, demoable increments through automated pipelines.</p>
 </div>
 <div class="bh-step" markdown>
-#### Support
-<p>Document, hand over cleanly, and stay available for improvements.</p>
+#### Operate
+<p>Monitor, document and support the system after it goes live.</p>
 </div>
 </div>
 
 ## Principles
 
-- **Simple beats clever.** Code the next developer can read and change with confidence.
-- **Security is a feature.** Authentication, authorization and auditing are designed in, not bolted on.
-- **Automate the boring parts.** If it's done twice, it gets a script, a pipeline or a package.
+- **Simple beats clever.** Systems the next engineer can read, change and operate with confidence.
+- **Security is designed in.** Authentication, authorization and auditing from the first sprint.
+- **Contracts first.** Integrations stay stable when APIs and messages are agreed up front.
 - **Clear communication.** Regular updates, honest estimates and no surprises.
 
 > **"Build once. Improve forever."**
 
 [Work with me :material-arrow-right:](contact.md){ .md-button .md-button--primary }
-[View projects](projects.md){ .md-button }
+[View my CV](../cv/index.md){ .md-button }

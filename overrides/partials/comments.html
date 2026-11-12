@@ -1,0 +1,37 @@
+{#- Share bar, shown at the end of every blog post -#}
+{% if page.file.src_uri.startswith("blog/posts/") %}
+  {% set share_url = page.canonical_url | urlencode %}
+  {% set share_text = page.title | urlencode %}
+  <aside class="bh-share" aria-label="Share this post">
+    <span class="bh-share__label">Share this post</span>
+    <div class="bh-share__buttons">
+      <a class="bh-share__btn bh-share__btn--whatsapp" target="_blank" rel="noopener"
+         href="https://wa.me/?text={{ share_text }}%20{{ share_url }}" title="Share on WhatsApp">
+        {% include ".icons/fontawesome/brands/whatsapp.svg" %}<span>WhatsApp</span>
+      </a>
+      <a class="bh-share__btn bh-share__btn--linkedin" target="_blank" rel="noopener"
+         href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" title="Share on LinkedIn">
+        {% include ".icons/fontawesome/brands/linkedin.svg" %}<span>LinkedIn</span>
+      </a>
+      <a class="bh-share__btn bh-share__btn--x" target="_blank" rel="noopener"
+         href="https://x.com/intent/tweet?text={{ share_text }}&url={{ share_url }}" title="Share on X">
+        {% include ".icons/fontawesome/brands/x-twitter.svg" %}<span>X</span>
+      </a>
+      <a class="bh-share__btn bh-share__btn--facebook" target="_blank" rel="noopener"
+         href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" title="Share on Facebook">
+        {% include ".icons/fontawesome/brands/facebook.svg" %}<span>Facebook</span>
+      </a>
+      <a class="bh-share__btn bh-share__btn--telegram" target="_blank" rel="noopener"
+         href="https://t.me/share/url?url={{ share_url }}&text={{ share_text }}" title="Share on Telegram">
+        {% include ".icons/fontawesome/brands/telegram.svg" %}<span>Telegram</span>
+      </a>
+      <button type="button" class="bh-share__btn bh-share__btn--copy" data-bh-copy="{{ page.canonical_url }}" title="Copy link">
+        {% include ".icons/material/link-variant.svg" %}<span>Copy link</span>
+      </button>
+      <button type="button" class="bh-share__btn bh-share__btn--native" hidden
+              data-bh-share-url="{{ page.canonical_url }}" data-bh-share-title="{{ page.title | e }}" title="More options">
+        {% include ".icons/material/share-variant.svg" %}<span>More</span>
+      </button>
+    </div>
+  </aside>
+{% endif %}

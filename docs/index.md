@@ -1,7 +1,7 @@
 ---
 template: home.html
-title: Abdelrahman — Software & Infrastructure Engineer
-description: I build secure, scalable Laravel platforms and the cloud-native infrastructure they run on.
+title: Abdelrahman Mahmoud | Enterprise Software & Integration Engineer
+description: Java Spring Boot services, IBM App Connect Enterprise and API Connect integrations, and Red Hat OpenShift platforms.
 hide:
   - navigation
   - toc
@@ -9,49 +9,49 @@ hide:
 ---
 
 <div class="bh-stats" markdown>
-<div class="bh-stat"><strong>Full-stack</strong><span>Laravel · Livewire · Filament</span></div>
-<div class="bh-stat"><strong>Cloud-native</strong><span>Docker · Kubernetes · OpenShift</span></div>
-<div class="bh-stat"><strong>Secure by design</strong><span>Keycloak · OAuth2 · OIDC · LDAP</span></div>
-<div class="bh-stat"><strong>Open source</strong><span>Laravel packages on GitHub</span></div>
+<div class="bh-stat"><strong>Java &amp; Spring</strong><span>Spring Boot · Spring Security · REST</span></div>
+<div class="bh-stat"><strong>Integration</strong><span>IBM CP4I · App Connect · API Connect</span></div>
+<div class="bh-stat"><strong>Red Hat OpenShift</strong><span>Certified Administrator</span></div>
+<div class="bh-stat"><strong>Identity</strong><span>Keycloak · OAuth 2.0 · OIDC · LDAP</span></div>
 </div>
 
 <div class="bh-section" markdown>
 
 <span class="bh-eyebrow">What I do</span>
 
-## Services for teams that need it done right
+## Enterprise engineering, end to end
 
-From the first database table to the production cluster, I take ownership of the whole path.
+Services, integrations and the platform they run on, built by one engineer who understands all three.
 
 <div class="grid cards bh-cols-4" markdown>
 
--   :simple-laravel:{ .lg } **Laravel application development**
+-   :simple-springboot:{ .lg } **Java Spring Boot services**
 
     ---
 
-    Custom web apps, admin panels and REST APIs built with Laravel, Livewire and Filament —
-    clean architecture, tested, and easy to extend.
+    Backend services and REST APIs with Spring Boot, Spring Security and PostgreSQL,
+    designed for clear contracts and long-term maintenance.
 
--   :material-shield-lock-outline:{ .lg } **Identity & access management**
-
-    ---
-
-    Single sign-on with Keycloak, OAuth2 / OpenID Connect, LDAP & Active Directory
-    integration, and role-based access control.
-
--   :material-kubernetes:{ .lg } **DevOps & cloud-native delivery**
+-   :material-transit-connection-variant:{ .lg } **Enterprise integration**
 
     ---
 
-    Containerization, Kubernetes / OpenShift deployments and CI/CD pipelines with
-    GitHub Actions or GitLab CI — repeatable, zero-drama releases.
+    Message flows and APIs on IBM Cloud Pak for Integration, App Connect Enterprise
+    and API Connect that link ERP modules, internal apps and external partners.
 
--   :material-server-network:{ .lg } **Infrastructure & Linux**
+-   :simple-redhatopenshift:{ .lg } **OpenShift platforms**
 
     ---
 
-    Red Hat & Ubuntu servers, Windows Server / AD, DNS, DHCP, virtualization and
-    S3-compatible object storage with MinIO.
+    Red Hat certified OpenShift administration: deployments, routes, TLS, scaling
+    and day-two operations for containerized workloads.
+
+-   :material-shield-lock-outline:{ .lg } **Identity &amp; access**
+
+    ---
+
+    Single sign-on with Keycloak, OAuth 2.0, OpenID Connect and LDAP, plus API
+    security and service-to-service authentication.
 
 </div>
 
@@ -63,38 +63,38 @@ From the first database table to the production cluster, I take ownership of the
 
 <span class="bh-eyebrow">Selected work</span>
 
-## Systems I've designed & delivered
+## Systems I've built and operated
 
-Business platforms built for real organizations — from ERP to self-service portals.
+Real platforms for real organizations, from ERP to enterprise integration.
 
 <div class="grid cards" markdown>
 
--   :material-office-building-cog-outline:{ .lg } **Enterprise ERP System**
+-   :material-office-building-cog-outline:{ .lg } **ERP Platform**
 
     ---
 
-    A modular ERP covering finance, inventory, purchasing and approvals, with
-    fine-grained permissions per department.
+    Backend services, SSO and integrations for a modular ERP, connected to SMS
+    providers and IoT access-control systems.
 
-    <p class="bh-chips"><code>Laravel</code><code>Filament</code><code>RBAC</code></p>
+    <p class="bh-chips"><code>Java</code><code>Spring Boot</code><code>Angular</code><code>PostgreSQL</code><code>Keycloak</code></p>
 
--   :material-face-agent:{ .lg } **Service Desk Platform**
-
-    ---
-
-    Ticketing with SLAs, assignment rules, escalations and a knowledge base,
-    connected to company SSO.
-
-    <p class="bh-chips"><code>Laravel</code><code>Livewire</code><code>Keycloak</code></p>
-
--   :material-account-group-outline:{ .lg } **HR Management System**
+-   :material-transit-connection-variant:{ .lg } **Enterprise API &amp; Integration**
 
     ---
 
-    Employee records, leave & attendance, onboarding workflows and self-service
-    requests for staff.
+    API contracts, request/response transformations and secure application-to-application
+    integration on IBM CP4I.
 
-    <p class="bh-chips"><code>Laravel</code><code>Filament</code><code>LDAP</code></p>
+    <p class="bh-chips"><code>IBM ACE</code><code>API Connect</code><code>OAuth 2.0</code></p>
+
+-   :simple-redhatopenshift:{ .lg } **Platform operations**
+
+    ---
+
+    Running integration runtimes and containerized services in production: deployments,
+    certificates, networking and incident troubleshooting.
+
+    <p class="bh-chips"><code>OpenShift</code><code>Linux</code><code>GitLab CI/CD</code></p>
 
 </div>
 
@@ -104,76 +104,37 @@ Business platforms built for real organizations — from ERP to self-service por
 
 <div class="bh-section" markdown>
 
-<span class="bh-eyebrow">Open source</span>
-
-## Laravel packages I maintain
-
-Reusable building blocks that I use in client work and share with the community.
-
-<div class="grid cards" markdown>
-
--   :material-api:{ .lg } **Laravel API Response**
-
-    ---
-
-    A fluent, configurable response builder for Laravel 11–13 APIs: presets, rate
-    limiting, audit logging and testing helpers.
-
-    [:octicons-book-24: Docs](packages/laravel-api-response/index.md) ·
-    [:fontawesome-brands-github: GitHub](https://github.com/bhry98/laravel-api-response)
-
--   :material-shield-account-outline:{ .lg } **Keycloak Laravel Auth**
-
-    ---
-
-    Plug Keycloak single sign-on into a Laravel application.
-
-    [:fontawesome-brands-github: GitHub](https://github.com/bhry98/keycloak-laravel-auth)
-
--   :material-rocket-launch-outline:{ .lg } **Laravel Ready**
-
-    ---
-
-    A starter that ships identity, users, RBAC and dynamic enums for fresh Laravel apps.
-
-    [:fontawesome-brands-github: GitHub](https://github.com/bhry98/bhry98-laravel-ready)
-
-</div>
-
-[All packages :material-arrow-right:](portfolio/packages.md){ .bh-link-arrow }
-
-</div>
-
-<div class="bh-section" markdown>
-
 <span class="bh-eyebrow">Writing</span>
 
 ## Latest from the blog
 
-Practical notes from building and running production systems.
+Practical notes from building and running enterprise systems.
 
-<div class="grid cards" markdown>
+<div class="grid cards bh-cols-4" markdown>
 
--   :material-api:{ .lg } **[Consistent JSON responses in Laravel APIs](blog/posts/consistent-laravel-api-responses.md)**
-
-    ---
-
-    Why a single response envelope makes mobile and frontend teams faster — and how to
-    adopt one without rewriting your controllers.
-
--   :material-shield-key-outline:{ .lg } **[Single sign-on for Laravel with Keycloak](blog/posts/laravel-keycloak-sso.md)**
+-   :simple-redhatopenshift:{ .lg } **[Running Spring Boot on OpenShift](blog/posts/spring-boot-on-openshift.md)**
 
     ---
 
-    How the OpenID Connect flow works, what to configure in Keycloak, and the
-    mistakes I see most often.
+    Images, health probes, configuration and graceful shutdown, done the platform way.
 
--   :simple-redhatopenshift:{ .lg } **[Shipping Laravel to Kubernetes & OpenShift](blog/posts/laravel-on-kubernetes-openshift.md)**
+-   :simple-springsecurity:{ .lg } **[Securing Spring Boot APIs with Keycloak](blog/posts/spring-boot-keycloak.md)**
 
     ---
 
-    A production-ready container image, health checks, queues and migrations
-    done the cloud-native way.
+    JWT validation, role mapping and the mistakes I see most often.
+
+-   :material-transit-connection-variant:{ .lg } **[IBM App Connect Enterprise in practice](blog/posts/ibm-ace-in-practice.md)**
+
+    ---
+
+    Integration servers, BAR files, ESQL and policies explained clearly.
+
+-   :material-scale-balance:{ .lg } **[ACE or Spring Boot?](blog/posts/ace-or-spring-boot.md)**
+
+    ---
+
+    How I decide where integration logic should live.
 
 </div>
 
@@ -183,12 +144,12 @@ Practical notes from building and running production systems.
 
 <div class="bh-cta" markdown>
 
-## Have a project in mind?
+## Have an enterprise project in mind?
 
-Whether you need a new Laravel platform, single sign-on across your apps, or a reliable
-path to production, I'd love to hear about it. Tell me what you're building and I'll reply with next steps.
+Whether you need Spring Boot services, integration between your systems, single sign-on or
+a reliable OpenShift platform, I'd like to hear about it.
 
 [Start a conversation :material-arrow-right:](portfolio/contact.md){ .md-button .md-button--primary }
-[Connect on LinkedIn](https://www.linkedin.com/in/bhry98/){ .md-button }
+[Download my CV](cv/index.md){ .md-button }
 
 </div>

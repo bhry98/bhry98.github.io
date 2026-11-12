@@ -7,8 +7,8 @@ description: Open-source Laravel packages by Abdelrahman (bhry98).
 
 # Laravel packages
 
-<p class="bh-lead">Reusable packages focused on developer productivity. I use them in client projects so every
-build starts from tested, proven building blocks — and share them with the community.</p>
+<p class="bh-lead">Open-source packages I built during my PHP and Laravel years, before focusing fully on
+enterprise Java, integration and OpenShift. They are still available on GitHub for anyone who finds them useful.</p>
 
 <div class="grid cards" markdown>
 
@@ -78,6 +78,6 @@ build starts from tested, proven building blocks — and share them with the com
 </div>
 
 !!! tip "Contribute"
-    Found a bug or have an idea? Open an issue or a pull request on GitHub — feedback,
+    Found a bug or have an idea? Open an issue or a pull request on GitHub. Feedback,
     feature requests and contributions are always welcome. If a package helps you, a ⭐ on
     GitHub means a lot.

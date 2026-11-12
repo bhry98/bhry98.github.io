@@ -1,68 +1,68 @@
 ---
 title: Skills
-description: Technical skills of Abdelrahman (bhry98) across backend, frontend, DevOps, infrastructure, storage and security.
+description: Technical skills of Abdelrahman Mahmoud (bhry98) across Java, enterprise integration, OpenShift, identity and infrastructure.
 ---
 
 <span class="bh-eyebrow">Skills</span>
 
 # My toolbox
 
-<p class="bh-lead">The technologies I use day to day to design, build, secure and operate software.</p>
+<p class="bh-lead">The technologies I use to design, build, integrate, secure and operate enterprise systems.</p>
 
 <div class="bh-skill-grid" markdown>
 
 <div markdown>
-### :material-code-braces: Backend
-<p class="bh-chips"><code>Laravel</code><code>PHP 8</code><code>Java</code><code>Spring Boot</code><code>REST APIs</code><code>Eloquent</code><code>Queues &amp; Jobs</code><code>AuthN / AuthZ</code></p>
+### :material-language-java: Backend
+<p class="bh-chips"><code>Java</code><code>Spring Boot</code><code>Spring Security</code><code>RESTful APIs</code><code>JSON / XML</code><code>Webhooks</code><code>Angular</code></p>
 </div>
 
 <div markdown>
-### :material-monitor-dashboard: Frontend
-<p class="bh-chips"><code>Livewire</code><code>Filament</code><code>Blade</code><code>JavaScript</code><code>HTML5</code><code>CSS3</code></p>
+### :material-transit-connection-variant: Integration
+<p class="bh-chips"><code>IBM Cloud Pak for Integration</code><code>IBM App Connect Enterprise</code><code>IBM Integration Bus</code><code>IBM API Connect</code><code>API contracts</code><code>Transformations</code></p>
 </div>
 
 <div markdown>
-### :material-kubernetes: DevOps
-<p class="bh-chips"><code>Docker</code><code>Kubernetes</code><code>OpenShift</code><code>GitHub Actions</code><code>GitLab CI/CD</code><code>Nginx</code></p>
+### :simple-redhatopenshift: Container platforms
+<p class="bh-chips"><code>Red Hat OpenShift</code><code>Kubernetes</code><code>Docker</code><code>Containerized apps</code></p>
 </div>
 
 <div markdown>
-### :material-server-network: Infrastructure
-<p class="bh-chips"><code>Red Hat Enterprise Linux</code><code>Ubuntu</code><code>Windows Server</code><code>Active Directory</code><code>DNS</code><code>DHCP</code><code>Virtualization</code></p>
+### :material-shield-lock-outline: Identity &amp; security
+<p class="bh-chips"><code>Keycloak</code><code>LDAP</code><code>SSO</code><code>OAuth 2.0</code><code>OpenID Connect</code><code>JWT</code><code>API security</code></p>
 </div>
 
 <div markdown>
-### :material-database-outline: Cloud &amp; storage
-<p class="bh-chips"><code>MinIO</code><code>Amazon S3 API</code><code>Object storage</code><code>NAS</code></p>
+### :material-server-network: Linux &amp; infrastructure
+<p class="bh-chips"><code>Linux administration</code><code>Networking</code><code>Nginx</code><code>Reverse proxy</code><code>SSL/TLS</code><code>Monitoring</code></p>
 </div>
 
 <div markdown>
-### :material-shield-lock-outline: Security &amp; identity
-<p class="bh-chips"><code>Keycloak</code><code>OAuth2</code><code>OpenID Connect</code><code>LDAP</code><code>PAM solutions</code><code>RBAC</code></p>
+### :material-database-outline: Data &amp; delivery
+<p class="bh-chips"><code>PostgreSQL</code><code>MySQL</code><code>GitLab CI/CD</code><code>Deployment workflows</code></p>
 </div>
 
 </div>
 
-## Ways of working
+## Certifications
 
 <div class="grid cards" markdown>
 
--   :material-test-tube:{ .lg } **Quality**
+-   :simple-redhat:{ .lg } **Red Hat Certified OpenShift Administrator**
 
     ---
 
-    Automated tests, code reviews and readable, documented code.
+    Red Hat
 
--   :material-source-pull:{ .lg } **Collaboration**
-
-    ---
-
-    Git workflows, pull requests and clear written communication.
-
--   :material-chart-timeline-variant:{ .lg } **Delivery**
+-   :simple-redhat:{ .lg } **Red Hat Portfolio: Foundational**
 
     ---
 
-    Small iterations, CI/CD and environments that mirror production.
+    Red Hat
+
+-   :material-certificate-outline:{ .lg } **Verified badges**
+
+    ---
+
+    See all my badges on [Credly](https://www.credly.com/users/bhry98).
 
 </div>
