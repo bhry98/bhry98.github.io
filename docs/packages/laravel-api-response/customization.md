@@ -169,10 +169,10 @@ Opt-in throttling for any route/group via the `api.rate_limit` middleware alias.
 })
 ```
 
-Override the configured `max_attempts`/`decay_seconds` for a specific route via middleware parameters:
+Override the configured `max_attempts`/`decay_seconds` for a specific route via middleware parameters. The second parameter is in **seconds**, not minutes:
 
 ```php
-Route::post('/login', ...)->middleware('api.rate_limit:5,1'); // 5 attempts per minute
+Route::post('/login', ...)->middleware('api.rate_limit:5,60'); // 5 attempts per 60 seconds
 ```
 
 `by: 'user'` buckets authenticated requests by the user's auth identifier and falls back to IP for guests; `by: 'route'` buckets by route name (or URI path when unnamed).
@@ -223,7 +223,10 @@ php artisan migrate
 ```
 
 - `queue.connection`/`queue.queue` map directly onto `StoreAuditLogEntry::onConnection()`/`onQueue()`. Leave them `null` to use your app's default queue connection (`config('queue.default')`, e.g. `sync`, `database`, `redis`, ...) - set `queue.connection` to `'database'` (or `'redis'`, etc.) explicitly if you want audit logs on a *different* connection than the rest of your app's jobs.
-- Anything listed under `hidden` is redacted (replaced with `"***"`) wherever it appears as a request/response body (or header, if `capture.headers` is on) key, at any nesting depth, before the entry is persisted.
+- Anything listed under `hidden` is redacted (replaced with `"***"`) before the entry is saved. Matching is case-insensitive and applies to keys at any depth in the request/response body, and to request headers when `capture.headers` is on (so `Authorization` is redacted by default).
+- Uploaded files are never stored. They show up in `request_body` as `{"file": "avatar.png", "size": 1024, "mime": "image/png"}`.
+- `methods` is case-insensitive (`['post']` and `['POST']` behave the same).
+- `user_id` is a string column, so integer, UUID and ULID user keys all work.
 - Query the log like any other Eloquent model:
 
 ```php
@@ -259,15 +262,48 @@ Bhry98\LaravelApiResponse\Events\ResponseSent::class;    // fired once the JsonR
 
 ## Exception handling
 
-Fully opt-in - off by default:
+This is fully opt-in and off by default:
 
 ```php
 'exceptions' => [
     'override_exception_handler' => env('API_RESPONSE_OVERRIDE_EXCEPTIONS', false),
+
+    'map' => [
+        ValidationException::class => 422,
+        AuthenticationException::class => 401,
+        AuthorizationException::class => 403,
+        ModelNotFoundException::class => 404,
+        HttpExceptionInterface::class => null, // uses the exception's own status code
+    ],
 ],
 ```
 
-When enabled, `ValidationException`, `AuthenticationException`, `AuthorizationException`, `ModelNotFoundException` and any `HttpExceptionInterface` are automatically formatted as `api()` responses for JSON/`api/*` requests; anything else becomes `api()->internal()` (with the real message only when `app.debug` is true).
+When it's enabled, exceptions thrown during JSON requests (or any `api/*` route) are rendered as `api()` responses:
+
+| Exception | Response |
+|---|---|
+| `ValidationException` | `api()->unprocessable($e->errors())`, 422 |
+| `AuthenticationException` | `api()->unauthorized()`, 401 |
+| `AuthorizationException` | `api()->forbidden($e->getMessage())`, 403 (or the status from `Gate::denyWithStatus()` / `denyAsNotFound()`) |
+| `ModelNotFoundException` | `api()->notFound()`, 404, with the generic "Resource not found." message, so model class names and IDs never reach the client |
+| any `HttpExceptionInterface` | its own status code, message **and headers** (e.g. `Retry-After`, `Allow`) |
+| a class you added to `map` | a failed response with the mapped status code and the exception's message |
+| anything else | `api()->internal()`, 500, with the real message only when `app.debug` is true |
+
+Use `map` to change the status code of a built-in type or to register your own domain exceptions:
+
+```php
+'map' => [
+    // ...the defaults above
+    App\Exceptions\InsufficientBalance::class => 409,
+],
+```
+
+```json
+{ "status": false, "message": "Your balance is too low.", "data": null }
+```
+
+An explicit status on the exception itself (`ValidationException::withMessages(...)->status(400)`, `Gate::denyWithStatus(404)`) always beats the map.
 
 ## Overriding the default `response()->json()`
 
@@ -283,11 +319,11 @@ return response()->json(['id' => 1]);
 // => {"status": true, "data": {"id": 1}}
 ```
 
-Never forced - leave it `false` (the default) and `response()->json()` behaves exactly like stock Laravel.
+It's never forced: leave it `false` (the default) and `response()->json()` behaves exactly like stock Laravel. Responses built with `api()` (and the legacy `BResponse*` classes) are already full envelopes, so they are never wrapped a second time, whether or not this flag is on.
 
 ## Testing helpers
 
-Registered automatically on `Illuminate\Testing\TestResponse` - no trait/import needed:
+These assertions are registered automatically on `Illuminate\Testing\TestResponse`, so you don't need a trait or import. They respect your renamed `keys` and the `wrap` option:
 
 ```php
 $response->assertApiSuccess('User created.');

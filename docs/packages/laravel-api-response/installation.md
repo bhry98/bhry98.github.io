@@ -4,8 +4,10 @@
 
 | | |
 |---|---|
-| PHP | ^8.2 |
-| Laravel | 11.x, 12.x or 13.x |
+| PHP | 8.2 or newer (8.2 – 8.5 tested) |
+| Laravel | 11.x, 12.x, 13.x or 14.x |
+
+See the [compatibility table](index.md#compatibility) for the exact PHP versions each Laravel release supports.
 
 ## Install via Composer
 
@@ -42,7 +44,7 @@ php artisan vendor:publish --tag=bhry98-api-response-migrations
 php artisan migrate
 ```
 
-This publishes a timestamped migration that creates the `api_response_audit_logs` table (the table name itself is configurable via `audit_log.table`).
+This publishes a timestamped migration that creates the `api_response_audit_logs` table. The table name is configurable via `audit_log.table`, and the database connection via `audit_log.connection`.
 
 ## Next
 

@@ -18,7 +18,7 @@ follow the docs to get productive in minutes.</p>
 
     ---
 
-    A fluent, extensible, highly configurable API response toolkit for Laravel 11, 12 and 13.
+    A fluent, extensible, highly configurable API response toolkit for Laravel 11, 12, 13 and 14.
 
     ```bash
     composer require bhry98/laravel-api-response

@@ -18,7 +18,7 @@ enterprise Java, integration and OpenShift. They are still available on GitHub f
 
     <span class="bh-tag bh-tag--live">Documented</span>
 
-    A fluent, extensible, highly configurable API response toolkit for Laravel 11, 12 and 13.
+    A fluent, extensible, highly configurable API response toolkit for Laravel 11, 12, 13 and 14.
 
     - Standardized JSON envelope & presets
     - Ready-made success & error responses
