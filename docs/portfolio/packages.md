@@ -45,8 +45,16 @@ enterprise Java, integration and OpenShift. They are still available on GitHub f
 
     ---
 
-    Authenticate Laravel users against Keycloak for single sign-on across your applications.
+    <span class="bh-tag bh-tag--live">Documented</span>
 
+    Complete Keycloak integration for Laravel 11, 12 and 13.
+
+    - Browser SSO with PKCE & silent refresh
+    - Offline-verified JWT API guard
+    - Roles, scopes, groups & UMA permissions
+    - Service tokens & full Admin API client
+
+    [:octicons-book-24: Read the docs](../packages/keycloak-laravel-auth/index.md){ .md-button .md-button--primary }
     [:fontawesome-brands-github: GitHub](https://github.com/bhry98/keycloak-laravel-auth){ .md-button }
 
 -   :material-format-list-bulleted-type:{ .lg } **Laravel Dynamic Enums**

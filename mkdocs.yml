@@ -156,3 +156,14 @@ nav:
           - Responses: packages/laravel-api-response/responses.md
           - Customization: packages/laravel-api-response/customization.md
           - Upgrade Guide: packages/laravel-api-response/upgrade.md
+      - Keycloak Laravel Auth:
+          - Introduction: packages/keycloak-laravel-auth/index.md
+          - Installation: packages/keycloak-laravel-auth/installation.md
+          - Configuration: packages/keycloak-laravel-auth/configuration.md
+          - Web SSO: packages/keycloak-laravel-auth/web-sso.md
+          - API Authentication: packages/keycloak-laravel-auth/api-authentication.md
+          - Authorization: packages/keycloak-laravel-auth/authorization.md
+          - OIDC & Service Tokens: packages/keycloak-laravel-auth/oidc.md
+          - Admin API: packages/keycloak-laravel-auth/admin-api.md
+          - Testing & Tooling: packages/keycloak-laravel-auth/testing.md
+          - Upgrade Guide: packages/keycloak-laravel-auth/upgrade.md

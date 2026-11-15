@@ -27,11 +27,25 @@ follow the docs to get productive in minutes.</p>
     [Get started :material-arrow-right:](laravel-api-response/index.md){ .md-button .md-button--primary }
     [:fontawesome-brands-github: GitHub](https://github.com/bhry98/laravel-api-response){ .md-button }
 
+-   :material-shield-account-outline:{ .lg } **Keycloak Laravel Auth**
+
+    ---
+
+    Complete Keycloak integration for Laravel 11, 12 and 13: SSO, a fast offline-verified JWT API
+    guard, roles & UMA permissions, service tokens and the Admin API.
+
+    ```bash
+    composer require bhry98/keycloak-laravel-auth
+    ```
+
+    [Get started :material-arrow-right:](keycloak-laravel-auth/index.md){ .md-button .md-button--primary }
+    [:fontawesome-brands-github: GitHub](https://github.com/bhry98/keycloak-laravel-auth){ .md-button }
+
 -   :material-book-clock-outline:{ .lg } **More docs coming soon**
 
     ---
 
-    Documentation for Laravel Users, Keycloak Laravel Auth, Dynamic Enums and Laravel Ready
+    Documentation for Laravel Users, Dynamic Enums and Laravel Ready
     is on the way. Meanwhile, browse the source on GitHub.
 
     [All packages :material-arrow-right:](../portfolio/packages.md){ .md-button }

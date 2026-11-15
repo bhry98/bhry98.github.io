@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Keycloak Laravel Auth</title>
+  <desc id="desc">Complete Keycloak integration for Laravel 11, 12 and 13: SSO, an offline-verified JWT API guard, roles, service tokens and the Admin API.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#04132e"/>
+      <stop offset="1" stop-color="#0b1f45"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="0.5" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#94a3b8" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1280" height="6" fill="url(#brand)"/>
+
+  <g font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+    <text x="80" y="150" fill="#38bdf8" font-size="22" font-weight="600" letter-spacing="3">BHRY98 / LARAVEL PACKAGE</text>
+    <text x="80" y="232" fill="#ffffff" font-size="68" font-weight="800">Keycloak</text>
+    <text x="80" y="312" fill="url(#brand)" font-size="68" font-weight="800">Laravel Auth</text>
+    <text x="80" y="372" fill="#cbd5e1" font-size="24">SSO, JWT APIs, roles, service tokens</text>
+    <text x="80" y="406" fill="#cbd5e1" font-size="24">and the Admin API, in one package.</text>
+
+    <g font-size="18" font-weight="700">
+      <rect x="80" y="456" width="112" height="40" rx="20" fill="#0a1d40" stroke="#38bdf8" stroke-opacity="0.5"/>
+      <text x="136" y="482" fill="#e2e8f0" text-anchor="middle">Laravel 11</text>
+      <rect x="204" y="456" width="62" height="40" rx="20" fill="#0a1d40" stroke="#38bdf8" stroke-opacity="0.5"/>
+      <text x="235" y="482" fill="#e2e8f0" text-anchor="middle">12</text>
+      <rect x="278" y="456" width="62" height="40" rx="20" fill="#0a1d40" stroke="#38bdf8" stroke-opacity="0.5"/>
+      <text x="309" y="482" fill="#e2e8f0" text-anchor="middle">13</text>
+      <rect x="352" y="456" width="118" height="40" rx="20" fill="#0a1d40" stroke="#2dd4bf" stroke-opacity="0.5"/>
+      <text x="411" y="482" fill="#e2e8f0" text-anchor="middle">PHP 8.2+</text>
+    </g>
+
+    <text x="80" y="566" fill="#64748b" font-size="20" font-family="'JetBrains Mono', Menlo, Consolas, monospace">composer require bhry98/keycloak-laravel-auth</text>
+  </g>
+
+  <g font-family="'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace" font-size="19">
+    <rect x="680" y="96" width="528" height="448" rx="18" fill="#020b1c" stroke="#94a3b8" stroke-opacity="0.18"/>
+    <circle cx="712" cy="128" r="7" fill="#f87171"/>
+    <circle cx="736" cy="128" r="7" fill="#fbbf24"/>
+    <circle cx="760" cy="128" r="7" fill="#34d399"/>
+    <text x="1180" y="134" fill="#64748b" font-size="15" text-anchor="end">routes/api.php</text>
+
+    <text x="712" y="190"><tspan fill="#38bdf8">Route</tspan><tspan fill="#e2e8f0">::</tspan><tspan fill="#60a5fa">middleware</tspan><tspan fill="#e2e8f0">([</tspan></text>
+    <text x="736" y="222"><tspan fill="#86efac">'keycloak.api'</tspan><tspan fill="#e2e8f0">,</tspan></text>
+    <text x="736" y="254"><tspan fill="#86efac">'keycloak.role:admin'</tspan><tspan fill="#e2e8f0">,</tspan></text>
+    <text x="712" y="286"><tspan fill="#e2e8f0">])-&gt;</tspan><tspan fill="#60a5fa">get</tspan><tspan fill="#e2e8f0">(</tspan><tspan fill="#86efac">'/orders'</tspan><tspan fill="#e2e8f0">, ...);</tspan></text>
+
+    <line x1="712" y1="316" x2="1176" y2="316" stroke="#94a3b8" stroke-opacity="0.15"/>
+
+    <text x="712" y="352"><tspan fill="#38bdf8">Keycloak</tspan><tspan fill="#e2e8f0">::</tspan><tspan fill="#60a5fa">token</tspan><tspan fill="#e2e8f0">()</tspan></text>
+    <text x="736" y="384"><tspan fill="#e2e8f0">-&gt;</tspan><tspan fill="#60a5fa">hasRole</tspan><tspan fill="#e2e8f0">(</tspan><tspan fill="#86efac">'billing:viewer'</tspan><tspan fill="#e2e8f0">);</tspan></text>
+
+    <text x="712" y="436"><tspan fill="#38bdf8">Http</tspan><tspan fill="#e2e8f0">::</tspan><tspan fill="#60a5fa">withKeycloakToken</tspan><tspan fill="#e2e8f0">()</tspan></text>
+    <text x="736" y="468"><tspan fill="#e2e8f0">-&gt;</tspan><tspan fill="#60a5fa">get</tspan><tspan fill="#e2e8f0">(</tspan><tspan fill="#fca5a5">$ordersApi</tspan><tspan fill="#e2e8f0">);</tspan></text>
+    <text x="712" y="516" fill="#64748b" font-size="15">// verified offline · 0 calls to Keycloak</text>
+  </g>
+</svg>
