@@ -68,4 +68,4 @@ flowchart TB
 Keeping those boundaries clean is what lets an enterprise landscape keep growing without turning
 into a tangle.
 
-Designing an integration architecture? [I'd be glad to help](../../portfolio/contact.md).
+Designing an integration architecture? [I'd be glad to help](../../../portfolio/contact.md).

@@ -135,4 +135,4 @@ a tight CPU limit for JVM services because throttling slows startup and garbage 
 - [x] Config in ConfigMaps, secrets in Secrets
 - [x] Resource requests and a memory limit
 
-Planning a move to OpenShift? [I can help](../../portfolio/services.md).
+Planning a move to OpenShift? [I can help](../../../portfolio/services.md).

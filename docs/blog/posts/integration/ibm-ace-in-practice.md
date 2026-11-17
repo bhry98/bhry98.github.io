@@ -96,4 +96,4 @@ configuration changing.
 - **Log a correlation ID** at every hop so one transaction can be traced across systems.
 - **Keep flows small.** Several focused flows are easier to test and operate than one huge flow.
 
-Connecting systems in your organization? [Let's talk](../../portfolio/contact.md).
+Connecting systems in your organization? [Let's talk](../../../portfolio/contact.md).

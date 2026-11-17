@@ -112,25 +112,25 @@ Practical notes from building and running enterprise systems.
 
 <div class="grid cards bh-cols-4" markdown>
 
--   :simple-redhatopenshift:{ .lg } **[Running Spring Boot on OpenShift](blog/posts/spring-boot-on-openshift.md)**
+-   :simple-redhatopenshift:{ .lg } **[Running Spring Boot on OpenShift](blog/posts/spring/spring-boot-on-openshift.md)**
 
     ---
 
     Images, health probes, configuration and graceful shutdown, done the platform way.
 
--   :simple-springsecurity:{ .lg } **[Securing Spring Boot APIs with Keycloak](blog/posts/spring-boot-keycloak.md)**
+-   :simple-springsecurity:{ .lg } **[Securing Spring Boot APIs with Keycloak](blog/posts/spring/spring-boot-keycloak.md)**
 
     ---
 
     JWT validation, role mapping and the mistakes I see most often.
 
--   :material-transit-connection-variant:{ .lg } **[IBM App Connect Enterprise in practice](blog/posts/ibm-ace-in-practice.md)**
+-   :material-transit-connection-variant:{ .lg } **[IBM App Connect Enterprise in practice](blog/posts/integration/ibm-ace-in-practice.md)**
 
     ---
 
     Integration servers, BAR files, ESQL and policies explained clearly.
 
--   :material-scale-balance:{ .lg } **[ACE or Spring Boot?](blog/posts/ace-or-spring-boot.md)**
+-   :material-scale-balance:{ .lg } **[ACE or Spring Boot?](blog/posts/integration/ace-or-spring-boot.md)**
 
     ---
 

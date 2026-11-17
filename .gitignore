@@ -1,5 +1,5 @@
 site/
-tools/
 .cache/
+tools/
 *.docx
 __pycache__/
