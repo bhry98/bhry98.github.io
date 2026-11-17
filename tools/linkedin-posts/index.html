@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkedIn Posts · OpenShift Series</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" crossorigin="anonymous"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+<style>
+  :root {
+    --navy: #0a2a5e;
+    --navy-deep: #04132e;
+    --accent: #22d3ee;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --soft: #f5f7fb;
+    --ok: #16a34a;
+    --font: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, "Noto Sans Arabic", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--soft); color: var(--ink); font-family: var(--font); line-height: 1.6; }
+
+  /* ---------- Page chrome ---------- */
+  .topbar { background: var(--navy); color: #fff; padding: 28px 16px; }
+  .topbar .wrap { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .topbar h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
+  .topbar p { margin: 4px 0 0; opacity: .8; font-size: .95rem; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  main.wrap { padding: 24px 16px 64px; }
+
+  .btn { font: inherit; font-weight: 600; font-size: .92rem; border: 1px solid var(--line); background: #fff; color: var(--navy);
+         border-radius: 10px; padding: 9px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .btn:hover { border-color: var(--navy); }
+  .btn.primary { background: var(--accent); color: var(--navy-deep); border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(.95); }
+  .btn.done { background: #dcfce7; border-color: #86efac; color: #166534; }
+  .btn:disabled { opacity: .6; cursor: progress; }
+
+  .post { background: #fff; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 28px; overflow: hidden; }
+  .post.published { border-color: #86efac; }
+  .post-head { display: flex; gap: 14px; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .num { width: 42px; height: 42px; border-radius: 12px; background: var(--navy); color: #fff; font-weight: 700;
+         display: grid; place-items: center; flex: none; }
+  .head-text { flex: 1; min-width: 220px; }
+  .head-text h2 { margin: 0; font-size: 1.1rem; }
+  .meta { color: var(--muted); font-size: .88rem; display: flex; gap: 14px; flex-wrap: wrap; }
+  .meta a { color: #0b63ce; text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: .92rem; cursor: pointer; user-select: none; }
+  .status input { width: 18px; height: 18px; accent-color: var(--ok); }
+
+  .post-body { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; padding: 20px; }
+  .post-text { white-space: pre-wrap; background: var(--soft); border: 1px solid var(--line); border-radius: 12px;
+               padding: 16px; margin: 0; font-family: var(--font); font-size: .95rem; line-height: 1.75;
+               max-height: 640px; overflow: auto; unicode-bidi: plaintext; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+  /* Preview: card is rendered at full 1080×1350 and scaled down for display only. */
+  .preview { width: 360px; height: 450px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px -12px rgba(4,19,46,.45); }
+  .preview-scale { width: 1080px; height: 1350px; transform: scale(calc(360 / 1080)); transform-origin: top right; }
+  [dir="ltr"] .preview-scale { transform-origin: top left; }
+
+  @media (max-width: 860px) {
+    .post-body { grid-template-columns: 1fr; }
+    .preview { width: 288px; height: 360px; margin: 0 auto; }
+    .preview-scale { transform: scale(calc(288 / 1080)); }
+  }
+
+  /* ---------- Image card (1080×1350) ---------- */
+  .card {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden; color: #fff;
+    font-family: var(--font); direction: rtl; text-align: right;
+    background:
+      radial-gradient(900px 700px at 100% 0%, rgba(34, 211, 238, .22), transparent 60%),
+      radial-gradient(800px 800px at 0% 100%, rgba(37, 99, 235, .35), transparent 60%),
+      linear-gradient(160deg, #0d3577 0%, #0a2a5e 45%, #04132e 100%);
+    padding: 88px 88px 0;
+    display: flex; flex-direction: column;
+  }
+  .card::before { /* grid */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 70%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 70%, transparent 100%);
+  }
+  .card::after { /* dots cluster */
+    content: ""; position: absolute; left: 60px; top: 56px; width: 324px; height: 135px; pointer-events: none;
+    background-image: radial-gradient(rgba(34,211,238,.55) 2.5px, transparent 3px);
+    background-size: 27px 27px; opacity: .55;
+  }
+  .card > * { position: relative; z-index: 1; }
+  .c-badge {
+    align-self: flex-start; direction: ltr; font-family: var(--mono); font-weight: 700; font-size: 26px;
+    letter-spacing: .5px; color: var(--accent); background: rgba(34, 211, 238, .1);
+    border: 2px solid rgba(34, 211, 238, .55); border-radius: 999px; padding: 12px 28px;
+  }
+  .c-title { margin: 56px 0 0; font-size: 78px; line-height: 1.32; font-weight: 700; }
+  .c-title bdi, .c-sub bdi, .c-bullets bdi { font-family: var(--font); }
+  .c-accent { color: var(--accent); }
+  .nw { white-space: nowrap; }
+  .c-sub { margin: 26px 0 0; font-size: 34px; line-height: 1.55; color: rgba(255,255,255,.78); font-weight: 500; }
+  .c-bullets { list-style: none; margin: 48px 0 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+  .c-bullets li { position: relative; padding-right: 50px; font-size: 38px; line-height: 1.45; font-weight: 500; }
+  .c-bullets li::before {
+    content: ""; position: absolute; right: 0; top: 17px; width: 22px; height: 22px; border-radius: 6px;
+    background: var(--accent); box-shadow: 0 0 0 6px rgba(34, 211, 238, .18);
+  }
+  .c-code {
+    direction: ltr; text-align: left; margin: 48px 0 0; font-family: var(--mono); font-size: 29px; line-height: 1.6;
+    background: rgba(4, 19, 46, .72); border: 1px solid rgba(255,255,255,.14); border-radius: 18px;
+    padding: 26px 32px; color: #e2e8f0; white-space: pre; overflow: hidden;
+  }
+  .c-code .p { color: var(--accent); }
+  .c-code .k { color: #93c5fd; }
+  .c-spacer { flex: 1; }
+  .c-footer {
+    margin: 0 -88px; padding: 34px 88px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    border-top: 1px solid rgba(255,255,255,.14); background: rgba(4, 19, 46, .55);
+  }
+  .c-author { display: flex; align-items: center; gap: 22px; }
+  .c-mono { width: 84px; height: 84px; border-radius: 22px; flex: none; display: grid; place-items: center;
+            background: linear-gradient(135deg, #22d3ee, #2563eb); color: #04132e; font-weight: 700; font-size: 34px;
+            font-family: var(--mono); direction: ltr; }
+  .c-name { direction: ltr; text-align: right; font-size: 34px; font-weight: 700; line-height: 1.25; }
+  .c-role { direction: ltr; text-align: right; font-size: 23px; color: rgba(255,255,255,.7); line-height: 1.4; margin-top: 4px; }
+  .c-cta { text-align: left; }
+  .c-cta .go { font-size: 30px; font-weight: 700; color: var(--accent); }
+  .c-cta .url { direction: ltr; font-family: var(--mono); font-size: 25px; color: rgba(255,255,255,.85); margin-top: 4px; }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--navy-deep); color: #fff;
+           padding: 10px 18px; border-radius: 10px; font-size: .92rem; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div>
+      <h1>منشورات LinkedIn · سلسلة OpenShift</h1>
+      <p><bdi>5</bdi> منشورات، واحد كل أسبوع في نفس يوم المقال. انسخ النص، ونزّل الصورة، وعلّم على اللي اتنشر.</p>
+    </div>
+    <button class="btn primary" id="download-all">⬇️ تنزيل كل الصور</button>
+  </div>
+</header>
+
+<main class="wrap" id="posts"></main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* Post text below is copied verbatim from linkedin-posts.md (same folder). */
+const POSTS = [
+  {
+    number: 1,
+    title: "OpenShift is not just Kubernetes",
+    date: "2026-11-18",
+    url: "https://bhry98.github.io/blog/openshift-vs-kubernetes/",
+    text: /*TEXT1*/"\"OpenShift ده مجرد Kubernetes عليه لوجو Red Hat\"\n\nالجملة دي بسمعها كتير… وهي نصها صح بس 👇\n\nأي OpenShift cluster هو Kubernetes كامل: الـ Deployments والـ Services والـ ConfigMaps بتشتغل زي ما هي.\nالفرق في كل الحاجات اللي Red Hat قررت إنك مش محتاج تركّبها بإيدك:\n\n🔹 Routes + HAProxy router جاهزين، تعمل expose لأي app بأمر واحد\n🔹 Security by default، الـ containers مش بتشتغل root أصلاً\n🔹 OAuth server داخلي، تربطه بـ LDAP أو Keycloak وخلاص\n🔹 Image registry + ImageStreams + Builds جوه الـ cluster\n🔹 Prometheus و Alertmanager متسطبين من الأول\n🔹 Upgrade للـ cluster كله عن طريق Cluster Version Operator\n🔹 OperatorHub: Kafka و Keycloak و Argo CD و Cloud Pak بكام click\n\nيعني Kubernetes بيديك موتور… و OpenShift بيديك العربية كاملة 🚗\n\nبس هل ده دايماً يستاهل؟ لأ.\nفي المقال كتبت مقارنة كاملة جدول بجدول، وإمتى أختار OpenShift وإمتى Kubernetes العادي (أو EKS/AKS/GKE) يكون كفاية 👇\n\n🔗 https://bhry98.github.io/blog/openshift-vs-kubernetes/\n\n#OpenShift #Kubernetes #RedHat #DevOps #PlatformEngineering #CloudNative",
+    card: {
+      badge: "OpenShift Series · 1/5",
+      title: '<bdi>OpenShift</bdi> مش مجرد <bdi class="c-accent">Kubernetes</bdi>',
+      sub: '<bdi>Kubernetes</bdi> بيديك موتور… و <bdi>OpenShift</bdi> بيديك العربية كاملة',
+      bullets: [
+        '<bdi>Routes</bdi> و <bdi>HAProxy router</bdi> جاهزين من الأول',
+        '<bdi>Security by default</bdi>: مفيش <bdi>root</bdi> أصلاً',
+        '<bdi>OAuth</bdi> داخلي تربطه بـ <bdi>LDAP</bdi> أو <bdi>Keycloak</bdi>',
+        '<bdi>OperatorHub</bdi>: <bdi>Kafka</bdi> و <bdi>Argo CD</bdi> بكام <bdi>click</bdi>'
+      ],
+      code: '<span class="p">$</span> oc new-app my-image\n<span class="p">$</span> oc expose service/my-app'
+    }
+  },
+  {
+    number: 2,
+    title: "Why your container fails on OpenShift",
+    date: "2026-11-25",
+    url: "https://bhry98.github.io/blog/openshift-scc-arbitrary-uid/",
+    text: /*TEXT2*/"الـ image شغالة تمام على Docker ✅\nشغالة على Kubernetes ✅\nتنزلها على OpenShift… CrashLoopBackOff ❌\n\n```\nmkdir() \"/var/cache/nginx/client_temp\" failed (13: Permission denied)\n```\n\nأول حل هتلاقيه على النت:\noc adm policy add-scc-to-user anyuid -z default\n\nوده غالباً أسوأ حل 🚫\n\nالسبب الحقيقي:\nOpenShift بيشغّل كل pod بـ random UID (زي 1000680000) من range خاص بالـ project، وبيعمل drop لكل الـ capabilities.\nيعني الـ user ده مش مالك أي حاجة جوه الـ image، ومش يقدر يعمل bind على port 80.\n\nالحل الصح إنك تصلّح الـ image نفسها، مش إنك تضعّف الـ cluster:\n1️⃣ أي folder الـ app بتكتب فيه: chgrp -R 0 و chmod -R g=u\n2️⃣ اسمع على 8080 مش 80\n3️⃣ USER رقمي non-root… ومن غير chown وقت التشغيل\n\nولو فعلاً محتاج SCC تاني؟ فيه طريقة آمنة باستخدام dedicated service account، وأمر بيقولك أنهي SCC هتقبل الـ pod بتاعك.\n\nكتبت المقال كامل بـ Dockerfile جاهز، وإزاي تتعامل مع الـ volumes والـ apps اللي محتاجة username 👇\n\n🔗 https://bhry98.github.io/blog/openshift-scc-arbitrary-uid/\n\n#OpenShift #ContainerSecurity #Docker #Kubernetes #DevSecOps #RedHat",
+    card: {
+      badge: "OpenShift Series · 2/5",
+      title: 'ليه الـ <bdi class="c-accent">container</bdi> بيقع على <bdi>OpenShift</bdi>؟',
+      sub: 'شغالة على <bdi>Docker</bdi>… وعلى <bdi>OpenShift</bdi>: <bdi>Permission denied</bdi>',
+      bullets: [
+        'كل <bdi>pod</bdi> بيشتغل بـ <bdi>random UID</bdi>',
+        'مفيش <bdi>capabilities</bdi> ومفيش <bdi>port 80</bdi>',
+        '<bdi>anyuid</bdi> غالباً أسوأ حل',
+        'صلّح الـ <bdi>image</bdi>، مش الـ <bdi>cluster</bdi>'
+      ],
+      code: '<span class="k">RUN</span> chgrp -R 0 /app &amp;&amp; chmod -R g=u /app\n<span class="k">EXPOSE</span> 8080\n<span class="k">USER</span> 1001'
+    }
+  },
+  {
+    number: 3,
+    title: "OpenShift Routes & TLS",
+    date: "2026-12-02",
+    url: "https://bhry98.github.io/blog/openshift-routes-tls/",
+    text: /*TEXT3*/"عمل Route على OpenShift بياخد أمر واحد.\nبس القرار المهم فعلاً: الـ TLS هيخلص فين؟ 🔐\n\nOpenShift بيديك 3 اختيارات:\n\n🟢 Edge\nالـ TLS بيخلص عند الـ router، والـ traffic للـ pod بيبقى HTTP.\nبسيط، وبيدعم path routing و sticky sessions و X-Forwarded headers.\n\n🟡 Passthrough\nالـ TLS بيوصل لحد الـ pod، والـ router مش بيفك التشفير خالص (بيقرأ الـ SNI بس).\nده اختيارك لو محتاج mTLS والـ app لازم تشوف client certificate، زي integrations البنوك والـ partners.\n\n🔵 Re-encrypt\nبيفك عند الـ router وبيشفّر تاني للـ pod.\nمميزات الـ Edge + تشفير جوه الـ cluster. ومع service serving certificates بيبقى تقريباً ببلاش.\n\n⚠️ ولو بتستخدم Spring Boot ورا Edge route: من غير forward-headers-strategy الـ redirects بتاعتك هتطلع http://\n\nفي المقال:\n✔️ الأوامر لكل نوع\n✔️ جدول مقارنة كامل\n✔️ Route ولا Ingress؟\n✔️ إزاي تحل صفحة \"Application is not available\" في 4 أوامر\n\n🔗 https://bhry98.github.io/blog/openshift-routes-tls/\n\n#OpenShift #TLS #Security #Kubernetes #SpringBoot #RedHat",
+    card: {
+      badge: "OpenShift Series · 3/5",
+      title: '<bdi>OpenShift Routes</bdi>: الـ <bdi class="c-accent">TLS</bdi> هيخلص فين؟',
+      sub: '3 اختيارات، وكل واحد ليه استخدامه',
+      bullets: [
+        '<bdi>Edge</bdi> ← بيخلص عند الـ <bdi>router</bdi>',
+        '<bdi>Passthrough</bdi> ← لحد الـ <bdi>pod</bdi>، ينفع مع <bdi>mTLS</bdi>',
+        '<bdi>Re-encrypt</bdi> ← يفك ويشفّر تاني للـ <bdi>pod</bdi>',
+        '<bdi>Spring Boot</bdi> ورا <bdi>Edge</bdi>؟ فعّل <bdi>forward headers</bdi>'
+      ],
+      code: '<span class="p">$</span> oc create route <span class="k">edge</span>        --service=my-app\n<span class="p">$</span> oc create route <span class="k">passthrough</span> --service=my-app\n<span class="p">$</span> oc create route <span class="k">reencrypt</span>   --service=my-app'
+    }
+  },
+  {
+    number: 4,
+    title: "Debugging pods with oc",
+    date: "2026-12-09",
+    url: "https://bhry98.github.io/blog/openshift-debugging-pods/",
+    text: /*TEXT4*/"لما الـ pod يقع، OpenShift تقريباً دايماً بيقولك السبب.\nالشطارة إنك تعرف تسأله السؤال الصح 🔍\n\nدي الـ playbook اللي بمشي بيها:\n\n📌 Pending ← oc describe pod + oc describe quota\n📌 ImagePullBackOff ← اسم الـ image غلط أو pull secret ناقص\n📌 CrashLoopBackOff ← oc logs --previous (مش oc logs!)\n📌 OOMKilled / Exit 137 ← الـ memory limit، ولو Java راجع MaxRAMPercentage\n📌 CreateContainerConfigError ← ConfigMap أو Secret مش موجود\n📌 Running بس 0/1 Ready ← readiness probe\n\nوأهم أمر في الصفحة كلها:\noc debug deployment/my-app\n\nبيشغّل نسخة من الـ pod بنفس الـ image والـ env والـ volumes، بس بـ shell بدل الـ command. تقدر تشغّل الـ app بإيدك وتشوف بتقع ليه.\n\nفي المقال كمان:\n🛠️ oc rsh و oc cp و port-forward للـ remote debugging\n🛠️ oc debug node و crictl لمشاكل الـ nodes\n🛠️ must-gather قبل ما تفتح support case\n🛠️ Cheat sheet تحفظها عندك\n\n🔗 https://bhry98.github.io/blog/openshift-debugging-pods/\n\n#OpenShift #Troubleshooting #Kubernetes #DevOps #SRE #RedHat",
+    card: {
+      badge: "OpenShift Series · 4/5",
+      title: 'الـ <bdi class="c-accent">pod</bdi> واقع؟ اسأل <bdi>OpenShift</bdi> السؤال الصح',
+      sub: 'الـ <bdi>playbook</bdi> اللي بمشي بيها مع كل <bdi>status</bdi>',
+      bullets: [
+        '<bdi>Pending</bdi> ← <bdi>oc describe pod</bdi>',
+        '<bdi>CrashLoopBackOff</bdi> ← <bdi>oc logs --previous</bdi>',
+        '<bdi>OOMKilled</bdi> ← راجع الـ <bdi>memory limit</bdi>',
+        '<bdi>0/1 Ready</bdi> ← الـ <bdi>readiness probe</bdi>'
+      ],
+      code: '<span class="p">$</span> oc debug deployment/my-app'
+    }
+  },
+  {
+    number: 5,
+    title: "Building Spring Boot images for OpenShift",
+    date: "2026-12-16",
+    url: "https://bhry98.github.io/blog/spring-boot-openshift-builds/",
+    text: /*TEXT5*/"عندك Spring Boot JAR وعايز تشغّله على OpenShift.\nتبني الـ image إزاي؟ 🤔\n\nفيه 4 طرق، وكلهم شغالين:\n\n1️⃣ Dockerfile في الـ CI (GitLab مثلاً) ← push لـ Nexus/Quay ← oc set image\nالأكثر portability، والـ cluster بيشغّل workloads بس.\n\n2️⃣ Docker strategy جوه OpenShift\nنفس الـ Dockerfile بس الـ build بيحصل في الـ cluster. مفيد لو مفيش registry برّه.\n\n3️⃣ Source-to-Image (S2I)\nمن غير Dockerfile خالص. تدّي OpenShift الكود أو الـ JAR والـ UBI OpenJDK builder يتصرف، و Red Hat هي اللي بتصلّح الـ base image.\n\n4️⃣ Jib\nمن غير Dockerfile ومن غير Docker daemon. layers ذكية: تغيير في الكود = push بكام KB بس ⚡\n\nبختار إزاي؟\n• عندك CI و registry ← Dockerfile أو Jib\n• فريق صغير أو cluster disconnected ← S2I\n• microservices كتير و builds كل شوية ← Jib\n\nفي المقال: الأوامر كاملة، pom.xml config لـ Jib، gitlab-ci.yml، وجدول مقارنة 👇\n\n🔗 https://bhry98.github.io/blog/spring-boot-openshift-builds/\n\n#SpringBoot #OpenShift #Java #DevOps #GitLab #CloudNative",
+    card: {
+      badge: "Spring Boot × OpenShift · 5/5",
+      title: 'تبني <bdi class="c-accent">Spring Boot</bdi> <bdi>image</bdi> <span class="nw">لـ <bdi>OpenShift</bdi> إزاي؟</span>',
+      sub: '4 طرق، وكلهم شغالين. الفرق في مكان الـ <bdi>build</bdi>',
+      bullets: [
+        '<bdi>Dockerfile</bdi> في الـ <bdi>CI</bdi> و <bdi>push</bdi> لـ <bdi>registry</bdi>',
+        '<bdi>Docker strategy</bdi> جوه الـ <bdi>cluster</bdi>',
+        '<bdi>S2I</bdi>: من غير <bdi>Dockerfile</bdi> خالص',
+        '<bdi>Jib</bdi>: من غير <bdi>Docker daemon</bdi>'
+      ],
+      code: '<span class="p">$</span> oc new-build --binary --strategy=source\n<span class="p">$</span> mvn compile jib:build'
+    }
+  }
+];
+
+const pad = n => String(n).padStart(2, "0");
+const slugOf = p => p.url.replace(/\/+$/, "").split("/").pop();
+const fileOf = p => `${pad(p.number)}-${slugOf(p)}.png`;
+const fmtDate = iso => {
+  try {
+    return new Date(iso + "T00:00:00").toLocaleDateString("ar-EG", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  } catch (e) { return iso; }
+};
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ---------- localStorage (guarded) ---------- */
+const STORE_KEY = "bhry98-linkedin-openshift-published";
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { return {}; }
+}
+function saveState(state) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+}
+
+function cardHTML(p) {
+  const c = p.card;
+  return `
+    <div class="card" id="card-${p.number}">
+      <div class="c-badge">${esc(c.badge)}</div>
+      <h3 class="c-title">${c.title}</h3>
+      <p class="c-sub">${c.sub}</p>
+      <ul class="c-bullets">${c.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+      ${c.code ? `<div class="c-code">${c.code}</div>` : ""}
+      <div class="c-spacer"></div>
+      <div class="c-footer">
+        <div class="c-author">
+          <div class="c-mono">AM</div>
+          <div>
+            <div class="c-name">Abdelrahman Mahmoud</div>
+            <div class="c-role">Red Hat Certified OpenShift Administrator</div>
+          </div>
+        </div>
+        <div class="c-cta">
+          <div class="go">اقرأ المقال كامل ←</div>
+          <div class="url">bhry98.github.io</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function render() {
+  const state = loadState();
+  const root = document.getElementById("posts");
+  root.innerHTML = POSTS.map(p => `
+    <section class="post${state[p.number] ? " published" : ""}" id="post-${p.number}">
+      <div class="post-head">
+        <div class="num">${pad(p.number)}</div>
+        <div class="head-text">
+          <h2 dir="ltr" style="text-align:right">${esc(p.title)}</h2>
+          <div class="meta">
+            <span>📅 ${fmtDate(p.date)} <bdi dir="ltr">(${p.date})</bdi></span>
+            <a href="${p.url}" target="_blank" rel="noopener" dir="ltr">${p.url.replace("https://", "")}</a>
+          </div>
+        </div>
+        <label class="status"><input type="checkbox" data-n="${p.number}" ${state[p.number] ? "checked" : ""}> اتنشر</label>
+      </div>
+      <div class="post-body">
+        <div>
+          <pre class="post-text" dir="rtl">${esc(p.text)}</pre>
+          <div class="actions">
+            <button class="btn" data-copy="${p.number}">📋 نسخ المنشور</button>
+            <button class="btn" data-img="${p.number}">🖼️ إنشاء الصورة</button>
+          </div>
+        </div>
+        <div class="preview"><div class="preview-scale">${cardHTML(p)}</div></div>
+      </div>
+    </section>`).join("");
+}
+
+/* ---------- Toast ---------- */
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+/* ---------- Copy ---------- */
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+    ta.remove();
+    return ok;
+  }
+}
+
+/* ---------- Image generation ---------- */
+let fontCSSPromise = null;
+function fontCSS(node) {
+  // Computed once and reused, so every export embeds the same web fonts.
+  if (!fontCSSPromise) fontCSSPromise = htmlToImage.getFontEmbedCSS(node).catch(() => undefined);
+  return fontCSSPromise;
+}
+
+async function renderCard(p) {
+  await document.fonts.ready;
+  const node = document.getElementById(`card-${p.number}`);
+  const fontEmbedCSS = await fontCSS(node);
+  const opts = {
+    width: 1080, height: 1350, canvasWidth: 1080, canvasHeight: 1350,
+    pixelRatio: 1, cacheBust: true, fontEmbedCSS,
+    style: { transform: "none", margin: "0" }
+  };
+  // First pass warms up font/image decoding in some browsers; second pass is the real one.
+  await htmlToImage.toPng(node, opts);
+  return htmlToImage.toPng(node, opts);
+}
+
+function download(dataUrl, name) {
+  const a = document.createElement("a");
+  a.href = dataUrl; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+async function generate(p, btn) {
+  const label = btn ? btn.textContent : "";
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ جاري الإنشاء…"; }
+  try {
+    const url = await renderCard(p);
+    download(url, fileOf(p));
+    return url;
+  } catch (e) {
+    console.error(e); toast("حصلت مشكلة في إنشاء الصورة");
+    throw e;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = label; }
+  }
+}
+
+document.addEventListener("click", async e => {
+  const copyBtn = e.target.closest("[data-copy]");
+  if (copyBtn) {
+    const p = POSTS.find(x => x.number === +copyBtn.dataset.copy);
+    const ok = await copyText(p.text);
+    const original = "📋 نسخ المنشور";
+    copyBtn.textContent = ok ? "Copied ✓" : "تعذّر النسخ";
+    copyBtn.classList.toggle("done", ok);
+    setTimeout(() => { copyBtn.textContent = original; copyBtn.classList.remove("done"); }, 1800);
+    return;
+  }
+  const imgBtn = e.target.closest("[data-img]");
+  if (imgBtn) {
+    const p = POSTS.find(x => x.number === +imgBtn.dataset.img);
+    generate(p, imgBtn).catch(() => {});
+    return;
+  }
+  if (e.target.closest("#download-all")) {
+    const btn = e.target.closest("#download-all");
+    btn.disabled = true;
+    try {
+      for (const p of POSTS) {
+        btn.textContent = `⏳ ${p.number}/${POSTS.length}`;
+        await generate(p);
+        await new Promise(r => setTimeout(r, 400));
+      }
+      toast("اتنزلت كل الصور ✓");
+    } catch (err) { /* toast already shown */ }
+    btn.disabled = false; btn.textContent = "⬇️ تنزيل كل الصور";
+  }
+});
+
+document.addEventListener("change", e => {
+  const box = e.target.closest(".status input");
+  if (!box) return;
+  const state = loadState();
+  state[box.dataset.n] = box.checked;
+  saveState(state);
+  document.getElementById(`post-${box.dataset.n}`).classList.toggle("published", box.checked);
+});
+
+render();
+// Exposed for scripted export (e.g. Playwright).
+window.__linkedin = { POSTS, renderCard, fileOf };
+</script>
+</body>
+</html>
