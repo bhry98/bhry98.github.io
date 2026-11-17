@@ -1,0 +1,195 @@
+/* ==========================================================================
+   CV page: a clean, document-style résumé (matches the Word CV layout).
+   The same styles are used on screen and to print the downloadable PDF.
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap");
+
+.md-typeset .bh-cv {
+  --cv-ink: #1a1a1a;
+  --cv-muted: #555555;
+  font-family: "Lato", "Calibri", "Carlito", sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--cv-ink);
+  background: #ffffff;
+  max-width: 210mm;
+  margin: 0 auto 2rem;
+  padding: 15mm 18mm;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 20px 50px -20px rgba(15, 23, 42, 0.35);
+}
+.md-typeset .bh-cv a {
+  color: var(--cv-ink);
+  text-decoration: none;
+}
+.md-typeset .bh-cv a:hover {
+  text-decoration: underline;
+}
+.md-typeset .bh-cv strong {
+  color: var(--cv-ink);
+}
+
+/* Header */
+.md-typeset .bh-cv .cv-head h1 {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--cv-ink);
+  margin: 0 0 0.2rem;
+}
+.md-typeset .bh-cv .cv-head h1 .headerlink {
+  display: none;
+}
+.md-typeset .bh-cv .cv-role {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--cv-muted);
+  margin: 0 0 0.7rem;
+}
+.md-typeset .bh-cv .cv-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.1rem 2rem;
+  font-size: 0.68rem;
+}
+
+/* Section headings with a rule, like the Word document */
+.md-typeset div.bh-cv h2 {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--cv-ink);
+  margin: 1.1rem 0 0.45rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--cv-ink);
+}
+.md-typeset .bh-cv h2 .headerlink {
+  display: none;
+}
+.md-typeset .bh-cv p {
+  margin: 0 0 0.4rem;
+  text-align: justify;
+}
+
+/* Skills table */
+.md-typeset .bh-cv .cv-skills {
+  display: grid;
+  grid-template-columns: 9.5em 1fr;
+  gap: 0.15rem 1.2rem;
+}
+
+/* Experience / projects */
+.md-typeset .bh-cv .cv-item {
+  margin: 0 0 0.45rem;
+  break-inside: avoid-page;
+}
+.md-typeset .bh-cv .cv-item__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.md-typeset .bh-cv .cv-date {
+  white-space: nowrap;
+  color: var(--cv-muted);
+  font-size: 0.66rem;
+}
+.md-typeset .bh-cv .cv-stack {
+  font-style: italic;
+  color: var(--cv-muted);
+  margin: 0 0 0.15rem 1.2rem;
+  text-align: left;
+}
+.md-typeset .bh-cv .cv-text {
+  margin: 0 0 0 1.2rem;
+  text-align: left;
+}
+.md-typeset .bh-cv ul {
+  margin: 0.1rem 0 0 1.2rem;
+  padding: 0;
+}
+.md-typeset .bh-cv ul li {
+  margin: 0 0 0.05rem;
+  padding-left: 0.1rem;
+}
+.md-typeset .bh-cv ul li::marker {
+  color: var(--cv-ink);
+}
+.md-typeset .bh-cv ul li p {
+  margin: 0;
+}
+
+/* Certificates in two columns */
+.md-typeset .bh-cv .cv-certs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 2rem;
+}
+.md-typeset .bh-cv .cv-certs div {
+  display: flex;
+  flex-direction: column;
+}
+.md-typeset .bh-cv .cv-certs span {
+  color: var(--cv-muted);
+}
+
+/* Action buttons above the CV */
+.md-typeset .bh-cv-actions {
+  justify-content: center;
+}
+
+@media screen and (max-width: 44.9375em) {
+  .md-typeset .bh-cv {
+    padding: 1.4rem 1.1rem;
+    font-size: 0.75rem;
+  }
+  .md-typeset .bh-cv .cv-head h1 {
+    font-size: 1.6rem;
+  }
+  .md-typeset .bh-cv .cv-contact,
+  .md-typeset .bh-cv .cv-certs {
+    grid-template-columns: 1fr;
+  }
+  .md-typeset .bh-cv .cv-skills {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .md-typeset .bh-cv .cv-skills span {
+    margin-bottom: 0.35rem;
+  }
+  .md-typeset .bh-cv .cv-item__head {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* Print / PDF: the CV becomes the whole page */
+@media print {
+  .md-typeset .bh-cv {
+    font-size: 9.2pt;
+    line-height: 1.32;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .md-typeset .bh-cv .cv-head h1 { font-size: 26pt; }
+  .md-typeset .bh-cv .cv-role { font-size: 12pt; }
+  .md-typeset .bh-cv .cv-contact { font-size: 9pt; }
+  .md-typeset div.bh-cv h2 { font-size: 12pt; margin: 0.8rem 0 0.35rem; break-after: avoid; }
+  .md-typeset .bh-cv p { margin-bottom: 0.25rem; }
+  .md-typeset .bh-cv .cv-item { margin-bottom: 0.3rem; }
+  .md-typeset .bh-cv ul li { margin-bottom: 0; }
+  .md-typeset .bh-cv .cv-date { font-size: 9pt; }
+  .md-typeset .bh-cv h1 + *,
+  .md-typeset .bh-cv h2 + * { break-before: avoid; }
+}
+@page {
+  size: A4;
+  margin: 15mm 18mm;
+}
