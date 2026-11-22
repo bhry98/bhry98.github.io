@@ -19,9 +19,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Inter font so the link preview images render with the site font
+      - run: sudo apt-get update -q && sudo apt-get install -y -q fonts-inter
+
       # [imaging] is needed by the social plugin (link preview images)
       # mkdocs-glightbox: click-to-zoom images in the How-To guides
-      - run: pip install "mkdocs-material[imaging]>=9.5,<10" mkdocs-glightbox
+      # mkdocs-redirects: old URLs of pages that moved (blog post -> How-To)
+      - run: pip install "mkdocs-material[imaging]>=9.5,<10" mkdocs-glightbox mkdocs-redirects
 
       - name: Build site
         run: mkdocs build

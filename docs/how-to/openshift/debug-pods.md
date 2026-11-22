@@ -1,22 +1,49 @@
 ---
-date: 2026-12-09
-slug: openshift-debugging-pods
-authors:
-  - bhry98
-categories:
+title: How to debug pods on OpenShift
+description: A step-by-step oc playbook for debugging pods on OpenShift. Fix Pending, ImagePullBackOff, CrashLoopBackOff, OOMKilled, CreateContainerConfigError and not Ready pods, and use oc debug, rsh and must-gather.
+cover: assets/images/covers/openshift-debug-pods.svg
+date: 2026-11-22
+level: Intermediate
+tags:
   - OpenShift
-description: A practical oc playbook for debugging pods on OpenShift. Pending, ImagePullBackOff, CrashLoopBackOff, OOMKilled, not Ready, and how oc debug, rsh and must-gather help.
+  - Kubernetes
+keywords:
+  - openshift debug pod
+  - oc debug
+  - crashloopbackoff openshift
+  - imagepullbackoff openshift
+  - oomkilled java
+  - oc logs previous
+  - must-gather
 ---
 
-# Debugging Pods on OpenShift: My `oc` Playbook
+# How to debug pods on OpenShift
+
+![Terminal with oc get pods showing CrashLoopBackOff, oc logs --previous and oc debug, above common pod status labels](../../assets/images/covers/openshift-debug-pods.svg)
+
+!!! info "Before you start"
+    - New to OpenShift? Read [OpenShift is not just Kubernetes](../../blog/posts/openshift/openshift-vs-kubernetes.md).
+    - New to containers in general? Read [Containers vs traditional deployment](../../blog/posts/devops/containers-vs-traditional-deployment.md).
 
 When a pod is unhappy, OpenShift almost always tells you why. The trick is knowing which command
 shows the answer for which status. This is the playbook I follow, from the first command to the
 cluster-level tools.
 
-<!-- more -->
+By the end of this guide you will be able to:
 
-## Always start with these three
+- [x] Find out why a pod is failing in under a minute
+- [x] Fix the eight most common pod problems
+- [x] Get a shell inside a crashing container with `oc debug`
+- [x] Collect data for a Red Hat support case
+
+## Prerequisites
+
+| Requirement | Notes |
+|---|---|
+| `oc` CLI | Logged in with `oc login` |
+| Access to the project | `edit` or `admin` role; node steps need `cluster-admin` |
+
+## Step 1: Always start with these three commands
 
 ```bash
 oc get pods -o wide
@@ -24,9 +51,10 @@ oc describe pod <pod>                         # read the Events section at the b
 oc get events --sort-by=.lastTimestamp | tail -20
 ```
 
-`describe` answers most questions on its own. The **status** column tells you where to look next.
+`describe` answers most questions on its own. The **STATUS** column tells you which of the next
+sections to follow.
 
-## Status by status
+## Step 2: Fix the problem by status
 
 ### `Pending`: the pod was never scheduled
 
@@ -72,9 +100,9 @@ oc logs <pod> --previous
 oc logs <pod> -c <container> --previous   # multi-container pods
 ```
 
-Typical causes: missing environment variable or config, cannot reach the database, **permission
-denied** (see [Why your container fails on OpenShift](openshift-scc-arbitrary-uid.md)), or the
-**liveness probe** killing a slow-starting app.
+Typical causes: a missing environment variable or config, can't reach the database, **permission
+denied** (see [Why your container fails on OpenShift](../../blog/posts/openshift/openshift-scc-arbitrary-uid.md)),
+or the **liveness probe** killing a slow-starting app.
 
 When the container dies too fast to inspect, start a copy of it with a shell instead of its normal
 command:
@@ -87,9 +115,10 @@ ls -la /app
 java -jar /app/app.jar        # run it by hand and watch it fail
 ```
 
-`oc debug` is the single most useful command on this page.
+!!! tip
+    `oc debug` is the single most useful command on this page.
 
-### `OOMKilled`
+### `OOMKilled` (exit code 137)
 
 ```bash
 oc describe pod <pod> | grep -A3 "Last State"
@@ -100,7 +129,7 @@ oc adm top pods
 ```
 
 The container used more memory than its **limit**. For Java, make the heap follow the limit with
-`-XX:MaxRAMPercentage=75` (details in [Running Spring Boot on OpenShift](../spring/spring-boot-on-openshift.md)),
+`-XX:MaxRAMPercentage=75` (details in [Running Spring Boot on OpenShift](../../blog/posts/spring/spring-boot-on-openshift.md)),
 then raise the limit only if real usage needs it.
 
 ### `CreateContainerConfigError`
@@ -120,11 +149,13 @@ shows *Application is not available*).
 ```bash
 oc describe pod <pod> | grep -A3 Readiness
 oc rsh <pod> curl -s localhost:8080/actuator/health/readiness
+oc get endpoints <service>      # empty = no Ready pods behind the Service
 ```
 
-Wrong path, wrong port, or a dependency the readiness check waits for.
+Wrong path, wrong port, or a dependency the readiness check waits for. For Route-specific issues,
+see [OpenShift Routes explained](../../blog/posts/openshift/openshift-routes-tls.md).
 
-## Inside a running pod
+## Step 3: Look inside a running pod
 
 ```bash
 oc rsh <pod>                                   # interactive shell
@@ -133,9 +164,9 @@ oc cp <pod>:/tmp/heapdump.hprof ./heapdump.hprof
 oc port-forward <pod> 5005:5005                # attach a remote debugger locally
 ```
 
-## When it is not your app: node and cluster
+## Step 4: When it's not your app (node and cluster)
 
-These need cluster-admin rights.
+These need `cluster-admin`.
 
 ```bash
 oc get nodes
@@ -155,6 +186,9 @@ oc adm must-gather            # cluster data into ./must-gather.local.*
 oc adm inspect ns/orders-dev  # just one namespace
 ```
 
+:material-check-circle:{ .bh-ok } **Done.** You can now go from a red pod to the root cause with a
+handful of `oc` commands.
+
 ## Cheat sheet
 
 | Symptom | First command |
@@ -170,5 +204,8 @@ oc adm inspect ns/orders-dev  # just one namespace
 
 Save this table. Most incidents are one of these eight rows.
 
-Previous: [OpenShift Routes explained](openshift-routes-tls.md) ·
-Next: [Building Spring Boot images for OpenShift](../spring/spring-boot-openshift-builds.md)
+## Next steps
+
+- [Building Spring Boot images for OpenShift](../../blog/posts/spring/spring-boot-openshift-builds.md)
+- [Why your container fails on OpenShift (SCC and random UIDs)](../../blog/posts/openshift/openshift-scc-arbitrary-uid.md)
+- [OpenShift docs: Investigating pod issues](https://docs.redhat.com/en/documentation/openshift_container_platform/latest/html/support/troubleshooting)

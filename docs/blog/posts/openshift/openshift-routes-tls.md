@@ -178,4 +178,4 @@ check that the pod actually serves TLS on that port.
   certificates make it nearly free.
 
 Previous: [Why your container fails on OpenShift](openshift-scc-arbitrary-uid.md) ·
-Next: [Debugging pods on OpenShift: my oc playbook](openshift-debugging-pods.md)
+Next: [How to debug pods on OpenShift: my oc playbook](../../../how-to/openshift/debug-pods.md)

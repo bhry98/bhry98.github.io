@@ -82,6 +82,10 @@ plugins:
         - OpenShift
         - Security
         - Architecture
+        - Infrastructure
+        - DevOps
+        - Java
+        - Fundamentals
   - tags
   # Click-to-zoom for screenshots in How-To guides. Add { .off-glb } to an image to opt out.
   - glightbox:
@@ -90,12 +94,20 @@ plugins:
   # Generates a preview image (Open Graph / Twitter card) for every page,
   # so links shared on WhatsApp, LinkedIn, X, Facebook, Telegram show an image.
   - social:
+      cards_layout: bhry98   # layouts/bhry98.yml: uses the page `cover:` SVG when set
       cards_layout_options:
         background_color: "#0a2a5e"
         color: "#ffffff"
+  # Old URLs keep working (and keep their search ranking) after a page moves.
+  - redirects:
+      redirect_maps:
+        blog/spring-boot-keycloak.md: how-to/spring-boot/secure-api-with-keycloak.md
+        blog/openshift-debugging-pods.md: how-to/openshift/debug-pods.md
 
 extra:
   generator: false
+  # Paste the code from Google Search Console (HTML tag method) to verify the site:
+  # google_site_verification: xxxxxxxxxxxxxxxxxxxxxxxx
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/bhry98
@@ -156,10 +168,20 @@ nav:
   - My CV: cv/index.md
   - How-To:
       - how-to/index.md
+      - Nginx:
+          - Install Nginx: how-to/nginx/install-nginx.md
+          - Reverse Proxy, Load Balancing & HA: how-to/nginx/nginx-reverse-proxy-load-balancing-ha.md
+      - Git:
+          - Install Git: how-to/git/install-git.md
+      - Active Directory:
+          - Enable LDAPS on Active Directory: how-to/active-directory/enable-ldaps-active-directory.md
       - Keycloak:
           - Install Keycloak: how-to/keycloak/install-keycloak.md
       - Spring Boot:
           - Simple CRUD API: how-to/spring-boot/simple-crud.md
+          - Secure an API with Keycloak: how-to/spring-boot/secure-api-with-keycloak.md
+      - OpenShift:
+          - Debug Pods: how-to/openshift/debug-pods.md
   - Blog:
       - blog/index.md
   - Packages:

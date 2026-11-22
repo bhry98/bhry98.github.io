@@ -407,6 +407,6 @@ spring:
 
 ## Next steps
 
-- [Securing Spring Boot APIs with Keycloak](../../blog/posts/spring/spring-boot-keycloak.md)
+- [How to secure a Spring Boot API with Keycloak](secure-api-with-keycloak.md)
 - [Running Spring Boot on OpenShift](../../blog/posts/spring/spring-boot-on-openshift.md)
 - Add database migrations with Flyway and tests with `@WebMvcTest` and `@DataJpaTest`

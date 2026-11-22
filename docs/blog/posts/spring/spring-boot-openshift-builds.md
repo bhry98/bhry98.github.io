@@ -165,4 +165,4 @@ oc set triggers deployment/orders-api --from-image=orders-api:latest -c orders-a
 Whichever you choose, the runtime rules stay the same: non-root image, port 8080, probes on
 Actuator, graceful shutdown. They are all in [Running Spring Boot on OpenShift](spring-boot-on-openshift.md).
 
-Previous: [Debugging pods on OpenShift](../openshift/openshift-debugging-pods.md)
+Previous: [How to debug pods on OpenShift](../../../how-to/openshift/debug-pods.md)

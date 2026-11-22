@@ -112,29 +112,29 @@ Practical notes from building and running enterprise systems.
 
 <div class="grid cards bh-cols-4" markdown>
 
--   :simple-redhatopenshift:{ .lg } **[Running Spring Boot on OpenShift](blog/posts/spring/spring-boot-on-openshift.md)**
+-   :simple-nginx:{ .lg } **[What is Nginx and why do we use it?](blog/posts/infrastructure/what-is-nginx.md)**
 
     ---
 
-    Images, health probes, configuration and graceful shutdown, done the platform way.
+    Web server, reverse proxy, load balancer and TLS front door, explained with examples.
 
--   :simple-springsecurity:{ .lg } **[Securing Spring Boot APIs with Keycloak](blog/posts/spring/spring-boot-keycloak.md)**
-
-    ---
-
-    JWT validation, role mapping and the mistakes I see most often.
-
--   :material-transit-connection-variant:{ .lg } **[IBM App Connect Enterprise in practice](blog/posts/integration/ibm-ace-in-practice.md)**
+-   :simple-git:{ .lg } **[What is Git? GitHub vs GitLab vs Bitbucket](blog/posts/devops/what-is-git-github-gitlab-bitbucket.md)**
 
     ---
 
-    Integration servers, BAR files, ESQL and policies explained clearly.
+    Version control explained, and the hosting platforms compared side by side.
 
--   :material-scale-balance:{ .lg } **[ACE or Spring Boot?](blog/posts/integration/ace-or-spring-boot.md)**
+-   :simple-docker:{ .lg } **[Containers vs traditional deployment](blog/posts/devops/containers-vs-traditional-deployment.md)**
 
     ---
 
-    How I decide where integration logic should live.
+    Bare metal, VMs and containers: what really changes and when each one wins.
+
+-   :material-file-tree:{ .lg } **[What is LDAP? Active Directory vs OpenLDAP](blog/posts/security/what-is-ldap-active-directory-vs-openldap.md)**
+
+    ---
+
+    How directories work and how the main products compare.
 
 </div>
 

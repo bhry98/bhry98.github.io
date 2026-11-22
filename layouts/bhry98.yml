@@ -1,0 +1,139 @@
+# Social card (link preview) layout for bhry98.github.io
+# -----------------------------------------------------------------------------
+# Based on the default layout of Material for MkDocs (MIT licence).
+#
+# - Pages with `cover: assets/images/covers/<name>.svg` in their front matter
+#   use that SVG as the whole preview image (the cover already shows the title).
+# - Every other page gets a generated card: site name, title and description.
+#
+# Used by the `social` plugin in mkdocs.yml (cards_layout: bhry98).
+# -----------------------------------------------------------------------------
+
+definitions:
+
+  - &cover >-
+    {%- if page.meta.cover -%}
+      {{ config.docs_dir }}/{{ page.meta.cover }}
+    {%- endif -%}
+
+  - &background_color >-
+    {%- if not page.meta.cover -%}
+      {{ layout.background_color or "#0a2a5e" }}
+    {%- endif -%}
+
+  - &color >-
+    {{ layout.color or "#ffffff" }}
+
+  - &font_family >-
+    {%- if layout.font_family -%}
+      {{ layout.font_family }}
+    {%- elif config.theme.font is mapping -%}
+      {{ config.theme.font.get("text", "Roboto") }}
+    {%- else -%}
+      Roboto
+    {%- endif -%}
+
+  - &site_name >-
+    {%- if not page.meta.cover -%}
+      {{ config.site_name }}
+    {%- endif -%}
+
+  - &page_title >-
+    {%- if not page.meta.cover -%}
+      {{ page.meta.get("title", page.title) }}
+    {%- endif -%}
+
+  - &page_title_with_site_name >-
+    {%- if not page.is_homepage -%}
+      {{ page.meta.get("title", page.title) }} - {{ config.site_name }}
+    {%- else -%}
+      {{ config.site_name }}
+    {%- endif -%}
+
+  - &page_description >-
+    {{ page.meta.get("description", config.site_description) | x }}
+
+  - &card_description >-
+    {%- if not page.meta.cover -%}
+      {{ page.meta.get("description", config.site_description) | x }}
+    {%- endif -%}
+
+  - &logo >-
+    {%- if not page.meta.cover and config.theme.logo -%}
+      {{ config.docs_dir }}/{{ config.theme.logo }}
+    {%- endif -%}
+
+  - &og_type >-
+    {%- if page.file.src_uri.startswith("blog/posts/") or page.file.src_uri.startswith("how-to/") and not page.is_index -%}
+      article
+    {%- else -%}
+      website
+    {%- endif -%}
+
+tags:
+
+  # Open Graph (Facebook, LinkedIn, WhatsApp, Telegram, Slack…)
+  og:type: *og_type
+  og:site_name: "{{ config.site_name }}"
+  og:title: *page_title_with_site_name
+  og:description: *page_description
+  og:image: "{{ image.url }}"
+  og:image:type: "{{ image.type }}"
+  og:image:width: "{{ image.width }}"
+  og:image:height: "{{ image.height }}"
+  og:image:alt: *page_title_with_site_name
+  og:url: "{{ page.canonical_url }}"
+
+  # X / Twitter
+  twitter:card: summary_large_image
+  twitter:title: *page_title_with_site_name
+  twitter:description: *page_description
+  twitter:image: "{{ image.url }}"
+  twitter:image:alt: *page_title_with_site_name
+
+size: { width: 1200, height: 630 }
+layers:
+
+  - background:
+      image: *cover
+      color: *background_color
+
+  - size: { width: 144, height: 144 }
+    offset: { x: 992, y: 64 }
+    background:
+      image: *logo
+
+  - size: { width: 832, height: 42 }
+    offset: { x: 64, y: 64 }
+    typography:
+      content: *site_name
+      color: *color
+      font:
+        family: *font_family
+        style: Bold
+
+  - size: { width: 832, height: 310 }
+    offset: { x: 62, y: 160 }
+    typography:
+      content: *page_title
+      align: start
+      color: *color
+      line:
+        amount: 3
+        height: 1.25
+      font:
+        family: *font_family
+        style: Bold
+
+  - size: { width: 832, height: 64 }
+    offset: { x: 64, y: 512 }
+    typography:
+      content: *card_description
+      align: start
+      color: *color
+      line:
+        amount: 2
+        height: 1.5
+      font:
+        family: *font_family
+        style: Regular

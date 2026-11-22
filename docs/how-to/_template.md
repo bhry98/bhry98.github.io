@@ -7,12 +7,24 @@
 # 3. Add the guide to the `How-To` section of `nav:` in mkdocs.yml
 # 4. Add a card for it in docs/how-to/index.md
 title: How to <do something>
-description: One sentence for search engines and link previews.
+description: One sentence for search engines and link previews (keep it 120-160 characters).
+# Cover image shown at the top AND used as the link preview (WhatsApp, LinkedIn, X...).
+# Create it with scripts/gen-covers.py or draw a 1200x630 SVG.
+cover: assets/images/covers/<name>.svg
+date: 2026-01-01
+level: Beginner            # Beginner | Intermediate | Advanced
+keywords:                  # search phrases people would type into Google
+  - <keyword one>
 tags:
   - <Technology>
 ---
 
 # How to <do something>
+
+![Describe the cover image](../../assets/images/covers/<name>.svg)
+
+!!! info "Before you start"
+    New to <Technology>? Read **[What is <Technology>?](../../blog/posts/<category>/<post>.md)** first.
 
 One or two sentences: what this tool is and why you'd do this.
 

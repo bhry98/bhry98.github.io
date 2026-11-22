@@ -1,9 +1,74 @@
 {% extends "base.html" %}
 
+{#-
+  SEO: structured data (JSON-LD) so Google understands each page.
+  - Blog posts      -> BlogPosting
+  - How-To guides   -> TechArticle
+  - Every page      -> WebSite + Person (the author)
+  Social preview tags (og:*, twitter:*) come from the `social` plugin,
+  see layouts/bhry98.yml.
+-#}
+{% block extrahead %}
+  {{ super() }}
+  {%- set is_post = page and page.file and page.file.src_uri.startswith("blog/posts/") -%}
+  {%- set is_howto = page and page.file and page.file.src_uri.startswith("how-to/") and not page.is_index -%}
+  {%- if config.extra.google_site_verification %}
+  <meta name="google-site-verification" content="{{ config.extra.google_site_verification }}">
+  {%- endif %}
+  {%- if page and page.meta and page.meta.keywords %}
+  <meta name="keywords" content="{{ page.meta.keywords | join(', ') if page.meta.keywords is not string else page.meta.keywords }}">
+  {%- endif %}
+  {%- set author = {
+    "@type": "Person",
+    "name": config.site_author,
+    "url": config.site_url ~ "portfolio/about-me/",
+    "sameAs": ["https://github.com/bhry98", "https://www.linkedin.com/in/bhry98/"]
+  } -%}
+  {%- if is_post or is_howto %}
+    {%- set title = page.meta.title or page.title -%}
+    {%- if is_post and page.config and page.config.date -%}
+      {%- set published = page.config.date.created.strftime("%Y-%m-%d") -%}
+      {%- set modified = page.config.date.updated.strftime("%Y-%m-%d") if page.config.date.updated else published -%}
+    {%- else -%}
+      {%- set published = page.meta.date | string if page.meta.date else "" -%}
+      {%- set modified = page.meta.updated | string if page.meta.updated else published -%}
+    {%- endif -%}
+    {%- set data = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting" if is_post else "TechArticle",
+      "headline": title,
+      "description": page.meta.description or config.site_description,
+      "url": page.canonical_url,
+      "mainEntityOfPage": {"@type": "WebPage", "@id": page.canonical_url},
+      "image": config.site_url ~ "assets/images/social/" ~ page.url.rstrip("/") ~ ".png",
+      "author": author,
+      "publisher": author,
+      "inLanguage": "en",
+      "keywords": (page.meta.keywords or page.meta.tags or []) | join(", ")
+    } -%}
+    {%- if published -%}
+      {%- set _ = data.update({"datePublished": published, "dateModified": modified}) -%}
+    {%- endif -%}
+    {%- if is_howto -%}
+      {%- set _ = data.update({"proficiencyLevel": page.meta.level or "Beginner"}) -%}
+    {%- endif %}
+  <script type="application/ld+json">{{ data | tojson }}</script>
+  {%- elif page and page.is_homepage %}
+  <script type="application/ld+json">{{ {
+    "@context": "https://schema.org",
+    "@graph": [
+      {"@type": "WebSite", "name": config.site_name, "url": config.site_url, "description": config.site_description, "inLanguage": "en"},
+      {"@type": "Person", "name": config.site_author, "url": config.site_url ~ "portfolio/about-me/",
+       "jobTitle": "Enterprise Software & Integration Engineer", "sameAs": author.sameAs}
+    ]
+  } | tojson }}</script>
+  {%- endif %}
+{% endblock %}
+
 {% block announce %}
   <a class="bh-announce" href="{{ 'how-to/' | url }}">
     <span class="bh-dot"></span>
-    <span class="bh-announce__long">New: step-by-step How-To guides for Keycloak, Spring Boot and more.</span> <strong>Read the guides</strong>
+    <span class="bh-announce__long">New: How-To guides for Nginx, Git, Active Directory LDAPS, Keycloak and more.</span> <strong>Read the guides</strong>
     <span class="twemoji">{% include ".icons/material/arrow-right.svg" %}</span>
   </a>
 {% endblock %}

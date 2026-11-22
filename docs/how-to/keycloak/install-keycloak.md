@@ -263,6 +263,6 @@ Production checklist:
 
 ## Next steps
 
-- [Securing Spring Boot APIs with Keycloak](../../blog/posts/spring/spring-boot-keycloak.md)
+- [How to secure a Spring Boot API with Keycloak](../spring-boot/secure-api-with-keycloak.md)
 - [Keycloak Laravel Auth](../../packages/keycloak-laravel-auth/index.md) for Laravel applications
 - [Official Keycloak server guides](https://www.keycloak.org/guides#server)
