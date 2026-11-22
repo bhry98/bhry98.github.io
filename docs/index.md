@@ -1,6 +1,6 @@
 ---
 template: home.html
-title: Abdelrahman Mahmoud | Enterprise Software & Integration Engineer
+title: Enterprise Software & Integration Engineer
 description: Java Spring Boot services, IBM App Connect Enterprise and API Connect integrations, and Red Hat OpenShift platforms.
 hide:
   - navigation
@@ -55,7 +55,7 @@ Services, integrations and the platform they run on, built by one engineer who u
 
 </div>
 
-[All services :material-arrow-right:](portfolio/services.md){ .bh-link-arrow }
+[More about me :material-arrow-right:](portfolio/about-me.md){ .bh-link-arrow }
 
 </div>
 
@@ -144,12 +144,12 @@ Practical notes from building and running enterprise systems.
 
 <div class="bh-cta" markdown>
 
-## Have an enterprise project in mind?
+## Learn by doing
 
-Whether you need Spring Boot services, integration between your systems, single sign-on or
-a reliable OpenShift platform, I'd like to hear about it.
+Step-by-step How-To guides with screenshots: install Keycloak, build a Spring Boot CRUD API,
+and more. Questions about a guide? Feel free to contact me.
 
-[Start a conversation :material-arrow-right:](portfolio/contact.md){ .md-button .md-button--primary }
-[Download my CV](cv/index.md){ .md-button }
+[Browse the How-To guides :material-arrow-right:](how-to/index.md){ .md-button .md-button--primary }
+[Contact me](portfolio/contact.md){ .md-button }
 
 </div>

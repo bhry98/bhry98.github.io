@@ -1,6 +1,6 @@
 ---
 title: Blog
-description: Notes on Spring Boot, IBM integration, OpenShift and identity & access management by Abdelrahman (bhry98).
+description: Notes on Spring Boot, IBM integration, OpenShift and identity & access management by Abdelrahman Mahmoud.
 ---
 
 # Blog

@@ -1,6 +1,6 @@
 ---
 title: Portfolio
-description: Portfolio of Abdelrahman Mahmoud (bhry98). Enterprise services, integration and OpenShift.
+description: Portfolio of Abdelrahman Mahmoud. Enterprise software, integration and OpenShift.
 hide:
   - toc
 ---
@@ -19,12 +19,6 @@ One engineer who understands how all the pieces fit together.</p>
     ---
 
     Who I am, how I work and what I care about.
-
--   :material-briefcase-outline:{ .lg } **[Services](services.md)**
-
-    ---
-
-    What I can build and run for you, and how an engagement works.
 
 -   :material-tools:{ .lg } **[Skills](skills.md)**
 
@@ -48,6 +42,6 @@ One engineer who understands how all the pieces fit together.</p>
 
     ---
 
-    Tell me about your project. Let's work together.
+    Questions or work-related messages? Contact me first.
 
 </div>

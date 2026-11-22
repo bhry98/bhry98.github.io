@@ -1,10 +1,10 @@
 ---
 title: About Me
-description: About Abdelrahman Mahmoud (bhry98), Enterprise Software & Integration Engineer and Red Hat Certified OpenShift Administrator.
+description: About Abdelrahman Mahmoud, Enterprise Software & Integration Engineer and Red Hat Certified OpenShift Administrator.
 ---
 
 <div class="bh-profile" markdown>
-<img src="../../assets/images/avatar.jpg" alt="Abdelrahman Mahmoud (bhry98)">
+<img src="../../assets/images/avatar.jpg" alt="Abdelrahman Mahmoud">
 <div markdown>
 <span class="bh-eyebrow">About me</span>
 # Abdelrahman Mahmoud
@@ -97,5 +97,5 @@ infrastructure layers.
 
 > **"Build once. Improve forever."**
 
-[Work with me :material-arrow-right:](contact.md){ .md-button .md-button--primary }
+[Contact me :material-arrow-right:](contact.md){ .md-button .md-button--primary }
 [View my CV](../cv/index.md){ .md-button }

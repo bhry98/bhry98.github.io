@@ -1,6 +1,6 @@
 ---
 title: Skills
-description: Technical skills of Abdelrahman Mahmoud (bhry98) across Java, enterprise integration, OpenShift, identity and infrastructure.
+description: Technical skills of Abdelrahman Mahmoud across Java, enterprise integration, OpenShift, identity and infrastructure.
 ---
 
 <span class="bh-eyebrow">Skills</span>

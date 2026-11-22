@@ -1,8 +1,8 @@
-site_name: BHRY98
+site_name: Abdelrahman Mahmoud
 site_url: https://bhry98.github.io/
-site_author: Abdelrahman Mahmoud (bhry98)
+site_author: Abdelrahman Mahmoud
 site_description: >-
-  Abdelrahman (bhry98), Enterprise Software & Integration Engineer.
+  Abdelrahman Mahmoud, Enterprise Software & Integration Engineer.
   Java Spring Boot, IBM App Connect Enterprise integrations, Red Hat OpenShift and identity & access management.
 copyright: >-
   &copy; 2026 Abdelrahman Mahmoud · bhry98
@@ -55,6 +55,10 @@ theme:
     - search.suggest
     - toc.follow
 
+# Files in docs/ that are not published (the How-To template is only for copying).
+exclude_docs: |
+  how-to/_template.md
+
 extra_css:
   - stylesheets/extra.css
   - stylesheets/cv.css
@@ -71,7 +75,7 @@ plugins:
       post_url_format: "{slug}"
       post_readtime: true
       pagination_per_page: 6
-      archive_date_format: yyyy
+      archive: false
       categories_allowed:
         - Spring Boot
         - Integration
@@ -79,6 +83,10 @@ plugins:
         - Security
         - Architecture
   - tags
+  # Click-to-zoom for screenshots in How-To guides. Add { .off-glb } to an image to opt out.
+  - glightbox:
+      skip_classes:
+        - off-glb
   # Generates a preview image (Open Graph / Twitter card) for every page,
   # so links shared on WhatsApp, LinkedIn, X, Facebook, Telegram show an image.
   - social:
@@ -109,6 +117,7 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+  - pymdownx.blocks.caption
   - pymdownx.details
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
@@ -140,12 +149,17 @@ nav:
   - Portfolio:
       - portfolio/index.md
       - About Me: portfolio/about-me.md
-      - Services: portfolio/services.md
       - Skills: portfolio/skills.md
       - Projects: portfolio/projects.md
       - Open Source: portfolio/packages.md
       - Contact: portfolio/contact.md
   - My CV: cv/index.md
+  - How-To:
+      - how-to/index.md
+      - Keycloak:
+          - Install Keycloak: how-to/keycloak/install-keycloak.md
+      - Spring Boot:
+          - Simple CRUD API: how-to/spring-boot/simple-crud.md
   - Blog:
       - blog/index.md
   - Packages:

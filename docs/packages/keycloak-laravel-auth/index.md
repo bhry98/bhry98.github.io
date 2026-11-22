@@ -101,4 +101,4 @@ sequenceDiagram
 | [Upgrade guide](upgrade.md) | Moving from 1.x to 2.x. |
 
 !!! tip "More packages"
-    Looking for something else? Browse [all bhry98 packages](../index.md).
+    Looking for something else? Browse [all my packages](../index.md).

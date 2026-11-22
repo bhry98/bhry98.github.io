@@ -1,6 +1,6 @@
 ---
 title: Open Source
-description: Open-source Laravel packages by Abdelrahman (bhry98).
+description: Open-source Laravel packages by Abdelrahman Mahmoud.
 ---
 
 <span class="bh-eyebrow">Open source</span>

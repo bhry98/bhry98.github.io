@@ -1,16 +1,16 @@
 ---
 title: Contact
-description: Get in touch with Abdelrahman (bhry98) to discuss your project.
+description: How to get in touch with Abdelrahman Mahmoud.
 hide:
   - toc
 ---
 
 <span class="bh-eyebrow">Contact</span>
 
-# Let's work together
+# Contact me
 
-<p class="bh-lead">Have a project, a problem to solve, or a team that needs extra hands? Send me a message and
-I'll get back to you as soon as I can.</p>
+<p class="bh-lead">Have a question about one of my guides, posts or open-source packages, or want to talk about
+something work-related? Send me a message first and I'll get back to you as soon as I can.</p>
 
 <div class="grid cards bh-contact" markdown>
 
@@ -18,7 +18,7 @@ I'll get back to you as soon as I can.</p>
 
     ---
 
-    The fastest way to reach me for new projects and collaborations.
+    The best way to reach me directly.
 
     [Message me on LinkedIn :material-arrow-right:](https://www.linkedin.com/in/bhry98/){ .md-button .md-button--primary }
 
@@ -40,18 +40,15 @@ I'll get back to you as soon as I can.</p>
 
     ---
 
-    Prefer email? Send me the details of your project.
+    Prefer email? Send me a message.
 
     [you@example.com :material-arrow-right:](mailto:you@example.com){ .md-button }
 -->
 
-## To get a faster, more useful reply
+## Before you write
 
-Include a few details in your first message:
+A few details help me give you a useful reply:
 
-- [x] What you're building and who it's for
-- [x] What exists today (new project, existing app, infrastructure)
-- [x] Your timeline and rough budget
-- [x] Any must-have technologies or constraints
-
-I'll come back with questions, a suggested approach and next steps.
+- [x] Who you are and what the message is about
+- [x] Which guide, post or package it relates to (if any)
+- [x] What you've already tried, for technical questions

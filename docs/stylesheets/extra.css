@@ -965,3 +965,24 @@
   size: A4;
   margin: 14mm 14mm;
 }
+
+/* ---------------------------------------------------------------------------
+   How-To guides: screenshots, figures and the "Done" marker
+   --------------------------------------------------------------------------- */
+.md-typeset figure img,
+.md-typeset .glightbox img {
+  border-radius: 10px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: 0 8px 24px rgba(4, 19, 46, 0.12);
+}
+
+.md-typeset figure figcaption {
+  max-width: 44rem;
+  margin-inline: auto;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.75rem;
+}
+
+.md-typeset .bh-ok {
+  color: #22c55e;
+}

@@ -1,13 +1,13 @@
 ---
 title: Packages
-description: Documentation for open-source Laravel packages by bhry98.
+description: Documentation for open-source Laravel packages by Abdelrahman Mahmoud.
 hide:
   - toc
 ---
 
 <span class="bh-eyebrow">Documentation</span>
 
-# BHRY98 packages
+# Open-source packages
 
 <p class="bh-lead">Guides and references for my open-source Laravel packages. Install with Composer and
 follow the docs to get productive in minutes.</p>

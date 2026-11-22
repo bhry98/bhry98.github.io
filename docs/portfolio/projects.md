@@ -1,6 +1,6 @@
 ---
 title: Projects
-description: Selected projects by Abdelrahman Mahmoud (bhry98). ERP platform, enterprise integration, OpenShift operations and business systems.
+description: Selected projects by Abdelrahman Mahmoud. ERP platform, enterprise integration, OpenShift operations and business systems.
 ---
 
 <span class="bh-eyebrow">Projects</span>
@@ -98,10 +98,10 @@ flowchart LR
 
 <div class="bh-cta" markdown>
 
-## Want something similar?
+## Questions about this work?
 
-I can design and build a version of any of these for your organization.
+Curious how something here was built, or want to talk tech? Feel free to reach out.
 
-[Discuss your project :material-arrow-right:](contact.md){ .md-button .md-button--primary }
+[Contact me :material-arrow-right:](contact.md){ .md-button .md-button--primary }
 
 </div>

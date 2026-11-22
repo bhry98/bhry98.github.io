@@ -87,4 +87,4 @@ Default JSON shape:
 ```
 
 !!! tip "More packages"
-    Looking for something else? Browse [all bhry98 packages](../index.md).
+    Looking for something else? Browse [all my packages](../index.md).

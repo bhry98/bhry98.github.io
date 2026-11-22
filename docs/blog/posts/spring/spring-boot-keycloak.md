@@ -124,4 +124,4 @@ List<Order> list() { ... }
 For backend-to-backend calls, use the **client credentials** grant: the calling service gets its
 own token with its own roles, so every call is authenticated and auditable.
 
-Need SSO across your organization's applications? [Let's talk](../../../portfolio/contact.md).
+Questions or feedback on this post? [Contact me](../../../portfolio/contact.md).
