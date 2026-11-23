@@ -167,7 +167,7 @@ purpose and the DC's DNS name, which is exactly what LDAPS needs.
 
 !!! tip "Production PKI"
     For production, Microsoft's recommended design is an **offline standalone root CA** plus an
-    **online enterprise subordinate CA**. The DC side of this guide (Steps 3–6) is identical; only
+    **online enterprise subordinate CA**. The DC side of this guide (Steps 3 to 6) is identical; only
     the CA setup differs.
 
 ## Step 3: Turn on certificate auto-enrollment for domain controllers
@@ -374,7 +374,7 @@ Copy `bhry98-CA.cer` to your clients, then:
     Click **Test connection** and **Test authentication**. See
     [How to install Keycloak](../keycloak/install-keycloak.md) for the Keycloak setup itself.
 
-## Step 8: Harden — stop plain-text LDAP
+## Step 8: Harden it by turning off plain-text LDAP
 
 LDAPS only helps if clients actually use it. Once your apps are switched to `ldaps://`:
 
@@ -424,7 +424,7 @@ LDAPS only helps if clients actually use it. Once your apps are switched to `lda
     the template (Certificate Templates console `certtmpl.msc` → template → **Security**).
 
 ??? question "Two DCs, only one works"
-    Each DC needs its own certificate. Run Steps 4–6 on every domain controller.
+    Each DC needs its own certificate. Run Steps 4 to 6 on every domain controller.
 
 ## Next steps
 

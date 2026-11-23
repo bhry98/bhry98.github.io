@@ -43,7 +43,7 @@ By the end of this guide you will have:
 | `lb1` | `10.0.0.21` | Nginx + keepalived (MASTER) |
 | `lb2` | `10.0.0.22` | Nginx + keepalived (BACKUP) |
 | VIP | `10.0.0.100` | Floating IP, DNS `app.bhry98.local` points here |
-| `app1`–`app3` | `10.0.0.11`–`.13` | Your application on port `8080` |
+| `app1` to `app3` | `10.0.0.11` to `.13` | Your application on port `8080` |
 
 !!! tip "No app to test with?"
     Run a tiny echo server on each app host, it prints which host answered:

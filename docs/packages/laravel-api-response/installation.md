@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| PHP | 8.2 or newer (8.2 – 8.5 tested) |
+| PHP | 8.2 or newer (8.2 to 8.5 tested) |
 | Laravel | 11.x, 12.x, 13.x or 14.x |
 
 See the [compatibility table](index.md#compatibility) for the exact PHP versions each Laravel release supports.

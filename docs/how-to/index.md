@@ -1,6 +1,6 @@
 ---
 title: How-To Guides
-description: Step-by-step technical guides by Abdelrahman Mahmoud. Install and configure Nginx, Git, Keycloak, Active Directory LDAPS, secure Spring Boot APIs and debug OpenShift pods.
+description: Step-by-step technical guides by Abdelrahman Mahmoud. Install and configure Nginx, Git, Keycloak, Active Directory LDAPS, sync AD to Entra ID, secure Spring Boot APIs and debug OpenShift pods.
 hide:
   - toc
 ---
@@ -64,6 +64,15 @@ and ends with a way to check that it worked.</p>
     `ldaps://` on port 636.
 
     <p class="bh-chips"><code>Active Directory</code><code>LDAPS</code><code>AD CS</code></p>
+
+-   :material-microsoft-azure:{ .lg } **[How to sync Active Directory users to Entra ID](entra-id/sync-active-directory-to-entra-id.md)**
+
+    ---
+
+    Entra Connect Sync with password hash sync: routable UPNs, OU filtering, sync cycles and how to
+    handle joiners, movers and leavers.
+
+    <p class="bh-chips"><code>Entra ID</code><code>Active Directory</code><code>Azure</code></p>
 
 -   :simple-keycloak:{ .lg } **[How to install Keycloak](keycloak/install-keycloak.md)**
 

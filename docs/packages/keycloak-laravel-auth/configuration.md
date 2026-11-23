@@ -168,16 +168,16 @@ column. Add the `HasKeycloakRoles` trait to it to get [role helpers](authorizati
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `KEYCLOAK_BASE_URL` | – | Keycloak server URL |
-| `KEYCLOAK_REALM` | – | Default realm |
-| `KEYCLOAK_CLIENT_ID` / `KEYCLOAK_CLIENT_SECRET` | – | Default client |
+| `KEYCLOAK_BASE_URL` | (none) | Keycloak server URL |
+| `KEYCLOAK_REALM` | (none) | Default realm |
+| `KEYCLOAK_CLIENT_ID` / `KEYCLOAK_CLIENT_SECRET` | (none) | Default client |
 | `KEYCLOAK_REDIRECT_URI` | `/auth/keycloak/callback` | Default login callback |
 | `KEYCLOAK_RED_AFTER_LOGOUT` | `APP_URL` | Post-logout redirect |
 | `KEYCLOAK_DEFAULT_GUARD` | `web` | Guard used when none is given |
 | `KC_{WEB,API,ADMIN}_{CLIENT_ID,CLIENT_SECRET,REALM,REDIRECT_URI}` | defaults above | Per-guard overrides |
-| `KC_API_AUDIENCE` | – | Required audience for API tokens |
+| `KC_API_AUDIENCE` | (none) | Required audience for API tokens |
 | `KEYCLOAK_ADMIN_GUARD` | `admin` | Credentials used for the Admin API |
-| `KEYCLOAK_ISSUER` | – | Public issuer URL |
+| `KEYCLOAK_ISSUER` | (none) | Public issuer URL |
 | `KEYCLOAK_VERIFY_ISSUER` | `true` | Check `iss` |
 | `KEYCLOAK_TOKEN_LEEWAY` | `30` | Clock skew (seconds) |
 | `KEYCLOAK_JWKS_TTL` | `86400` | Realm keys cache (seconds) |

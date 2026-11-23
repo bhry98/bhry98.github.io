@@ -175,6 +175,8 @@ nav:
           - Install Git: how-to/git/install-git.md
       - Active Directory:
           - Enable LDAPS on Active Directory: how-to/active-directory/enable-ldaps-active-directory.md
+      - Entra ID:
+          - Sync Active Directory to Entra ID: how-to/entra-id/sync-active-directory-to-entra-id.md
       - Keycloak:
           - Install Keycloak: how-to/keycloak/install-keycloak.md
       - Spring Boot:

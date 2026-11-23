@@ -63,9 +63,9 @@ Keycloak::users()->assignRealmRoles($id, ['editor']);
 
 | Laravel | PHP       | Status              |
 |---------|-----------|---------------------|
-| 13.x    | 8.3 – 8.5 | :material-check: supported |
-| 12.x    | 8.2 – 8.5 | :material-check: supported |
-| 11.x    | 8.2 – 8.5 | :material-check: supported (Laravel 11 itself no longer gets security fixes) |
+| 13.x    | 8.3 to 8.5 | :material-check: supported |
+| 12.x    | 8.2 to 8.5 | :material-check: supported |
+| 11.x    | 8.2 to 8.5 | :material-check: supported (Laravel 11 itself no longer gets security fixes) |
 
 CI runs the test suite against every combination, with both the lowest and the latest dependency versions.
 Works with any Keycloak version that has the `/realms/{realm}` URL layout (Keycloak 17+, Quarkus

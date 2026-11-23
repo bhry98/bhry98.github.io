@@ -147,6 +147,7 @@ forest, so Windows users can log in to Linux servers.
 
 - **Microsoft Entra ID (Azure AD)**: cloud identity for Microsoft 365. Despite the old name it
   is **not** an LDAP server (it uses OAuth2/OIDC/SAML); *Entra Domain Services* adds managed LDAP.
+  More in [What is Microsoft Entra ID?](what-is-microsoft-entra-id.md).
 - **Samba AD DC**: an open-source, AD-compatible domain controller on Linux.
 - **Apache Directory Server / ApacheDS**, **OpenDJ / PingDS**: Java-based LDAP servers.
 - **JumpCloud, Google Cloud Identity (Secure LDAP)**: directory-as-a-service with LDAP endpoints.
@@ -173,7 +174,7 @@ forest, so Windows users can log in to Linux servers.
 - **Linux servers needing central logins, sudo rules and certificates?** FreeIPA / Red Hat IdM,
   optionally trusted with AD.
 - **An app or appliance that just needs a small LDAP backend?** OpenLDAP or 389 DS.
-- **Cloud-first with Microsoft 365?** Entra ID, synced from on-prem AD if you have one.
+- **Cloud-first with Microsoft 365?** Entra ID, synced from on-prem AD if you have one ([how to set up the sync](../../../how-to/entra-id/sync-active-directory-to-entra-id.md)).
 - **Modern web apps and APIs?** Put **Keycloak** in front of your directory and let apps use OIDC
   instead of talking LDAP directly.
 

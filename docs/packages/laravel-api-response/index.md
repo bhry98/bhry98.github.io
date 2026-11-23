@@ -43,10 +43,10 @@ return api()
 
 | Laravel | PHP       | Status                                                                        |
 |---------|-----------|-------------------------------------------------------------------------------|
-| 14.x    | 8.4 – 8.5 | :material-flask: tested against `dev-master` ahead of its release             |
-| 13.x    | 8.3 – 8.5 | :material-check: supported                                                    |
-| 12.x    | 8.2 – 8.5 | :material-check: supported                                                    |
-| 11.x    | 8.2 – 8.5 | :material-check: supported (Laravel 11 itself no longer gets security fixes)  |
+| 14.x    | 8.4 to 8.5 | :material-flask: tested against `dev-master` ahead of its release             |
+| 13.x    | 8.3 to 8.5 | :material-check: supported                                                    |
+| 12.x    | 8.2 to 8.5 | :material-check: supported                                                    |
+| 11.x    | 8.2 to 8.5 | :material-check: supported (Laravel 11 itself no longer gets security fixes)  |
 
 CI runs the full test suite on every combination above, with both the lowest and the latest dependency versions.
 

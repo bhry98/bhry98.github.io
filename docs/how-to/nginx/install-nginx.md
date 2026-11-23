@@ -73,7 +73,7 @@ By the end of this guide you will have:
     ```
 
     !!! note "Quick option"
-        `sudo apt install nginx` without steps 1–3 also works, but installs the (older) version
+        `sudo apt install nginx` without steps 1 to 3 also works, but installs the (older) version
         packaged by Ubuntu/Debian with a slightly different layout (`sites-available/`).
 
 === "RHEL / Rocky / Alma / Fedora"

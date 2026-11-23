@@ -93,8 +93,8 @@ def cover(name, kind, topic, title_lines, subtitle, diagram, desc):
         body.append(t(60, yy, ln, 21, MUTED))
         yy += 30
     body.append('<rect x="60" y="548" width="44" height="4" rx="2" fill="url(#brand)"/>')
-    body.append(t(60, 586, "bhry98.github.io", 20, FG, 700))
-    body.append(t(232, 586, "· Abdelrahman Mahmoud", 20, MUTED))
+    body.append(t(60, 586, "Abdelrahman Mahmoud", 20, FG, 700))
+    body.append(t(298, 586, "· bhry98", 20, MUTED))
     body.append(f'<g>{diagram}</g></svg>')
     with open(os.path.join(COVERS, name + ".svg"), "w") as f:
         f.write("\n".join(body))
@@ -294,6 +294,33 @@ d_debug = "".join([
         ("OOMKilled (137)", RED), ("ConfigError", AMBER), ("Running 0/1", AMBER)])],
 ])
 
+d_entra = "".join([
+    box(X0, 140, 130, 60, "Employees", size=17), box(X0, 240, 130, 60, "Guests", size=18), box(X0, 340, 130, 60, "Devices", size=18),
+    arrow(f"M{X0+130} 170 L{X0+178} 240"), arrow(f"M{X0+130} 270 H{X0+178}"), arrow(f"M{X0+130} 370 L{X0+178} 300"),
+    f'<rect x="{X0+185}" y="100" width="200" height="350" rx="16" fill="{BOX}" stroke="url(#brand)" stroke-width="2.5"/>',
+    t(X0 + 285, 142, "Entra ID", 28, "#ffffff", 800, "middle"),
+    *[pill(X0 + 205, 162 + i * 50, lbl, c, 14, 160) for i, (lbl, c) in enumerate([
+        ("Sign-in · SSO", TEAL), ("MFA", CYAN), ("Conditional Access", CYAN), ("Users · groups", CYAN), ("Audit logs", CYAN)])],
+    arrow(f"M{X0+385} 210 H{X0+430}"), arrow(f"M{X0+385} 275 H{X0+430}"), arrow(f"M{X0+385} 340 H{X0+430}"),
+    box(X0 + 435, 180, 120, 56, "Microsoft 365", size=15), box(X0 + 435, 248, 120, 56, "Azure", size=16), box(X0 + 435, 316, 120, 56, "SaaS apps", size=16),
+    t(X0 + 285, 490, "one identity · every cloud app", 16, MUTED, anchor="middle"),
+])
+
+d_entra_sync = "".join([
+    f'<rect x="{X0}" y="130" width="160" height="250" rx="16" fill="{BOX}" stroke="{AMBER}" stroke-opacity=".7"/>',
+    t(X0 + 80, 170, "DC01", 24, "#ffffff", 800, "middle"), t(X0 + 80, 196, "bhry98.local", 15, MUTED, anchor="middle"),
+    pill(X0 + 20, 222, "AD DS", AMBER, 14, 120), pill(X0 + 20, 266, "ou=Users", AMBER, 14, 120), pill(X0 + 20, 310, "ou=Groups", AMBER, 14, 120),
+    t(X0 + 80, 365, "on-premises", 14, MUTED, anchor="middle"),
+    box(X0 + 198, 200, 150, 110, "SYNC01", "Entra Connect", size=21),
+    f'<rect x="{X0+385}" y="130" width="160" height="250" rx="16" fill="{BOX}" stroke="url(#brand)" stroke-width="2.5"/>',
+    t(X0 + 465, 170, "Entra ID", 24, "#ffffff", 800, "middle"), t(X0 + 465, 196, "contoso.com", 15, MUTED, anchor="middle"),
+    pill(X0 + 405, 222, "Users", TEAL, 14, 120), pill(X0 + 405, 266, "Groups", TEAL, 14, 120), pill(X0 + 405, 310, "Password hash", TEAL, 14, 120),
+    t(X0 + 465, 365, "cloud", 14, MUTED, anchor="middle"),
+    arrow(f"M{X0+160} 255 H{X0+192}", w=3), arrow(f"M{X0+348} 255 H{X0+379}", TEAL, w=3),
+    pill(X0 + 60, 420, "delta sync every 30 minutes", CYAN, 15, 425),
+    t(X0 + 272, 500, "AD stays the source of truth · Entra ID gets a copy", 16, MUTED, anchor="middle"),
+])
+
 COVERS_SPEC = [
     ("nginx-install", "How-To", "Nginx", ["How to install", "Nginx"], ["Ubuntu, Debian, RHEL, Rocky,", "Docker and Windows"], d_install_nginx,
      "Terminal showing Nginx installed with dnf, started with systemctl and answering HTTP 200."),
@@ -321,6 +348,10 @@ COVERS_SPEC = [
      "A client logs in to Keycloak, receives a JWT and calls a Spring Boot API, which validates the token with Keycloak's public keys."),
     ("openshift-debug-pods", "How-To", "OpenShift", ["How to debug", "pods on", "OpenShift"], ["Pending, CrashLoopBackOff,", "OOMKilled and more"], d_debug,
      "Terminal with oc get pods showing CrashLoopBackOff, oc logs --previous and oc debug, above common pod status labels."),
+    ("entra-id", "Blog", "Security", ["What is Microsoft", "Entra ID and why", "do we use it?"], ["The identity service behind", "Azure and Microsoft 365"], d_entra,
+     "Employees, guests and devices sign in through Microsoft Entra ID, which provides single sign-on, MFA, Conditional Access, groups and audit logs for Microsoft 365, Azure and SaaS apps."),
+    ("entra-connect-sync", "How-To", "Entra ID", ["Sync Active", "Directory users", "to Entra ID"], ["Entra Connect Sync, password", "hash sync and Cloud Sync"], d_entra_sync,
+     "Domain controller DC01 of bhry98.local sends users and groups through the Entra Connect server SYNC01 to Microsoft Entra ID every 30 minutes."),
 ]
 
 for spec in COVERS_SPEC:

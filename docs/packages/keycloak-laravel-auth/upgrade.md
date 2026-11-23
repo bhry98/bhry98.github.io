@@ -75,7 +75,7 @@ Keycloak::users()->assignRealmRoles($userId, ['editor']);
 - Cached service tokens, `Http::withKeycloakToken()` and `Http::withKeycloakUserToken()`.
 - Admin API: users, realm roles, groups, clients and client roles, realm events, lazy pagination.
 - `keycloak:install`, `keycloak:check`, `keycloak:decode`, `keycloak:clear-cache`.
-- Events, testing helpers, PKCE, configurable routes / cache / HTTP, Laravel 11–13 support, CI.
+- Events, testing helpers, PKCE, configurable routes / cache / HTTP, Laravel 11 to 13 support, CI.
 
 **Fixed**
 
