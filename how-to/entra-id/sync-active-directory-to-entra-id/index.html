@@ -1,0 +1,3615 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Sync and manage users between on-premises Windows Active Directory and Microsoft Entra ID (Azure AD) with Entra Connect Sync and password hash sync. Prepare UPNs, filter OUs, run and monitor sync cycles, and handle joiners, movers and leavers.">
+      
+      
+        <meta name="author" content="Abdelrahman Mahmoud">
+      
+      
+        <link rel="canonical" href="https://bhry98.github.io/how-to/entra-id/sync-active-directory-to-entra-id/">
+      
+      
+        <link rel="prev" href="../../active-directory/enable-ldaps-active-directory/">
+      
+      
+        <link rel="next" href="../../keycloak/install-keycloak/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>How to sync Active Directory users to Microsoft Entra ID - Abdelrahman Mahmoud</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/cv.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <meta name="keywords" content="sync active directory to entra id, azure ad connect, entra connect sync, entra cloud sync, password hash sync, hybrid identity, Start-ADSyncSyncCycle">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "author": {"@type": "Person", "name": "Abdelrahman Mahmoud", "sameAs": ["https://github.com/bhry98", "https://www.linkedin.com/in/bhry98/"], "url": "https://bhry98.github.io/portfolio/about-me/"}, "dateModified": "2026-11-23", "datePublished": "2026-11-23", "description": "Sync and manage users between on-premises Windows Active Directory and Microsoft Entra ID (Azure AD) with Entra Connect Sync and password hash sync. Prepare UPNs, filter OUs, run and monitor sync cycles, and handle joiners, movers and leavers.", "headline": "How to sync Active Directory users to Microsoft Entra ID", "image": "https://bhry98.github.io/assets/images/social/how-to/entra-id/sync-active-directory-to-entra-id.png", "inLanguage": "en", "keywords": "sync active directory to entra id, azure ad connect, entra connect sync, entra cloud sync, password hash sync, hybrid identity, Start-ADSyncSyncCycle", "mainEntityOfPage": {"@id": "https://bhry98.github.io/how-to/entra-id/sync-active-directory-to-entra-id/", "@type": "WebPage"}, "proficiencyLevel": "Intermediate", "publisher": {"@type": "Person", "name": "Abdelrahman Mahmoud", "sameAs": ["https://github.com/bhry98", "https://www.linkedin.com/in/bhry98/"], "url": "https://bhry98.github.io/portfolio/about-me/"}, "url": "https://bhry98.github.io/how-to/entra-id/sync-active-directory-to-entra-id/"}</script>
+
+  
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Abdelrahman Mahmoud">
+<meta property="og:title" content="How to sync Active Directory users to Microsoft Entra ID - Abdelrahman Mahmoud">
+<meta property="og:description" content="Sync and manage users between on-premises Windows Active Directory and Microsoft Entra ID (Azure AD) with Entra Connect Sync and password hash sync. Prepare UPNs, filter OUs, run and monitor sync cycles, and handle joiners, movers and leavers.">
+<meta property="og:image" content="https://bhry98.github.io/assets/images/social/how-to/entra-id/sync-active-directory-to-entra-id.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="How to sync Active Directory users to Microsoft Entra ID - Abdelrahman Mahmoud">
+<meta property="og:url" content="https://bhry98.github.io/how-to/entra-id/sync-active-directory-to-entra-id/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="How to sync Active Directory users to Microsoft Entra ID - Abdelrahman Mahmoud">
+<meta property="twitter:description" content="Sync and manage users between on-premises Windows Active Directory and Microsoft Entra ID (Azure AD) with Entra Connect Sync and password hash sync. Prepare UPNs, filter OUs, run and monitor sync cycles, and handle joiners, movers and leavers.">
+<meta property="twitter:image" content="https://bhry98.github.io/assets/images/social/how-to/entra-id/sync-active-directory-to-entra-id.png">
+<meta property="twitter:image:alt" content="How to sync Active Directory users to Microsoft Entra ID - Abdelrahman Mahmoud">
+<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-sync-active-directory-users-to-microsoft-entra-id" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+              </button>
+            
+            
+  <a class="bh-announce" href="../../">
+    <span class="bh-dot"></span>
+    <span class="bh-announce__long">New: How-To guides for Nginx, Git, Active Directory LDAPS, Keycloak and more.</span> <strong>Read the guides</strong>
+    <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg></span>
+  </a>
+
+          </div>
+          
+            <script>var el=document.querySelector("[data-md-component=announce]");if(el){var content=el.querySelector(".md-typeset");__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0)}</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Abdelrahman Mahmoud" class="md-header__button md-logo" aria-label="Abdelrahman Mahmoud" data-md-component="logo">
+      
+  <img src="../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Abdelrahman Mahmoud
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to sync Active Directory users to Microsoft Entra ID
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../portfolio/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Portfolio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../cv/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  My CV
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  How-To
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../packages/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Packages
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Abdelrahman Mahmoud" class="md-nav__button md-logo" aria-label="Abdelrahman Mahmoud" data-md-component="logo">
+      
+  <img src="../../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    Abdelrahman Mahmoud
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../portfolio/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Portfolio
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Portfolio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/about-me/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Me
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skills
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open Source
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../portfolio/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My CV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked="">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-To
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-To
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nginx
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nginx/install-nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nginx/nginx-reverse-proxy-load-balancing-ha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reverse Proxy, Load Balancing &amp; HA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Git
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/install-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Directory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Active Directory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../active-directory/enable-ldaps-active-directory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enable LDAPS on Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entra ID
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entra ID
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sync Active Directory to Entra ID
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sync Active Directory to Entra ID
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#lab-used-in-this-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab used in this guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-give-users-a-routable-upn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Give users a routable UPN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-decide-which-ous-to-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Decide which OUs to sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-download-and-install-on-sync01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Download and install on SYNC01
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-run-the-wizard-with-custom-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Run the wizard with custom settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-check-that-users-arrived" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Check that users arrived
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-run-and-monitor-sync-from-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Run and monitor sync from PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-users-day-to-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing users day to day
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing users day to day">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-can-still-be-done-in-the-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What can still be done in the cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users-that-already-exist-in-both-places" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Users that already exist in both places
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entra-cloud-sync-instead-of-connect-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entra Cloud Sync instead of Connect Sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6">
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Keycloak
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keycloak/install-keycloak/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install Keycloak
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7">
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring Boot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/simple-crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simple CRUD API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring-boot/secure-api-with-keycloak/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure an API with Keycloak
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8">
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenShift
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    OpenShift
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openshift/debug-pods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug Pods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../blog/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2">
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/devops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/openshift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenShift
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/category/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../packages/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Packages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../packages/laravel-api-response/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Laravel API Response
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Laravel API Response
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/laravel-api-response/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/laravel-api-response/responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/laravel-api-response/customization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/laravel-api-response/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../packages/keycloak-laravel-auth/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak Laravel Auth
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Keycloak Laravel Auth
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/web-sso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web SSO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/api-authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/authorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/oidc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OIDC &amp; Service Tokens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/admin-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Admin API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing &amp; Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../packages/keycloak-laravel-auth/upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upgrade Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#lab-used-in-this-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab used in this guide
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-give-users-a-routable-upn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Give users a routable UPN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-decide-which-ous-to-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Decide which OUs to sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-download-and-install-on-sync01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Download and install on SYNC01
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-run-the-wizard-with-custom-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Run the wizard with custom settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-check-that-users-arrived" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Check that users arrived
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-run-and-monitor-sync-from-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Run and monitor sync from PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-users-day-to-day" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing users day to day
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing users day to day">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-can-still-be-done-in-the-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What can still be done in the cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users-that-already-exist-in-both-places" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Users that already exist in both places
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entra-cloud-sync-instead-of-connect-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entra Cloud Sync instead of Connect Sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags">
+    
+      
+      
+      
+      
+        <span class="md-tag">Active Directory</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">Azure</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">Entra ID</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">Identity</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">Windows Server</span>
+      
+    
+  </nav>
+
+
+
+<h1 id="how-to-sync-active-directory-users-to-microsoft-entra-id">How to sync Active Directory users to Microsoft Entra ID<a class="headerlink" href="#how-to-sync-active-directory-users-to-microsoft-entra-id" title="Permanent link">¶</a></h1>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../../assets/images/covers/entra-connect-sync.svg" data-desc-position="bottom"><img alt="Domain controller DC01 of bhry98.local sends users and groups through the Entra Connect server SYNC01 to Microsoft Entra ID" src="../../../assets/images/covers/entra-connect-sync.svg"></a></p>
+<div class="admonition info">
+<p class="admonition-title">Before you start</p>
+<p>New to Entra ID? Read <strong><a href="../../../blog/what-is-microsoft-entra-id/">What is Microsoft Entra ID and why do we use it?</a></strong> first.</p>
+</div>
+<p>Most companies already have their users in an on-premises Active Directory and now also need them
+in Microsoft Entra ID for Microsoft 365, Azure and SaaS apps. Creating every user twice by hand
+doesn't scale and ends with two passwords per person. The fix is to let AD stay the place where
+you manage people and have a sync tool copy them to Entra ID.</p>
+<p>In this guide I use <strong>Microsoft Entra Connect Sync</strong> (the tool people still call "Azure AD
+Connect") with <strong>password hash sync</strong>, which is what I'd pick for most setups. At the end there
+is a section on the lighter <strong>Entra Cloud Sync</strong> agent and when to use it instead.</p>
+<p>By the end of this guide you will have:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Users from selected OUs in <code>bhry98.local</code> showing up in Entra ID</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> The same username and password working on-premises and in Microsoft 365</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> A sync running every 30 minutes on its own</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> A clear process for new users, changes and leavers</li>
+</ul>
+<h2 id="lab-used-in-this-guide">Lab used in this guide<a class="headerlink" href="#lab-used-in-this-guide" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Host</th>
+<th>IP</th>
+<th>OS</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DC01.bhry98.local</code></td>
+<td><code>10.0.0.10</code></td>
+<td>Windows Server 2025</td>
+<td>Domain controller (AD DS + DNS)</td>
+</tr>
+<tr>
+<td><code>SYNC01.bhry98.local</code></td>
+<td><code>10.0.0.30</code></td>
+<td>Windows Server 2025</td>
+<td>Domain member, will run Entra Connect Sync</td>
+</tr>
+<tr>
+<td>Entra tenant</td>
+<td></td>
+<td></td>
+<td><code>contoso.onmicrosoft.com</code> with the custom domain <code>contoso.com</code> verified</td>
+</tr>
+</tbody>
+</table>
+<p>Replace <code>contoso.com</code> with your own public domain everywhere below. It's the same domain lab as
+my <strong><a href="../../active-directory/enable-ldaps-active-directory/">LDAPS guide</a></strong>, so if you followed
+that one you already have DC01.</p>
+<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">¶</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph onprem["On-premises"]
+        DC["DC01&lt;br/&gt;AD DS"]
+        S["SYNC01&lt;br/&gt;Entra Connect Sync"]
+    end
+    E["Microsoft Entra ID&lt;br/&gt;contoso.com"]
+    DC -- "LDAP read&lt;br/&gt;(MSOL_ account)" --&gt; S
+    S -- "HTTPS 443&lt;br/&gt;outbound only" --&gt; E</code></pre>
+<ul>
+<li>Entra Connect reads users, groups and contacts from AD, applies your filters, and writes them to
+  Entra ID. Only outbound HTTPS, no inbound ports to open.</li>
+<li><strong>AD is the source of authority.</strong> A synced user is edited in AD, not in the Entra portal. Most
+  fields are greyed out in the cloud.</li>
+<li>With password hash sync, Entra ID gets a hash of the AD password hash (never the password
+  itself), so users sign in to the cloud without the request touching your DCs.</li>
+<li>Every 30 minutes it runs a <em>delta</em> sync that only sends what changed.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A working AD domain</td>
+<td><code>bhry98.local</code>, healthy (<code>dcdiag /q</code> shows nothing)</td>
+</tr>
+<tr>
+<td>A Windows Server 2016 or newer, domain-joined</td>
+<td><code>SYNC01</code>. Not a domain controller (supported, but I'd avoid it)</td>
+</tr>
+<tr>
+<td>An Entra tenant with your domain verified</td>
+<td><strong>Entra admin center</strong> → <strong>Entra ID</strong> → <strong>Domain names</strong> → <strong>Add custom domain</strong>, then add the TXT record it gives you</td>
+</tr>
+<tr>
+<td>Entra account with the <strong>Hybrid Identity Administrator</strong> (or Global Administrator) role</td>
+<td>Cloud-only account, <code>admin@contoso.onmicrosoft.com</code>, with MFA</td>
+</tr>
+<tr>
+<td>AD account in <strong>Enterprise Admins</strong></td>
+<td>Only used during setup to create the sync service account</td>
+</tr>
+<tr>
+<td>Outbound HTTPS 443 from SYNC01</td>
+<td>To the Microsoft endpoints; TLS 1.2 enabled</td>
+</tr>
+<tr>
+<td>Fewer than about 100,000 objects</td>
+<td>Otherwise use a full SQL Server instead of the built-in SQL Express LocalDB</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Clean up AD first</p>
+<p>Whatever is in the OUs you pick will end up in the cloud. Duplicate <code>mail</code> or
+<code>proxyAddresses</code> values, users with empty <code>mail</code>, and old test accounts cause errors later.
+Microsoft's <strong>IdFix</strong> tool scans AD and lists these problems. Run it once before you start.</p>
+</div>
+<h2 id="step-1-give-users-a-routable-upn">Step 1: Give users a routable UPN<a class="headerlink" href="#step-1-give-users-a-routable-upn" title="Permanent link">¶</a></h2>
+<p>Users sign in to Entra ID with their UPN. <code>alice@bhry98.local</code> can't be used in the cloud because
+nobody can verify <code>.local</code> on the internet. If you sync as-is, users get
+<code>alice@contoso.onmicrosoft.com</code> instead, which nobody wants to type.</p>
+<p>Add <code>contoso.com</code> as a UPN suffix on DC01, then move the users to it:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">GUI</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># 1. Add the suffix to the forest</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">Get-ADForest</span> <span class="p">|</span> <span class="nb">Set-ADForest</span> <span class="n">-UPNSuffixes</span> <span class="p">@{</span><span class="n">Add</span> <span class="p">=</span> <span class="s2">"contoso.com"</span><span class="p">}</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c"># 2. See who still has the old suffix</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">Get-ADUser</span> <span class="n">-SearchBase</span> <span class="s2">"OU=Staff,DC=bhry98,DC=local"</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="p">|</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="nb">Where-Object</span> <span class="n">UserPrincipalName</span> <span class="o">-like</span> <span class="s2">"*@bhry98.local"</span> <span class="p">|</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">Select-Object</span> <span class="n">SamAccountName</span><span class="p">,</span> <span class="n">UserPrincipalName</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c"># 3. Change them (test on one OU first)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">Get-ADUser</span> <span class="n">-SearchBase</span> <span class="s2">"OU=Staff,DC=bhry98,DC=local"</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="p">|</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="nb">Where-Object</span> <span class="n">UserPrincipalName</span> <span class="o">-like</span> <span class="s2">"*@bhry98.local"</span> <span class="p">|</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="nv">$new</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="n">UserPrincipalName</span> <span class="o">-replace</span> <span class="s2">"@bhry98\.local$"</span><span class="p">,</span> <span class="s2">"@contoso.com"</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="nb">Set-ADUser</span> <span class="nv">$_</span> <span class="n">-UserPrincipalName</span> <span class="nv">$new</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="p">}</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<ol>
+<li><strong>Active Directory Domains and Trusts</strong> → right-click the root → <strong>Properties</strong>.</li>
+<li><strong>Alternative UPN suffixes:</strong> add <code>contoso.com</code> → <strong>OK</strong>.</li>
+<li>In <strong>Active Directory Users and Computers</strong>, open a user → <strong>Account</strong> tab → pick
+   <code>@contoso.com</code> in the drop-down next to the logon name.</li>
+</ol>
+</div>
+</div>
+</div>
+<p>Users can still log in to Windows as <code>BHRY98\alice</code> as before. Only the UPN changes.</p>
+<div class="admonition tip">
+<p class="admonition-title">Make UPN and email match</p>
+<p>Life is easier when <code>alice@contoso.com</code> is both the UPN and the email address. Fill the <code>mail</code>
+attribute too, because Exchange Online and many apps read it.</p>
+</div>
+<h2 id="step-2-decide-which-ous-to-sync">Step 2: Decide which OUs to sync<a class="headerlink" href="#step-2-decide-which-ous-to-sync" title="Permanent link">¶</a></h2>
+<p>Don't sync the whole domain. Service accounts, disabled users and the built-in <code>Users</code> container
+don't belong in the cloud. In this lab I sync two OUs:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>DC=bhry98,DC=local
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── OU=Staff          ← sync
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── OU=Groups         ← sync
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── OU=ServiceAccounts
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>└── CN=Users          (built-in, not synced)
+</span></code></pre></div>
+<p>You choose these OUs in the wizard in Step 4, and you can change them later.</p>
+<h2 id="step-3-download-and-install-on-sync01">Step 3: Download and install on SYNC01<a class="headerlink" href="#step-3-download-and-install-on-sync01" title="Permanent link">¶</a></h2>
+<p>Sign in to <strong>SYNC01</strong> as a domain admin.</p>
+<ol>
+<li>In the <strong>Microsoft Entra admin center</strong> (<code>entra.microsoft.com</code>), go to <strong>Entra ID</strong> →
+   <strong>Entra Connect</strong> → <strong>Connect Sync</strong> and download the latest installer. Microsoft moved the
+   download there; older links to the Download Center point at outdated versions.</li>
+<li>Run <code>MicrosoftEntraConnectSyncSetup.msi</code> (the exact file name changes between releases).</li>
+<li>Accept the licence terms → <strong>Continue</strong>.</li>
+</ol>
+<h2 id="step-4-run-the-wizard-with-custom-settings">Step 4: Run the wizard with custom settings<a class="headerlink" href="#step-4-run-the-wizard-with-custom-settings" title="Permanent link">¶</a></h2>
+<p><strong>Express settings</strong> syncs the entire forest with password hash sync. It works, but I prefer
+<strong>Customize</strong> so I can choose the OUs.</p>
+<ol>
+<li><strong>Install required components:</strong> leave the defaults (built-in SQL Express LocalDB,
+   auto-created service account) → <strong>Install</strong>.</li>
+<li><strong>User sign-in:</strong> select <strong>Password Hash Synchronization</strong> and tick <strong>Enable single sign-on</strong>
+   (Seamless SSO, so domain-joined PCs on the network don't ask for a password again).</li>
+<li><strong>Connect to Microsoft Entra ID:</strong> sign in with <code>admin@contoso.onmicrosoft.com</code> and approve MFA.</li>
+<li><strong>Connect your directories:</strong> forest <code>bhry98.local</code> → <strong>Add Directory</strong> → <strong>Create new AD
+   account</strong>, enter <code>BHRY98\Administrator</code> (Enterprise Admin). The wizard creates a low-privilege
+   account named <code>MSOL_xxxxxxxx</code> that it uses from now on.</li>
+<li><strong>Microsoft Entra sign-in configuration:</strong> you should see <code>contoso.com</code> as <strong>Verified</strong> and
+   <code>bhry98.local</code> as <strong>Not Added</strong>. Keep <strong>USER PRINCIPAL NAME</strong> as the attribute. Since all users
+   are already on <code>@contoso.com</code> from Step 1, tick <strong>Continue without matching all UPN suffixes
+   to verified domains</strong>.</li>
+<li><strong>Domain and OU filtering:</strong> choose <strong>Sync selected domains and OUs</strong> and tick only <code>Staff</code> and
+   <code>Groups</code>.</li>
+<li><strong>Uniquely identifying your users:</strong> keep the defaults. Users are matched by UPN and the source
+   anchor is <code>ms-DS-ConsistencyGuid</code>. Don't change this unless you know why.</li>
+<li><strong>Filter users and devices:</strong> <strong>Synchronize all users and devices</strong>.</li>
+<li><strong>Optional features:</strong> leave <strong>Password hash synchronization</strong> ticked. If you have Entra ID P1,
+   also tick <strong>Password writeback</strong> so users can reset their AD password from the cloud.</li>
+<li><strong>Enable single sign-on:</strong> enter domain admin credentials when asked. This creates a computer
+    account called <code>AZUREADSSOACC</code> in AD.</li>
+<li><strong>Ready to configure:</strong> tick <strong>Start the synchronization process when configuration
+    completes</strong> → <strong>Install</strong>.</li>
+</ol>
+<p>The first full sync starts right away. On a small domain it takes a few minutes.</p>
+<div class="admonition note">
+<p class="admonition-title">Staging mode</p>
+<p>The same screen has <strong>Enable staging mode</strong>. A server in staging mode imports and calculates
+everything but doesn't write to Entra ID. Install a second server like that and you have a
+ready standby if SYNC01 dies.</p>
+</div>
+<h2 id="step-5-check-that-users-arrived">Step 5: Check that users arrived<a class="headerlink" href="#step-5-check-that-users-arrived" title="Permanent link">¶</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Entra admin center</label><label for="__tabbed_2_2">PowerShell (Microsoft Graph)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>Entra ID</strong> → <strong>Users</strong> → <strong>All users</strong>. Add the column <strong>On-premises sync enabled</strong>. Your AD
+users show <strong>Yes</strong>, cloud-only admins show <strong>No</strong>.</p>
+<p><strong>Entra ID</strong> → <strong>Entra Connect</strong> → <strong>Connect Sync</strong> shows the last sync time and whether
+password hash sync is healthy.</p>
+</div>
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">Install-Module</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">Graph</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">Connect-MgGraph</span> <span class="n">-Scopes</span> <span class="s2">"User.Read.All"</span><span class="p">,</span><span class="s2">"Organization.Read.All"</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c"># When did the tenant last sync?</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">Get-MgOrganization</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">OnPremisesSyncEnabled</span><span class="p">,</span> <span class="n">OnPremisesLastSyncDateTime</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c"># Is this user coming from AD?</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nb">Get-MgUser</span> <span class="n">-UserId</span> <span class="n">alice</span><span class="nv">@contoso</span><span class="p">.</span><span class="n">com</span> <span class="p">`</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">-Property</span> <span class="n">DisplayName</span><span class="p">,</span><span class="n">UserPrincipalName</span><span class="p">,</span><span class="n">OnPremisesSyncEnabled</span><span class="p">,</span><span class="n">OnPremisesSamAccountName</span> <span class="p">|</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">UserPrincipalName</span><span class="p">,</span> <span class="n">OnPremisesSyncEnabled</span><span class="p">,</span> <span class="n">OnPremisesSamAccountName</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Then do the real test: open <code>https://myapps.microsoft.com</code> in a private browser window and sign
+in as <code>alice@contoso.com</code> with her AD password.</p>
+<h2 id="step-6-run-and-monitor-sync-from-powershell">Step 6: Run and monitor sync from PowerShell<a class="headerlink" href="#step-6-run-and-monitor-sync-from-powershell" title="Permanent link">¶</a></h2>
+<p>Everything below runs on <strong>SYNC01</strong> in an elevated PowerShell (the <code>ADSync</code> module is installed
+with Entra Connect).</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c"># Status of the scheduler: is it on, when is the next run?</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">Get-ADSyncScheduler</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c"># Push changes now instead of waiting up to 30 minutes</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nb">Start-ADSyncSyncCycle</span> <span class="n">-PolicyType</span> <span class="n">Delta</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c"># After changing filters or rules: full sync</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nb">Start-ADSyncSyncCycle</span> <span class="n">-PolicyType</span> <span class="n">Initial</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c"># Pause the scheduler during maintenance, then turn it back on</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nb">Set-ADSyncScheduler</span> <span class="n">-SyncCycleEnabled</span> <span class="nv">$false</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="nb">Set-ADSyncScheduler</span> <span class="n">-SyncCycleEnabled</span> <span class="nv">$true</span>
+</span></code></pre></div>
+<p>For errors on single objects, open <strong>Synchronization Service Manager</strong> (installed with Entra
+Connect). The <strong>Operations</strong> tab lists every run; click a run with warnings to see which user
+failed and why. The usual suspect is a duplicate <code>proxyAddresses</code> or UPN.</p>
+<h2 id="managing-users-day-to-day">Managing users day to day<a class="headerlink" href="#managing-users-day-to-day" title="Permanent link">¶</a></h2>
+<p>Once sync is on, the rule is simple: <strong>change users in AD, never in the cloud.</strong> Here is what each
+common task looks like.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Do this in AD</th>
+<th>What happens in Entra ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New employee</td>
+<td>Create the user in <code>OU=Staff</code> with a <code>@contoso.com</code> UPN</td>
+<td>Appears after the next sync. Assign the Microsoft 365 licence (or use group-based licensing)</td>
+</tr>
+<tr>
+<td>Name, title, department, manager</td>
+<td>Edit the user in AD</td>
+<td>Updated on the next sync</td>
+</tr>
+<tr>
+<td>Password change</td>
+<td>User changes it with Ctrl+Alt+Del or you reset it in AD</td>
+<td>Synced within about 2 minutes (password sync runs on its own schedule)</td>
+</tr>
+<tr>
+<td>Add to a group</td>
+<td>Add to a group inside <code>OU=Groups</code></td>
+<td>Group membership updated in Entra ID</td>
+</tr>
+<tr>
+<td>Employee leaves</td>
+<td><strong>Disable</strong> the account in AD</td>
+<td>Sign-in blocked after the next sync. Revoke sessions in Entra to cut access right away</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Delete in AD (or move out of synced OUs)</td>
+<td>User goes to <strong>Deleted users</strong> in Entra ID and is kept 30 days, then removed for good</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Moving a user out of a synced OU deletes them in the cloud</p>
+<p>To Entra ID, a user that leaves the sync scope looks exactly like a deleted user. Their
+mailbox and OneDrive go with them after 30 days. Move users between synced OUs only, or
+restore them from <strong>Deleted users</strong> if it happens by mistake.</p>
+</div>
+<p>Entra Connect also has an <strong>accidental delete</strong> guard: if one sync run would delete more than 500
+objects it stops and waits for you. Don't turn that off.</p>
+<h3 id="what-can-still-be-done-in-the-cloud">What can still be done in the cloud<a class="headerlink" href="#what-can-still-be-done-in-the-cloud" title="Permanent link">¶</a></h3>
+<p>Some things are not part of sync and are managed in Entra ID even for synced users:</p>
+<ul>
+<li>Licence assignment, MFA methods and Conditional Access policies.</li>
+<li>Cloud-only groups (Microsoft 365 groups, Teams).</li>
+<li>Guest users and cloud-only admin accounts.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Keep admin accounts cloud-only</p>
+<p>Use a separate cloud-only account (<code>admin@contoso.onmicrosoft.com</code>) for Global Administrator
+and similar roles, not a synced AD account. If AD is ever compromised, the attacker doesn't get
+your tenant too.</p>
+</div>
+<h2 id="users-that-already-exist-in-both-places">Users that already exist in both places<a class="headerlink" href="#users-that-already-exist-in-both-places" title="Permanent link">¶</a></h2>
+<p>If someone created <code>alice@contoso.com</code> by hand in Entra ID before you set up sync, Entra Connect
+tries to link it to the AD user with the same UPN or primary SMTP address. This is called a
+<strong>soft match</strong>. After the match, the cloud account becomes a synced account and AD wins from then
+on.</p>
+<p>Soft match is blocked for accounts that hold admin roles, on purpose. Remove the role, let it sync,
+then add the role back (or better, keep admins cloud-only as above).</p>
+<h2 id="entra-cloud-sync-instead-of-connect-sync">Entra Cloud Sync instead of Connect Sync<a class="headerlink" href="#entra-cloud-sync-instead-of-connect-sync" title="Permanent link">¶</a></h2>
+<p>Microsoft also offers <strong>Microsoft Entra Cloud Sync</strong>. Instead of a full sync server with its own
+database, you install a small <strong>provisioning agent</strong> on one or more domain-joined servers, and
+the sync configuration lives in the Entra admin center.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Entra Connect Sync</th>
+<th>Entra Cloud Sync</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What you install</td>
+<td>Full sync engine with SQL LocalDB</td>
+<td>Lightweight agent, install 2 or 3 for high availability</td>
+</tr>
+<tr>
+<td>Where you configure it</td>
+<td>Wizard on the server</td>
+<td>Entra admin center</td>
+</tr>
+<tr>
+<td>Sync interval</td>
+<td>30 minutes</td>
+<td>About every 2 minutes</td>
+</tr>
+<tr>
+<td>Several disconnected AD forests</td>
+<td>Hard</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Device sync (hybrid join), complex custom rules, very large directories</td>
+<td>Yes</td>
+<td>Limited</td>
+</tr>
+</tbody>
+</table>
+<p>My rule of thumb: for a new, simple setup (one forest, users and groups, password hash sync) try
+Cloud Sync first because there is less to maintain. If you need hybrid-joined devices, custom
+sync rules, or another feature Cloud Sync doesn't cover yet, use Connect Sync. The
+two can run side by side on different OUs during a migration. Check Microsoft's current
+comparison page before deciding, because Cloud Sync gains features often.</p>
+<p>The Cloud Sync setup in short:</p>
+<ol>
+<li><strong>Entra admin center</strong> → <strong>Entra ID</strong> → <strong>Entra Connect</strong> → <strong>Cloud sync</strong> → <strong>Agents</strong> →
+   download the agent.</li>
+<li>Install it on SYNC01 (and later a second server) and sign in as Hybrid Identity Administrator.</li>
+<li>Back in the portal: <strong>New configuration</strong> → <strong>AD to Microsoft Entra ID sync</strong> → pick
+   <code>bhry98.local</code>.</li>
+<li><strong>Scoping filters:</strong> select the <code>Staff</code> and <code>Groups</code> OUs. Turn on <strong>Password hash sync</strong>.</li>
+<li><strong>Enable</strong> the configuration and use <strong>Provision on demand</strong> to test one user first.</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Likely cause and fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users show up as <code>@contoso.onmicrosoft.com</code></td>
+<td>Their UPN suffix isn't a verified domain. Fix the UPN in AD (Step 1) and sync again</td>
+</tr>
+<tr>
+<td><code>AttributeValueMustBeUnique</code> error</td>
+<td>Two objects have the same <code>proxyAddresses</code> or UPN. Find it with <code>Get-ADUser -Filter "proxyAddresses -eq 'smtp:alice@contoso.com'"</code> and fix the duplicate</td>
+</tr>
+<tr>
+<td>User is in AD but not in Entra ID</td>
+<td>Not in a synced OU, or filtered out. Check <strong>Synchronization Service Manager</strong> → <strong>Metaverse search</strong></td>
+</tr>
+<tr>
+<td>Password works on-premises but not in the cloud</td>
+<td>Password hash sync off or failing. Check the Connect Sync health page and run <code>Start-ADSyncSyncCycle -PolicyType Delta</code></td>
+</tr>
+<tr>
+<td>"This operation can't be performed because the object is synced" in the portal</td>
+<td>Expected. Edit that field in AD instead</td>
+</tr>
+<tr>
+<td>Sync stopped with too many deletes</td>
+<td>The accidental delete guard kicked in. Check what is being deleted before you allow it</td>
+</tr>
+</tbody>
+</table>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<ul>
+<li>AD stays the place where you create, change and disable users. Entra ID gets a copy.</li>
+<li>Give users a routable UPN (<code>@contoso.com</code>) before the first sync.</li>
+<li>Sync only the OUs you need, with password hash sync for sign-in.</li>
+<li><code>Start-ADSyncSyncCycle -PolicyType Delta</code> pushes changes right away; otherwise they go every
+  30 minutes.</li>
+<li>Disable leavers in AD, keep admin accounts cloud-only, and be careful moving users between OUs.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../../active-directory/enable-ldaps-active-directory/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Enable LDAPS on Active Directory">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Enable LDAPS on Active Directory
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../keycloak/install-keycloak/" class="md-footer__link md-footer__link--next" aria-label="Next: Install Keycloak">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Install Keycloak
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 Abdelrahman Mahmoud · bhry98
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/bhry98" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/bhry98/" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://bhry98.github.io/blog/" target="_blank" rel="noopener" title="Blog" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20 5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27zm0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93z"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.code.copy", "content.code.annotate", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../../javascripts/share.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="t d">
+  <title id="t">Keycloak setup overview</title>
+  <desc id="d">Applications send users to Keycloak to log in. Keycloak stores realms, users, clients and roles in PostgreSQL and returns tokens to the applications.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#04132e"/><stop offset="1" stop-color="#0b1f45"/></linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect width="1200" height="460" rx="18" fill="url(#bg)"/>
+  <rect width="1200" height="6" fill="url(#brand)"/>
+  <g font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" fill="#e2e8f0">
+    <g>
+      <rect x="50" y="90" width="270" height="110" rx="14" fill="#0a1d40" stroke="#38bdf8" stroke-opacity=".5"/>
+      <text x="185" y="138" text-anchor="middle" font-size="24" font-weight="700">Your application</text>
+      <text x="185" y="170" text-anchor="middle" font-size="17" fill="#94a3b8">Angular · Spring Boot · Laravel</text>
+      <rect x="50" y="260" width="270" height="110" rx="14" fill="#0a1d40" stroke="#38bdf8" stroke-opacity=".5"/>
+      <text x="185" y="308" text-anchor="middle" font-size="24" font-weight="700">User's browser</text>
+      <text x="185" y="340" text-anchor="middle" font-size="17" fill="#94a3b8">login page · SSO session</text>
+    </g>
+    <rect x="440" y="60" width="370" height="340" rx="16" fill="#0a1d40" stroke="url(#brand)" stroke-width="2"/>
+    <text x="625" y="108" text-anchor="middle" font-size="28" font-weight="800">Keycloak</text>
+    <text x="625" y="136" text-anchor="middle" font-size="16" fill="#94a3b8">:8080 HTTP · :9000 health &amp; metrics</text>
+    <rect x="470" y="160" width="310" height="210" rx="12" fill="#04132e" stroke="#38bdf8" stroke-opacity=".35" stroke-dasharray="6 6"/>
+    <text x="625" y="192" text-anchor="middle" font-size="18" font-weight="700" fill="#38bdf8">realm: demo</text>
+    <g font-size="17" text-anchor="middle">
+      <rect x="490" y="212" width="130" height="42" rx="21" fill="#0b1f45"/><text x="555" y="239">users</text>
+      <rect x="630" y="212" width="130" height="42" rx="21" fill="#0b1f45"/><text x="695" y="239">clients</text>
+      <rect x="490" y="268" width="130" height="42" rx="21" fill="#0b1f45"/><text x="555" y="295">roles</text>
+      <rect x="630" y="268" width="130" height="42" rx="21" fill="#0b1f45"/><text x="695" y="295">groups</text>
+      <text x="625" y="345" fill="#94a3b8" font-size="15">LDAP / AD federation (optional)</text>
+    </g>
+    <rect x="930" y="170" width="220" height="120" rx="14" fill="#0a1d40" stroke="#2dd4bf" stroke-opacity=".6"/>
+    <text x="1040" y="222" text-anchor="middle" font-size="24" font-weight="700">PostgreSQL</text>
+    <text x="1040" y="254" text-anchor="middle" font-size="17" fill="#94a3b8">persistent data</text>
+    <g stroke="#38bdf8" stroke-width="2.5" fill="none" marker-end="url(#a)">
+      <path d="M320 145 H432"/>
+      <path d="M440 330 H328"/>
+      <path d="M810 230 H922"/>
+    </g>
+    <g font-size="15" fill="#cbd5e1" text-anchor="middle">
+      <text x="378" y="132">redirect</text>
+      <text x="378" y="318">login form</text>
+      <text x="378" y="358">→ tokens</text>
+      <text x="866" y="218">JDBC</text>
+    </g>
+  </g>
+</svg>
